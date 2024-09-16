@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace RpgMenager.Domain.Entities
 {
-    public class Statistics
+    public class Statistics : Entity
     {
-        int Id { get; set; }
-        int Value { get; set; }  = 0;
-        string Name { get; set; } = default!;
-        string? Description { get; set; } = default;
-        StatisticsEnum statisticsEnum { get; set; } = StatisticsEnum.None;
+        public int Value { get; set; }  = 0;
+        public StatisticsEnum statisticsEnum { get; set; } = StatisticsEnum.None;
+
+        public string? Type { get; set; } = default;
+        public int CharaterId { get; set; }
+        public required Charater Charater { get; set; }
     }
 }
