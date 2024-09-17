@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace RpgMenager.Domain.Entities
 {
     //player character
-    public class PC :Charater
+    public class PC :Character
     {
         public int PlayerId;
         public required Player Player;

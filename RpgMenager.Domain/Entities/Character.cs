@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace RpgMenager.Domain.Entities
 {
-    public abstract class Charater : Entity
+    public abstract class Character : Entity
     {
         public int Hp { get; set; } = 1;
         public string? Lastname = default;
         public List<Statistics> ListOfStatistics { get; set; } = new List<Statistics>();
-        
+        public List<Item> ListOfItems { get; set; } = new List<Item>();
     }
 }
