@@ -11,7 +11,8 @@ namespace RpgMenager.Domain.Entities
         public string RealFirstName { get; set; } = default!;
         public string RealLastName { get; set; } = default!;
         public string? Email { get; set; } = default;
-
+        public string? Phone { get; set; } = default;
+        public List<PC> PlayerCharacters { get; set; } = new List<PC>();   
 
         public string CreateName()
         {

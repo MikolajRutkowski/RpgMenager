@@ -13,7 +13,7 @@ namespace RpgMenager.Domain.Entities
         public StatisticsEnum statisticsEnum { get; set; } = StatisticsEnum.None;
 
         public string? Type { get; set; } = default;
-        public int CharaterId { get; set; }
-        public required Charater Charater { get; set; }
+        public int CharacterId { get; set; }
+        public required Character Character { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace RpgMenager.Domain.Enums
     public enum StatisticsEnum
     {
         None = 0,
-        Characteristic = 1,
-        Skill  = 2
+        Character = 1, //cecha
+        Skill  = 2     //Umiejętność
     }
 }

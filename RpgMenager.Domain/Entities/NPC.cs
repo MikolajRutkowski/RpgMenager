@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RpgMenager.Domain.Entities
 {
-    public class NPC : Charater
+    public class NPC : Character
     {
         public string? AttitudeToAnotherCharacter { get; set; } = default;
     }
