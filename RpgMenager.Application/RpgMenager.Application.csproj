@@ -15,4 +15,10 @@
     <ProjectReference Include="..\RpgMenager.Domain\RpgMenager.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DtosAnd\Player\Commands\" />
+    <Folder Include="DtosAnd\Player\Queries\GetAllPlayers\" />
+    <Folder Include="DtosAnd\Player\Queries\GetPlayersByEncodedName\" />
+  </ItemGroup>
+
 </Project>
