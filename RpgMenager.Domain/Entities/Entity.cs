@@ -13,5 +13,6 @@ namespace RpgMenager.Domain.Entities
         public string? Description { get; set; } = default;
         public string  EncodedName { get; private set; } = default!;
         public void Encode() { EncodedName = Name.ToLower().Replace(" ", "-"); }
+        public string? PathToImage { get; set; } = default;
     }
 }
