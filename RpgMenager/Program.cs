@@ -1,10 +1,13 @@
 using RpgMenager.Infrastructure.Extensions;
 using RpgMenager.Infrastructure.Seeders;
+using RpgMenager.Application.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddIntrastructure(builder.Configuration);
+builder.Services.AddApplication();
 
 var app = builder.Build();
 
