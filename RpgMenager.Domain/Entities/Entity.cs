@@ -8,8 +8,10 @@ namespace RpgMenager.Domain.Entities
 {
     abstract public class Entity
     {
-        public int Id;
+        public int Id { get; set; }
         public string Name { get; set; } = default!;
         public string? Description { get; set; } = default;
+        public string  EncodedName { get; private set; } = default!;
+        public void Encode() { EncodedName = Name.ToLower().Replace(" ", "-"); }
     }
 }

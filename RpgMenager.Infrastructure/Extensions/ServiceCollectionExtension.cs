@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RpgMenager.Infrastructure.Persistence;
+using RpgMenager.Infrastructure.Seeders;
 
 namespace RpgMenager.Infrastructure.Extensions
 {
@@ -16,6 +17,7 @@ namespace RpgMenager.Infrastructure.Extensions
         {
             string contetionString = configuration.GetConnectionString("RpgMenager");
             service.AddDbContext<RpgMenagerDbContext>(options => options.UseSqlServer(contetionString));
+            service.AddScoped<SeederOne>();
         }
     }
 }
