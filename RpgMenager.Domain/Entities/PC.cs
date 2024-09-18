@@ -9,7 +9,7 @@ namespace RpgMenager.Domain.Entities
     //player character
     public class PC :Character
     {
-        public int PlayerId;
-        public required Player Player;
+        public int? PlayerId { get; set; }
+        public Player? Player { get; set; } = default;
     }
 }
