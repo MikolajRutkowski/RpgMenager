@@ -9,7 +9,11 @@ namespace RpgMenager.Domain.Interfaces
 {
     public interface IRpgMenagerRepository
     {
-        Task Create();
+        Task CreatePlayer(Player player);
+        Task CreateItem(Item item);
+        Task CreateCharacter(Character character);
+        Task CreateCharacter(Character character,List<Statistic> listOfStatic);
         Task<IEnumerable<T>> GetAll<T>() where T : Entity;
+        
     }
 }

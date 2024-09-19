@@ -10,14 +10,10 @@ using RpgMenager.Domain.Interfaces;
 
 namespace RpgMenager.Application.DtosAnd.Player.Queries.GetAllPlayers
 {
-    public class GetAllcarPlayerQueryHandler : IRequestHandler<GetAllPlayersQuery, IEnumerable<PlayerDto>>
+    public class GetAllcarPlayerQueryHandler: RpgHandler, IRequestHandler<GetAllPlayersQuery, IEnumerable<PlayerDto>>
     {
-        private readonly IMapper _mapper;
-        private readonly IRpgMenagerRepository _repository;
-        public GetAllcarPlayerQueryHandler(IMapper mapper, IRpgMenagerRepository rpgMenagerRepository)
+        public GetAllcarPlayerQueryHandler(IMapper mapper, IRpgMenagerRepository rpgMenagerRepository) : base(mapper, rpgMenagerRepository)
         {
-            _mapper = mapper;
-            _repository = rpgMenagerRepository;
         }
 
         public async Task<IEnumerable<PlayerDto>> Handle(GetAllPlayersQuery request, CancellationToken cancellationToken)

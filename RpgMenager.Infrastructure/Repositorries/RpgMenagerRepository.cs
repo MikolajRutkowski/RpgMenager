@@ -18,9 +18,25 @@ namespace RpgMenager.Infrastructure.Repositorries
             _context = rpgMenagerDbContext;
         }
 
-        public Task Create()
+        public Task CreateCharacter(Character character)
         {
             throw new NotImplementedException();
+        }
+
+        public Task CreateCharacter(Character character, List<Statistic> listOfStatic)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task CreateItem(Item item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async  Task CreatePlayer(Player player)
+        {
+            _context.Add(player);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<T>> GetAll<T>() where T : Entity
