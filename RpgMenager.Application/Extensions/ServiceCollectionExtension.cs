@@ -22,8 +22,8 @@ namespace RpgMenager.Application.Extensions
             services.AddAutoMapper(typeof(RpgMenagerMappingProfile));
 
             services.AddValidatorsFromAssemblyContaining<CreatePlayerCommandValidator>()
-                .AddFluentValidation()
-                .AddFluentValidationClientsideAdapters();
+                    .AddFluentValidation()
+                    .AddFluentValidationClientsideAdapters();
         }
     }
 }

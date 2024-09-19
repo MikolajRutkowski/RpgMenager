@@ -6,6 +6,8 @@ using RpgMenager.Models;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using RpgMenager.Application.DtosAnd.Player.Commands.Create;
+using RpgMenager.Application.DtosAnd.Player.Queries.GetPlayersByEncodedName;
+using RpgMenager.Application.DtosAnd.Player.Commands.Edit;
 
 namespace RpgMenager.Mvc.Controllers
 {
@@ -22,6 +24,15 @@ namespace RpgMenager.Mvc.Controllers
             var carWorkshops = await _mediator.Send(new GetAllPlayersQuery());
             return View(carWorkshops);
         }
+
+        [Route("CarWorkshop/{encodedName}/Edit")]
+        public async Task<IActionResult> Edit(string encodedName)
+        {
+            var dto = await _mediator.Send(new GetPlayersByEncodedNameQuery(encodedName));
+            EditPlayerCommand model = _mapper.Map<EditPlayerCommand>(dto);
+            return View(model);
+        }
+
         //To przenosi na strone
         public ActionResult Create()
         {
