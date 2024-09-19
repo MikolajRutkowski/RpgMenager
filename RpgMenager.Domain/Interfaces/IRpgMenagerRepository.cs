@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RpgMenager.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,5 +10,6 @@ namespace RpgMenager.Domain.Interfaces
     public interface IRpgMenagerRepository
     {
         Task Create();
+        Task<IEnumerable<T>> GetAll<T>() where T : Entity;
     }
 }

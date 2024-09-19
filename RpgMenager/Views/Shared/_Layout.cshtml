@@ -1,6 +1,7 @@
 ﻿@{
-    var currentUrl = ViewContext.RouteData.Values["Action"]!.ToString();
-    int x = 1;
+    var action = ViewContext.RouteData.Values["Action"]!.ToString();
+    var controler = ViewContext.RouteData.Values["Controller"]!.ToString();
+
 }
 
 <!DOCTYPE html>
@@ -15,7 +16,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light  border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark fs-5 border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">RpgMenager</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -23,14 +24,16 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="nav nav-pills">
                         <li class="nav-item">
-                            <a class="nav-link text-dark @(currentUrl == "Index" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link  @(controler=="Home" && action == "Index" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark @(currentUrl == "Privacy" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link  @(controler=="Home" && action == "Privacy" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>     
+                        <li class="nav-item">
+                            <a class="nav-link  @(controler=="PlayerController" && action == "Index" ? "active" : "")" asp-area="" asp-controller="Player" asp-action="Index">Gracze</a>
                         </li>
-
                     </ul>
                 </div>
             </div>
@@ -38,21 +41,7 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            @RenderBody()
-            <ul class="nav nav-pills">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Active</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
-            </ul>
+            @RenderBody()    
         </main>
     </div>
 
