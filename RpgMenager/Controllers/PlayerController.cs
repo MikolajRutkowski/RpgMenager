@@ -5,6 +5,7 @@ using RpgMenager.Application.DtosAnd.Player.Queries.GetAllPlayers;
 using RpgMenager.Models;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using RpgMenager.Application.DtosAnd.Player.Commands.Create;
 
 namespace RpgMenager.Mvc.Controllers
 {
@@ -20,6 +21,22 @@ namespace RpgMenager.Mvc.Controllers
         {
             var carWorkshops = await _mediator.Send(new GetAllPlayersQuery());
             return View(carWorkshops);
+        }
+        //To przenosi na strone
+        public ActionResult Create()
+        {
+            return View();
+        }
+        //To tworzy nowego gracza
+        [HttpPost]
+        public async Task<IActionResult> Create(CreatePlayerCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(command);
+            }
+            await _mediator.Send(command);
+            return RedirectToAction(nameof(Index));
         }
 
     }

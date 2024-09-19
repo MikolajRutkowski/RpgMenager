@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MediatR;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using RpgMenager.Application.DtosAnd.Player.Commands.Create;
 
 
 namespace RpgMenager.Application.Extensions
@@ -17,6 +20,10 @@ namespace RpgMenager.Application.Extensions
         {
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetAllPlayersQuery).Assembly));
             services.AddAutoMapper(typeof(RpgMenagerMappingProfile));
+
+            services.AddValidatorsFromAssemblyContaining<CreatePlayerCommandValidator>()
+                .AddFluentValidation()
+                .AddFluentValidationClientsideAdapters();
         }
     }
 }
