@@ -8,7 +8,7 @@ namespace RpgMenager.Application.DtosAnd
 {
     public abstract class Dto
     {
-        public string Name { get; set; } = default!;
+        public string? Name { get; set; } = default;
         public string? Description { get; set; }
         public string? EncodedName { get; set; }
         public string? PathToImage { get; set; }

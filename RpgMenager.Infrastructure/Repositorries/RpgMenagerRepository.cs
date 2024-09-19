@@ -18,6 +18,9 @@ namespace RpgMenager.Infrastructure.Repositorries
             _context = rpgMenagerDbContext;
         }
 
+        public Task Commit()
+        => _context.SaveChangesAsync();
+
         public Task CreateCharacter(Character character)
         {
             throw new NotImplementedException();
@@ -67,6 +70,42 @@ namespace RpgMenager.Infrastructure.Repositorries
                     throw new InvalidOperationException("Nieobsługiwany typ encji");
             }
             return resultList;
+        }
+
+        public async Task<Entity> GetByEncodedName<T>(string encodedName) where T : Entity
+        {
+            Entity result = null;
+            switch (typeof(T))
+            {
+                case Type _ when typeof(T) == typeof(Player):
+                    result = await _context.Players.FirstAsync(c => c.EncodedName == encodedName);
+                    break;
+
+                case Type _ when typeof(T) == typeof(NPC):
+                    result = await _context.Players.FirstAsync(c => c.EncodedName == encodedName); ;
+                    break;
+
+                case Type _ when typeof(T) == typeof(PC):
+                    result = await _context.Players.FirstAsync(c => c.EncodedName == encodedName);
+                    break;
+
+                case Type _ when typeof(T) == typeof(Statistic):
+                    result = await _context.Players.FirstAsync(c => c.EncodedName == encodedName);
+                    break;
+
+                case Type _ when typeof(T) == typeof(Item):
+                    result = await _context.Players.FirstAsync(c => c.EncodedName == encodedName);
+                    break;
+
+                default:
+                    throw new InvalidOperationException("Nieobsługiwany typ encji");
+            }
+            if (result == null)
+            {
+                throw new InvalidOperationException($"Encja typu {typeof(T).Name} z takim imieniem '{encodedName}' nie została znaleziona.");
+            }
+            return result;
+
         }
     }
 }
