@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RpgMenager.Domain.Interfaces;
 using RpgMenager.Infrastructure.Persistence;
+using RpgMenager.Infrastructure.Repositorries;
 using RpgMenager.Infrastructure.Seeders;
 
 namespace RpgMenager.Infrastructure.Extensions
@@ -18,6 +20,7 @@ namespace RpgMenager.Infrastructure.Extensions
             string contetionString = configuration.GetConnectionString("RpgMenager");
             service.AddDbContext<RpgMenagerDbContext>(options => options.UseSqlServer(contetionString));
             service.AddScoped<SeederOne>();
+            service.AddScoped<IRpgMenagerRepository, RpgMenagerRepository>();
         }
     }
 }
