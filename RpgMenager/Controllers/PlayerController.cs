@@ -6,6 +6,8 @@ using RpgMenager.Application.DtosAnd.Player.Commands.Create;
 using RpgMenager.Application.DtosAnd.Player.Queries.GetPlayersByEncodedName;
 using RpgMenager.Application.DtosAnd.Player.Commands.Edit;
 using RpgMenager.Application.DtosAnd.Player;
+using RpgMenager.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace RpgMenager.Mvc.Controllers
 {
@@ -13,9 +15,11 @@ namespace RpgMenager.Mvc.Controllers
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
-        public PlayerController(IMediator mediator, IMapper mapper) {
+        private readonly RpgMenagerDbContext _dbcontext;
+        public PlayerController(IMediator mediator, IMapper mapper, RpgMenagerDbContext context ) {
             _mediator = mediator;
             _mapper = mapper;
+            _dbcontext = context;
         }
         public async Task<IActionResult> Index()
         {
@@ -68,6 +72,27 @@ namespace RpgMenager.Mvc.Controllers
             await _mediator.Send(command);
             return RedirectToAction(nameof(Index));
         }
-        #endregion 
+        #endregion
+        #region Delete
+        [HttpPost]
+        public async Task<ActionResult> DeleteAsync(string encodedName)
+        {
+            try
+            {
+                var player = _dbcontext.Players.Find(encodedName);
+                if (player == null)
+                {
+                    return NotFound();
+                }
+                _dbcontext.Players.Remove(player);
+                _dbcontext.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex) {
+                return View();
+            }
+            
+        }
+        #endregion
     }
 }
