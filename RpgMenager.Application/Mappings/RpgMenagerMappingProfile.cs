@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using RpgMenager.Application.DtosAnd.Player;
+using RpgMenager.Application.DtosAnd.Player.Commands.Edit;
 using RpgMenager.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace RpgMenager.Application.Mappings
         public RpgMenagerMappingProfile() {
             CreateMap<Player, PlayerDto>();
             CreateMap<PlayerDto, Player>();
+            CreateMap<PlayerDto,EditPlayerCommand>();
         }
     }
 }

@@ -2,12 +2,10 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RpgMenager.Application.DtosAnd.Player.Queries.GetAllPlayers;
-using RpgMenager.Models;
-using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
 using RpgMenager.Application.DtosAnd.Player.Commands.Create;
 using RpgMenager.Application.DtosAnd.Player.Queries.GetPlayersByEncodedName;
 using RpgMenager.Application.DtosAnd.Player.Commands.Edit;
+using RpgMenager.Application.DtosAnd.Player;
 
 namespace RpgMenager.Mvc.Controllers
 {
@@ -21,11 +19,19 @@ namespace RpgMenager.Mvc.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var carWorkshops = await _mediator.Send(new GetAllPlayersQuery());
-            return View(carWorkshops);
+            var players = await _mediator.Send(new GetAllPlayersQuery());
+            return View(players);
         }
-
-        [Route("CarWorkshop/{encodedName}/Edit")]
+        #region Details
+        [Route("Players/{encodedName}/Details")]
+        public async Task<IActionResult> Details(string encodedName)
+        {
+            PlayerDto dto = await _mediator.Send(new GetPlayersByEncodedNameQuery(encodedName));  
+            return View(dto);
+        }
+        #endregion
+        #region Edit
+        [Route("Players/{encodedName}/Edit")]
         public async Task<IActionResult> Edit(string encodedName)
         {
             var dto = await _mediator.Send(new GetPlayersByEncodedNameQuery(encodedName));
@@ -33,6 +39,19 @@ namespace RpgMenager.Mvc.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [Route("Players/{encodedName}/Edit")]
+        public async Task<IActionResult> Edit(EditPlayerCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(command);
+            }
+            await _mediator.Send(command);
+            return RedirectToAction(nameof(Index));
+        }
+        #endregion
+        #region Create
         //To przenosi na strone
         public ActionResult Create()
         {
@@ -49,6 +68,6 @@ namespace RpgMenager.Mvc.Controllers
             await _mediator.Send(command);
             return RedirectToAction(nameof(Index));
         }
-
+        #endregion 
     }
 }
