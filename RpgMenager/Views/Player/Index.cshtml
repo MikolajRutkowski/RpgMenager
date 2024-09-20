@@ -58,9 +58,9 @@
                     @Html.DisplayFor(modelItem => item.Phone)
                 </td>
                 <td>
-                    <button asp-action="Edit" type="button" class="btn btn-primary">Edit</button>
-                    <button asp-action="Dtails" type="button" class="btn btn-primary">Dtails</button>
-                    <button asp-action="Delete" type="button" class="btn btn-danger">Delete</button>
+                    <a asp-action="Edit" asp-controller="Player" asp-route-encodedName="@item.EncodedName" class="btn btn-primary">Edit</a>
+                    <a asp-action="Details" asp-controller="Player" asp-route-encodedName="@item.EncodedName" class="btn btn-primary">Details</a>
+                    <a asp-action="Delete" asp-controller="Player" asp-route-encodedName="@item.EncodedName" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
             Counter++;
