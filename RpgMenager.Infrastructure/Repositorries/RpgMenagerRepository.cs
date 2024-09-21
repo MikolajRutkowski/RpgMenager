@@ -65,6 +65,12 @@ namespace RpgMenager.Infrastructure.Repositorries
                 case Type _ when typeof(T) == typeof(Item):
                     resultList = (IEnumerable<T>)await _context.Items.ToListAsync();
                     break;
+                case Type _ when typeof(T) == typeof(Character):
+                    var npcList = await _context.NPCs.ToListAsync();
+                    var pcList = await _context.PCs.ToListAsync();
+                    var combinedList = npcList.Cast<Character>().Concat(pcList.Cast<Character>());
+                    resultList = (IEnumerable<T>)combinedList;
+                    break;
 
                 default:
                     throw new InvalidOperationException("Nieobsługiwany typ encji");

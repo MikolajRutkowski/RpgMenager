@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RpgMenager.Application.DtosAnd.Player
+namespace RpgMenager.Application.DtosAnd.Character
 {
     public class CharacterDto :Dto
     {
@@ -16,10 +16,12 @@ namespace RpgMenager.Application.DtosAnd.Player
         public List<StatisticDto> Statistics { get; set; } = new List<StatisticDto>();
         public List<ItemDto> Items { get; set; } = new List<ItemDto>();
 
-        // Właściwości specyficzne dla PC
+        public string? TypeOfCharacter { get; set; } = default;
+
+        // Właściwości  dla PC
         public int? PlayerId { get; set; }
 
-        // Właściwości specyficzne dla NPC
+        // Właściwości  dla NPC
         public string? AttitudeToAnotherCharacter { get; set; }
 
     }
