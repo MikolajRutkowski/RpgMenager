@@ -10,9 +10,9 @@ using RpgMenager.Domain.Interfaces;
 
 namespace RpgMenager.Application.DtosAnd.Player.Queries.GetAllPlayers
 {
-    public class GetAllcarPlayerQueryHandler: RpgHandler, IRequestHandler<GetAllPlayersQuery, IEnumerable<PlayerDto>>
+    public class GetAllPlayerQueryHandler: RpgHandler, IRequestHandler<GetAllPlayersQuery, IEnumerable<PlayerDto>>
     {
-        public GetAllcarPlayerQueryHandler(IMapper mapper, IRpgMenagerRepository rpgMenagerRepository) : base(mapper, rpgMenagerRepository)
+        public GetAllPlayerQueryHandler(IMapper mapper, IRpgMenagerRepository rpgMenagerRepository) : base(mapper, rpgMenagerRepository)
         {
         }
 

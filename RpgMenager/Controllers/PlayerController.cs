@@ -75,16 +75,16 @@ namespace RpgMenager.Mvc.Controllers
         #endregion
         #region Delete
         [HttpPost]
-        public async Task<ActionResult> DeleteAsync(string encodedName)
+        public async Task<IActionResult> Delete(string encodedName)
         {
             try
             {
-                var player = _dbcontext.Players.Find(encodedName);
+                var player = _dbcontext.Players.FirstAsync(c => c.EncodedName == encodedName);
                 if (player == null)
                 {
                     return NotFound();
                 }
-                _dbcontext.Players.Remove(player);
+                _dbcontext.Players.Remove(await player);
                 _dbcontext.SaveChanges();
                 return RedirectToAction("Index");
             }

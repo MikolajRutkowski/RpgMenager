@@ -1,0 +1,42 @@
+﻿@model IEnumerable<RpgMenager.Application.DtosAnd.Character.CharacterDto>
+
+@{
+    bool PcActive = true;
+    bool NpcActive = true;
+    ViewData["Title"] = "Characters";
+}
+
+<h1>Characters</h1>
+
+<!-- Przyciski filtrujące -->
+<div class="btn-group mb-3" role="group">
+    <a asp-action="Index" action="@{PcActive = true; NpcActive = true; }"  class="btn btn-secondary @(PcActive && NpcActive ? "active" : "")">All</a>
+    <a asp-action="Index" action="@{PcActive = false; NpcActive = true; }" class="btn btn-secondary @(!PcActive && NpcActive  ? "active" : "")">NPC</a>
+    <a asp-action="Index" action="@{PcActive = true; NpcActive = false; }" class="btn btn-secondary @(PcActive && !NpcActive ? "active" : "")">PC</a>
+</div>
+
+<!-- Przycisk tworzenia nowej postaci -->
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<!-- Wyświetlanie postaci w formie kart -->
+<div class="row">
+    @foreach (var item in Model)
+    {
+        
+        <div class="card m-3" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">@item.Name</h5>
+                <h6 class="card-subtitle mb-2 text-muted">@item.Lastname</h6>
+                <p class="card-text">@item.Description</p>
+                <p class="card-text">HP: @item.Hp</p>
+                <p class="card-text">Player ID: @item.PlayerId</p>
+                <p class="card-text">Attitude: @item.AttitudeToAnotherCharacter</p>
+                <a class="btn btn-primary" asp-controller="Player" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <a class="btn btn-primary" asp-controller="Player" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a class="btn btn-danger" asp-controller="Player" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </div>
+        </div>
+    }
+</div>
