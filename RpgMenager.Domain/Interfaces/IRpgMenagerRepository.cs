@@ -11,6 +11,7 @@ namespace RpgMenager.Domain.Interfaces
     {
         Task CreatePlayer(Player player);
         Task CreateItem(Item item);
+        Task CreateStatistic(Statistic statistic);
         Task CreateCharacter(Character character);
         Task CreateCharacter(Character character,List<Statistic> listOfStatic);
         Task<IEnumerable<T>> GetAll<T>() where T : Entity;

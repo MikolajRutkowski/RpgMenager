@@ -21,14 +21,20 @@ namespace RpgMenager.Infrastructure.Repositorries
         public Task Commit()
         => _context.SaveChangesAsync();
 
-        public Task CreateCharacter(Character character)
+        public async Task CreateCharacter(Character character)
         {
-            throw new NotImplementedException();
+            _context.Add(character);
+            await _context.SaveChangesAsync();
         }
 
-        public Task CreateCharacter(Character character, List<Statistic> listOfStatic)
+        public async Task CreateCharacter(Character character, List<Statistic> listOfStatic)
         {
-            throw new NotImplementedException();
+            await CreateCharacter(character);
+            foreach (Statistic statistic in listOfStatic) {
+            statistic.Character = character;
+            statistic.CharacterId = character.Id;
+            await CreateStatistic(statistic);
+            }
         }
 
         public Task CreateItem(Item item)
@@ -39,6 +45,12 @@ namespace RpgMenager.Infrastructure.Repositorries
         public async  Task CreatePlayer(Player player)
         {
             _context.Add(player);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task CreateStatistic(Statistic statistic)
+        {
+            _context.Add(statistic);
             await _context.SaveChangesAsync();
         }
 
@@ -84,7 +96,8 @@ namespace RpgMenager.Infrastructure.Repositorries
             switch (typeof(T))
             {
                 case Type _ when typeof(T) == typeof(Player):
-                    result = await _context.Players.FirstAsync(c => c.EncodedName == encodedName);
+                    result = await _context.Players.Include(p => p.PlayerCharacters)
+                        .FirstAsync(c => c.EncodedName == encodedName);
                     break;
 
                 case Type _ when typeof(T) == typeof(NPC):

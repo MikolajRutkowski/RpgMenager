@@ -5,6 +5,7 @@ using RpgMenager.Application.DtosAnd;
 using RpgMenager.Application.DtosAnd.Character;
 using RpgMenager.Application.DtosAnd.Character.Queries.GetAllCharacters;
 using RpgMenager.Application.DtosAnd.Player;
+using RpgMenager.Application.DtosAnd.Player.Commands.Create;
 using RpgMenager.Domain.Entities;
 using RpgMenager.Infrastructure.Persistence;
 
@@ -12,6 +13,7 @@ namespace RpgMenager.Mvc.Controllers
 {
     public class CharacterController : Controller
     {
+        #region ConstucotrsAndVarables
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
         private readonly RpgMenagerDbContext _dbcontext;
@@ -22,6 +24,8 @@ namespace RpgMenager.Mvc.Controllers
             _mapper = mapper;
             _dbcontext = context;
         }
+        #endregion
+        #region Index
         public async Task<IActionResult> Index(string type = "all")
         {
             IEnumerable<CharacterDto> characters = await _mediator.Send(new GetAllCharactersQuery());
@@ -59,7 +63,30 @@ namespace RpgMenager.Mvc.Controllers
         {
             IEnumerable<CharacterDto> characters = await _mediator.Send(new GetAllCharactersQuery());
             
-            return View(characters);
+            return View();
         }
+        #endregion
+        #region Edit
+        #endregion
+        #region Delete
+        #endregion
+        #region Details
+        #endregion
+        #region Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateCharacterCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(command);
+            }
+            await _mediator.Send(command);
+            return RedirectToAction(nameof(Index));
+        }
+        #endregion
     }
 }
