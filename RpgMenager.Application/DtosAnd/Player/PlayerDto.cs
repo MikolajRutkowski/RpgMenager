@@ -1,4 +1,5 @@
-﻿using RpgMenager.Domain.Entities;
+﻿using RpgMenager.Application.DtosAnd.Character;
+using RpgMenager.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,6 @@ namespace RpgMenager.Application.DtosAnd.Player
         public string RealLastName { get; set; } = default!;
         public string? Email { get; set; } = default;
         public string? Phone { get; set; } = default;
-        public List<PC> PlayerCharacters { get; set; } = new List<PC>();
+        public List<CharacterDto> PlayerCharacters { get; set; } = new List<CharacterDto>();
     }
 }

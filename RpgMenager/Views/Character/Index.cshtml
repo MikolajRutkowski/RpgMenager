@@ -1,18 +1,18 @@
 ﻿@model IEnumerable<RpgMenager.Application.DtosAnd.Character.CharacterDto>
 
 @{
-    bool PcActive = true;
-    bool NpcActive = true;
     ViewData["Title"] = "Characters";
+    bool PcActive = ViewBag.PcActive ?? true;
+    bool NpcActive = ViewBag.NpcActive ?? true;
 }
 
 <h1>Characters</h1>
 
 <!-- Przyciski filtrujące -->
 <div class="btn-group mb-3" role="group">
-    <a asp-action="Index" action="@{PcActive = true; NpcActive = true; }"  class="btn btn-secondary @(PcActive && NpcActive ? "active" : "")">All</a>
-    <a asp-action="Index" action="@{PcActive = false; NpcActive = true; }" class="btn btn-secondary @(!PcActive && NpcActive  ? "active" : "")">NPC</a>
-    <a asp-action="Index" action="@{PcActive = true; NpcActive = false; }" class="btn btn-secondary @(PcActive && !NpcActive ? "active" : "")">PC</a>
+    <a asp-action="Index" asp-route-type="all" class="btn btn-secondary @(PcActive && NpcActive ? "active" : "")">All</a>
+    <a asp-action="Index" asp-route-type="npc" class="btn btn-secondary @(!PcActive && NpcActive ? "active" : "")">NPC</a>
+    <a asp-action="Index" asp-route-type="pc" class="btn btn-secondary @(PcActive && !NpcActive ? "active" : "")">PC</a>
 </div>
 
 <!-- Przycisk tworzenia nowej postaci -->
@@ -24,7 +24,6 @@
 <div class="row">
     @foreach (var item in Model)
     {
-        
         <div class="card m-3" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">@item.Name</h5>
