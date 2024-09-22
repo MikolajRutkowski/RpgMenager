@@ -17,6 +17,8 @@ namespace RpgMenager.Application.DtosAnd.Character.Commands.Create
 
         public async Task Handle(CreateCharacterCommand request, CancellationToken cancellationToken)
         {
+            if(request.TypeOfCharacter == "NPC") { }
+            if (request.TypeOfCharacter == "PC") { }
             var character = _mapper.Map<Domain.Entities.Character>(request);
             character.Encode();
             await _repository.CreateCharacter(character);
