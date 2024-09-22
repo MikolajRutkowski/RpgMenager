@@ -13,6 +13,7 @@ namespace RpgMenager.Mvc.Controllers
 {
     public class PlayerController : Controller
     {
+        #region ConstucotrsAndVarables
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
         private readonly RpgMenagerDbContext _dbcontext;
@@ -21,11 +22,14 @@ namespace RpgMenager.Mvc.Controllers
             _mapper = mapper;
             _dbcontext = context;
         }
+        #endregion
+        #region Index
         public async Task<IActionResult> Index()
         {
             var players = await _mediator.Send(new GetAllPlayersQuery());
             return View(players);
         }
+        #endregion
         #region Details
         [Route("Players/{encodedName}/Details")]
         public async Task<IActionResult> Details(string encodedName)

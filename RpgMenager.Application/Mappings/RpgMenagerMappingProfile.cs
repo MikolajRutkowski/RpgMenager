@@ -15,11 +15,17 @@ namespace RpgMenager.Application.Mappings
     {
         public RpgMenagerMappingProfile() {
             CreateMap<Player, PlayerDto>();
-            CreateMap<PlayerDto, Player>();
+            CreateMap<PlayerDto, Player>()
+                .ForMember(dest => dest.PlayerCharacters, opt => opt.MapFrom(src => src.PlayerCharacters)); ;
             CreateMap<PlayerDto,EditPlayerCommand>();
-            CreateMap<Character, CharacterDto>().ForMember(dest => dest.TypeOfCharacter, opt => opt.MapFrom(src =>
+            CreateMap<Character, CharacterDto>()
+                .ForMember(dest => dest.TypeOfCharacter, opt => opt.MapFrom(src =>
                 src is PC ? "PC" : src is NPC ? "NPC" : "Unknown")); 
             CreateMap<CharacterDto, Character>();
+            CreateMap<PC, CharacterDto>();
+            CreateMap<NPC, CharacterDto>();
+            CreateMap<CharacterDto, NPC>();
+            CreateMap<CharacterDto, PC>();
         }
     }
 }
