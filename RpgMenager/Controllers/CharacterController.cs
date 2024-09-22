@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RpgMenager.Application.DtosAnd;
 using RpgMenager.Application.DtosAnd.Character;
+using RpgMenager.Application.DtosAnd.Character.Commands.Create;
 using RpgMenager.Application.DtosAnd.Character.Queries.GetAllCharacters;
 using RpgMenager.Application.DtosAnd.Player;
 using RpgMenager.Application.DtosAnd.Player.Commands.Create;
@@ -75,10 +77,11 @@ namespace RpgMenager.Mvc.Controllers
         #region Create
         public ActionResult Create()
         {
+            ViewBag.Players = _dbcontext.Players.Select(p => new { p.Id, p.Name }).ToList();
             return View();
         }
-        [HttpPost]
-        public async Task<IActionResult> Create(CreateCharacterCommand command)
+        [HttpPost]                              
+        public async Task<IActionResult> Create(CreateCharacterCommand  command)
         {
             if (!ModelState.IsValid)
             {

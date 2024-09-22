@@ -1,0 +1,115 @@
+﻿@model RpgMenager.Application.DtosAnd.Character.Commands.Create.CreateCharacterCommand
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create a Character</h1>
+
+<h4>CreateCharacterCommand</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Wybór typu postaci (PC/NPC) -->
+            <div class="form-group">
+                <label class="control-label">Character Type</label>
+                <div>
+                    <input type="radio" name="CharacterType" value="PC" id="characterTypePC" checked />
+                    <label for="characterTypePC">PC</label>
+                    <input type="radio" name="CharacterType" value="NPC" id="characterTypeNPC" />
+                    <label for="characterTypeNPC">NPC</label>
+                </div>
+            </div>
+
+            <!-- Pole wyboru HP -->
+            <div class="form-group">
+                <label asp-for="Hp" class="control-label"></label>
+                <input asp-for="Hp" class="form-control" />
+                <span asp-validation-for="Hp" class="text-danger"></span>
+            </div>
+
+            <!-- Pole dla nazwiska -->
+            <div class="form-group">
+                <label asp-for="Lastname" class="control-label"></label>
+                <input asp-for="Lastname" class="form-control" />
+                <span asp-validation-for="Lastname" class="text-danger"></span>
+            </div>
+
+            <!-- Dynamiczna kontrola - wyświetlanie w zależności od typu postaci -->
+            <div id="playerIdSection" class="form-group">
+                <label asp-for="PlayerId" class="control-label">Assign to Player</label>
+                <select asp-for="PlayerId" class="form-control">
+                    <option value="">-- Select Player --</option>
+                    @* Assuming ViewBag.Players contains a list of players *@
+                    @foreach (var player in ViewBag.Players)
+                    {
+                        <option value="@player.Id">@player.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="PlayerId" class="text-danger"></span>
+            </div>
+
+            <div id="npcAttitudeSection" class="form-group" style="display: none;">
+                <label asp-for="AttitudeToAnotherCharacter" class="control-label">Attitude to Other Characters</label>
+                <input asp-for="AttitudeToAnotherCharacter" class="form-control" />
+                <span asp-validation-for="AttitudeToAnotherCharacter" class="text-danger"></span>
+            </div>
+
+            <!-- Pole dla imienia postaci -->
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <!-- Opis postaci -->
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <!-- Ścieżka do obrazu -->
+            <div class="form-group">
+                <label asp-for="PathToImage" class="control-label"></label>
+                <input asp-for="PathToImage" class="form-control" />
+                <span asp-validation-for="PathToImage" class="text-danger"></span>
+            </div>
+
+            <!-- Przyciski -->
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<!-- Skrypt do dynamicznego przełączania pól formularza -->
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Funkcja do zmiany pól formularza w zależności od wyboru typu postaci
+            $('input[name="CharacterType"]').change(function () {
+                if ($('#characterTypePC').is(':checked')) {
+                    // Wybrano PC - pokazujemy rozwijaną listę graczy
+                    $('#playerIdSection').show();
+                    $('#npcAttitudeSection').hide();
+                } else if ($('#characterTypeNPC').is(':checked')) {
+                    // Wybrano NPC - pokazujemy pole do wpisania nastawienia do innych postaci
+                    $('#npcAttitudeSection').show();
+                    $('#playerIdSection').hide();
+                }
+            });
+
+            // Wywołaj zmianę od razu po załadowaniu strony, aby ustawić początkowy stan pól
+            $('input[name="CharacterType"]:checked').trigger('change');
+        });
+    </script>
+}
