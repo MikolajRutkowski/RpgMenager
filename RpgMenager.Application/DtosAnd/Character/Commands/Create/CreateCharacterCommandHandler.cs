@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using RpgMenager.Domain.Entities;
 using RpgMenager.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,22 @@ namespace RpgMenager.Application.DtosAnd.Character.Commands.Create
 
         public async Task Handle(CreateCharacterCommand request, CancellationToken cancellationToken)
         {
-            if(request.TypeOfCharacter == "NPC") { }
-            if (request.TypeOfCharacter == "PC") { }
-            var character = _mapper.Map<Domain.Entities.Character>(request);
-            character.Encode();
-            await _repository.CreateCharacter(character);
+            if(request.TypeOfCharacter == "NPC")
+            {
+                var character = _mapper.Map<Domain.Entities.NPC>(request);
+                character.Encode();
+                await _repository.CreateCharacter(character);
+            }
+            if (request.TypeOfCharacter == "PC") {
+                var pc = _mapper.Map<Domain.Entities.PC>(request);
+                pc.Encode();
+                await _repository.CreateCharacter(pc);
+            }
+            else
+            {
+                throw new Exception("Nieznany typ postaci");
+            }
+           
         }
     }
 }
