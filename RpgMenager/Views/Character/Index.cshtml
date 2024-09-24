@@ -32,9 +32,9 @@
                 <p class="card-text">HP: @item.Hp</p>
                 <p class="card-text">Player ID: @item.PlayerId</p>
                 <p class="card-text">Attitude: @item.AttitudeToAnotherCharacter</p>
-                <a class="btn btn-primary" asp-controller="Player" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                <a class="btn btn-primary" asp-controller="Player" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                <a class="btn btn-danger" asp-controller="Player" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a class="btn btn-primary" asp-route-encodedName="@item.EncodedName" asp-route-id="@item.Id" asp-controller="Character" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <a class="btn btn-primary" asp-route-encodedName="@item.EncodedName" asp-route-id="@item.Id" asp-controller="Character" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a class="btn btn-danger" asp-route-encodedName="@item.EncodedName" asp-route-id="@item.Id" asp-controller="Character" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </div>
         </div>
     }

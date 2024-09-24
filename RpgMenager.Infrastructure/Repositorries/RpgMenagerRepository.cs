@@ -99,21 +99,21 @@ namespace RpgMenager.Infrastructure.Repositorries
                     result = await _context.Players.Include(p => p.PlayerCharacters)
                         .FirstAsync(c => c.EncodedName == encodedName);
                     break;
-
-                case Type _ when typeof(T) == typeof(NPC):
-                    result = await _context.Players.FirstAsync(c => c.EncodedName == encodedName); ;
-                    break;
-
+                case Type _ when typeof(T) == typeof(Character):
+                case Type _ when typeof(T) == typeof(NPC):                   
                 case Type _ when typeof(T) == typeof(PC):
-                    result = await _context.Players.FirstAsync(c => c.EncodedName == encodedName);
+                    result = await _context.PCs.FirstOrDefaultAsync(c => c.EncodedName == encodedName);
+                    if(result == null) { 
+                        result = await _context.NPCs.FirstOrDefaultAsync(c => c.EncodedName == encodedName);
+                    }      
                     break;
 
                 case Type _ when typeof(T) == typeof(Statistic):
-                    result = await _context.Players.FirstAsync(c => c.EncodedName == encodedName);
+                    result = await _context.Statistics.FirstAsync(c => c.EncodedName == encodedName);
                     break;
 
                 case Type _ when typeof(T) == typeof(Item):
-                    result = await _context.Players.FirstAsync(c => c.EncodedName == encodedName);
+                    result = await _context.Items.FirstAsync(c => c.EncodedName == encodedName);
                     break;
 
                 default:
@@ -125,6 +125,43 @@ namespace RpgMenager.Infrastructure.Repositorries
             }
             return result;
 
+        }
+
+        public async Task<Entity> GetByID<T>(int id) where T : Entity
+        {
+            Entity result = null;
+            switch (typeof(T))
+            {
+                case Type _ when typeof(T) == typeof(Player):
+                    result = await _context.Players.Include(p => p.PlayerCharacters)
+                        .FirstAsync(c => c.Id == id);
+                    break;
+                case Type _ when typeof(T) == typeof(Character):
+                case Type _ when typeof(T) == typeof(NPC):
+                case Type _ when typeof(T) == typeof(PC):
+                    result =  await _context.PCs.FirstOrDefaultAsync(c => c.Id == id);
+                    if (result == null)
+                    {
+                        result = await _context.NPCs.FirstOrDefaultAsync(c => c.Id == id);
+                    }
+                    break;
+
+                case Type _ when typeof(T) == typeof(Statistic):
+                    result = await _context.Statistics.FirstAsync(c => c.Id == id);
+                    break;
+
+                case Type _ when typeof(T) == typeof(Item):
+                    result = await _context.Items.FirstAsync(c => c.Id == id);
+                    break;
+
+                default:
+                    throw new InvalidOperationException("Nieobsługiwany typ encji");
+            }
+            if (result == null)
+            {
+                throw new InvalidOperationException($"Encja typu {typeof(T).Name} z takim Id:  '{id}' nie została znaleziona.");
+            }
+            return result;
         }
     }
 }

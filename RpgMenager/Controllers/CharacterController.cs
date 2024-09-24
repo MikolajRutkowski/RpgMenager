@@ -6,8 +6,10 @@ using RpgMenager.Application.DtosAnd;
 using RpgMenager.Application.DtosAnd.Character;
 using RpgMenager.Application.DtosAnd.Character.Commands.Create;
 using RpgMenager.Application.DtosAnd.Character.Queries.GetAllCharacters;
+using RpgMenager.Application.DtosAnd.Character.Queries.GetCharacterByEncodedName;
 using RpgMenager.Application.DtosAnd.Player;
 using RpgMenager.Application.DtosAnd.Player.Commands.Create;
+using RpgMenager.Application.DtosAnd.Player.Queries.GetPlayersByEncodedName;
 using RpgMenager.Domain.Entities;
 using RpgMenager.Infrastructure.Persistence;
 
@@ -73,6 +75,12 @@ namespace RpgMenager.Mvc.Controllers
         #region Delete
         #endregion
         #region Details
+        [Route("Character/{encodedName}/Details")]
+        public async Task<IActionResult> Details(string encodedName,int id)
+        {
+            CharacterDto dto = await _mediator.Send(new GetCharacterIdNameQuery(id));
+            return View(dto);
+        }
         #endregion
         #region Create
         public ActionResult Create()
