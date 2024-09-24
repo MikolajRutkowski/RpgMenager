@@ -46,7 +46,6 @@
                 <label asp-for="PlayerId" class="control-label">Assign to Player</label>
                 <select asp-for="PlayerId" class="form-control">
                     <option value="">-- Select Player --</option>
-                    @* Assuming ViewBag.Players contains a list of players *@
                     @foreach (var player in ViewBag.Players)
                     {
                         <option value="@player.Id">@player.Name</option>
@@ -82,6 +81,12 @@
                 <span asp-validation-for="PathToImage" class="text-danger"></span>
             </div>
 
+            <!-- Przyciski do zarządzania statystykami -->
+            <div class="form-group">
+                <button type="button" id="addStatistics" class="btn btn-secondary">Add Default Statistics</button>
+                <button type="button" id="openNewWindow" class="btn btn-secondary">Open New Window</button>
+            </div>
+
             <!-- Przyciski -->
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -101,12 +106,10 @@
             // Funkcja do zmiany pól formularza w zależności od wyboru typu postaci
             $('input[name="CharacterType"]').change(function () {
                 if ($('#characterTypePC').is(':checked')) {
-                    // Wybrano PC - ustawiamy TypeOfCharacter na PC i pokazujemy rozwijaną listę graczy
                     $('#TypeOfCharacter').val('PC');
                     $('#playerIdSection').show();
                     $('#npcAttitudeSection').hide();
                 } else if ($('#characterTypeNPC').is(':checked')) {
-                    // Wybrano NPC - ustawiamy TypeOfCharacter na NPC i pokazujemy pole do wpisania nastawienia
                     $('#TypeOfCharacter').val('NPC');
                     $('#npcAttitudeSection').show();
                     $('#playerIdSection').hide();
@@ -115,6 +118,31 @@
 
             // Wywołaj zmianę od razu po załadowaniu strony, aby ustawić początkowy stan pól
             $('input[name="CharacterType"]:checked').trigger('change');
+
+            // Dodaj domyślne statystyki do modelu
+            $('#addStatistics').click(function () {
+                // Dodawanie przykładowych statystyk do modelu
+                var defaultStats = [
+                    { name: 'Strength', value: 10 },
+                    { name: 'Agility', value: 8 },
+                    { name: 'Intelligence', value: 12 }
+                ];
+
+                // Przykład dodania tych danych do formularza jako JSON, który będzie przesłany do serwera
+                // Upewnij się, że obsługujesz to w kontrolerze, jeśli to wymagane
+                defaultStats.forEach(stat => {
+                    // Możesz wysłać te dane do serwera lub pokazać w formularzu jako ukryte pola
+                    var input = $('<input>').attr('type', 'hidden').attr('name', 'Statistics').val(JSON.stringify(stat));
+                    $('form').append(input);
+                });
+
+                alert('Default statistics added to the character!');
+            });
+
+            // Otwórz nowe okno
+            $('#openNewWindow').click(function () {
+                window.open('https://example.com', '_blank', 'width=800,height=600');
+            });
         });
     </script>
 }
