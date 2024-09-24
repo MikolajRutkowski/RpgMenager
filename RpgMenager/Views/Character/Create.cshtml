@@ -13,6 +13,9 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+            <!-- Ukryte pole, które będzie aktualizowane w zależności od wyboru typu postaci -->
+            <input type="hidden" asp-for="TypeOfCharacter" />
+
             <!-- Wybór typu postaci (PC/NPC) -->
             <div class="form-group">
                 <label class="control-label">Character Type</label>
@@ -91,18 +94,20 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-<!-- Skrypt do dynamicznego przełączania pól formularza -->
+<!-- Skrypt do dynamicznego przełączania pól formularza i ustawiania wartości TypeOfCharacter -->
 @section Scripts {
     <script>
         $(document).ready(function () {
             // Funkcja do zmiany pól formularza w zależności od wyboru typu postaci
             $('input[name="CharacterType"]').change(function () {
                 if ($('#characterTypePC').is(':checked')) {
-                    // Wybrano PC - pokazujemy rozwijaną listę graczy
+                    // Wybrano PC - ustawiamy TypeOfCharacter na PC i pokazujemy rozwijaną listę graczy
+                    $('#TypeOfCharacter').val('PC');
                     $('#playerIdSection').show();
                     $('#npcAttitudeSection').hide();
                 } else if ($('#characterTypeNPC').is(':checked')) {
-                    // Wybrano NPC - pokazujemy pole do wpisania nastawienia do innych postaci
+                    // Wybrano NPC - ustawiamy TypeOfCharacter na NPC i pokazujemy pole do wpisania nastawienia
+                    $('#TypeOfCharacter').val('NPC');
                     $('#npcAttitudeSection').show();
                     $('#playerIdSection').hide();
                 }
