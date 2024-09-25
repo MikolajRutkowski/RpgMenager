@@ -14,5 +14,6 @@ namespace RpgMenager.Domain.Entities
 
         public int? CharacterId { get; set; }
         public Character? Character { get; set; } = null;
+        public string? NameOfTheList { get; set; } = default;
     }
 }

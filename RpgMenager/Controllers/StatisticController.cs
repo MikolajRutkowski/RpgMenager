@@ -3,7 +3,9 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RpgMenager.Application.DtosAnd.Player.Queries.GetAllPlayers;
+using RpgMenager.Application.DtosAnd.Statistic;
 using RpgMenager.Infrastructure.Persistence;
+using RpgMenager.Mvc.Models;
 
 namespace RpgMenager.Mvc.Controllers
 {
@@ -23,18 +25,22 @@ namespace RpgMenager.Mvc.Controllers
         #region Index
         public async Task<IActionResult> Index()
         {
-           // var players = await _mediator.Send(new GetAllPlayersQuery());
-           // return View(players);
+            IEnumerable<StatisticDto> allStatistic = await _mediator.Send(new GetAllStatisticQuery());
+            CreateListOfListOfStatistic Creator = new CreateListOfListOfStatistic(allStatistic);
+            var model = Creator.BigList;
+            return View(model);
         }
         #endregion
-
+        #region Details
+        
         // GET: StatisticController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
+        #endregion
+        #region Create
 
-        
         public ActionResult Create()
         {
             return View();
@@ -54,6 +60,8 @@ namespace RpgMenager.Mvc.Controllers
                 return View();
             }
         }
+        #endregion
+        #region Edit
 
         // GET: StatisticController/Edit/5
         public ActionResult Edit(int id)
@@ -75,6 +83,8 @@ namespace RpgMenager.Mvc.Controllers
                 return View();
             }
         }
+        #endregion
+        #region Delete
 
         // GET: StatisticController/Delete/5
         public ActionResult Delete(int id)
@@ -96,5 +106,6 @@ namespace RpgMenager.Mvc.Controllers
                 return View();
             }
         }
+        #endregion
     }
 }

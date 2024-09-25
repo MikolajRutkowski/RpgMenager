@@ -2,6 +2,7 @@
 using RpgMenager.Application.DtosAnd.Character;
 using RpgMenager.Application.DtosAnd.Player;
 using RpgMenager.Application.DtosAnd.Player.Commands.Edit;
+using RpgMenager.Application.DtosAnd.Statistic;
 using RpgMenager.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,8 @@ namespace RpgMenager.Application.Mappings
             CreateMap<CharacterDto, NPC>();
 
             CreateMap<CharacterDto, PC>();
+            CreateMap<Statistic, StatisticDto>();
+            CreateMap<StatisticDto, Statistic>();
         }
     }
 }

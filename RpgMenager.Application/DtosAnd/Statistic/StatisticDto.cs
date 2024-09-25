@@ -12,5 +12,6 @@ namespace RpgMenager.Application.DtosAnd.Statistic
         public int Value { get; set; } = 0;
         public StatisticsEnum statisticsEnum { get; set; } = StatisticsEnum.None;
         public int? CharacterId { get; set; }
+        public string NameOfTheList { get; set; } = default!;
     }
 }
