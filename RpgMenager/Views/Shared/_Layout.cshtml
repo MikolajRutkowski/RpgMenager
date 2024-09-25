@@ -32,10 +32,13 @@
                             <a class="nav-link  @(controler=="Home" && action == "Privacy" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>     
                         <li class="nav-item">
-                            <a class="nav-link  @(controler=="PlayerController" && action == "Index" ? "active" : "")" asp-area="" asp-controller="Player" asp-action="Index">Gracze</a>
+                            <a class="nav-link  @(controler=="Player" && action == "Index" ? "active" : "")" asp-area="" asp-controller="Player" asp-action="Index">Gracze</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  @(controler=="PlayerController" && action == "Index" ? "active" : "")" asp-area="" asp-controller="Character" asp-action="Index">Postacie</a>
+                            <a class="nav-link  @(controler=="Character" && action == "Index" ? "active" : "")" asp-area="" asp-controller="Character" asp-action="Index">Postacie</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link  @(controler=="Statistic" && action == "Index" ? "active" : "")" asp-area="" asp-controller="Statistic" asp-action="Index">Lista Statystyk</a>
                         </li>
                     </ul>
                 </div>
