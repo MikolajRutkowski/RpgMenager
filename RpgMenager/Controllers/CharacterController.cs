@@ -73,9 +73,58 @@ namespace RpgMenager.Mvc.Controllers
         #region Edit
         #endregion
         #region Delete
-        #endregion
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, string type)
+        {
+            try
+            {
+                
+                if (type == "NPC")
+                {
+
+                    var npc = await _dbcontext.NPCs.FirstOrDefaultAsync(c => c.Id == id);
+                    if (npc == null)
+                    {
+                        return NotFound();
+                    }
+                    
+
+                    _dbcontext.NPCs.Remove(npc);
+                    await _dbcontext.SaveChangesAsync();
+                }
+                else
+                {
+
+                    var pc = await _dbcontext.PCs.FirstOrDefaultAsync(c => c.Id == id);
+                    if (pc == null)
+                    {
+                        return NotFound();
+                    }
+
+
+                    _dbcontext.PCs.Remove(pc);
+                    await _dbcontext.SaveChangesAsync();
+                }
+                var listOfStatistik = await _dbcontext.Statistics.Where(s => s.CharacterId == id).ToListAsync();
+                foreach (var statistic in listOfStatistik)
+                {
+                    _dbcontext.Remove(statistic);
+
+                }
+                await _dbcontext.SaveChangesAsync();
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+
+                return View("Error");
+
+            }
+        }
+            #endregion
         #region Details
-        [Route("Character/{encodedName}/Details")]
+            [Route("Character/{encodedName}/Details")]
         public async Task<IActionResult> Details(string encodedName,int id)
         {
             CharacterDto dto = await _mediator.Send(new GetCharacterIdNameQuery(id));
