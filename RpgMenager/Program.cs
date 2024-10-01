@@ -13,9 +13,10 @@ var app = builder.Build();
 
 var scope = app.Services.CreateScope();
 
-var seeder = scope.ServiceProvider.GetRequiredService<SeederOne>();
-await seeder.Seed();
-
+//var seeder = scope.ServiceProvider.GetRequiredService<SeederOne>();
+//await seeder.Seed();
+var statSeeder = scope.ServiceProvider.GetRequiredService<StatisticSeeder>();
+statSeeder.Seed();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

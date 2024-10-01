@@ -20,6 +20,7 @@ namespace RpgMenager.Infrastructure.Extensions
             string contetionString = configuration.GetConnectionString("RpgMenager");
             service.AddDbContext<RpgMenagerDbContext>(options => options.UseSqlServer(contetionString));
             service.AddScoped<SeederOne>();
+            service.AddScoped<StatisticSeeder>();
             service.AddScoped<IRpgMenagerRepository, RpgMenagerRepository>();
         }
     }
