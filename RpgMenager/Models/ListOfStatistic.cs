@@ -54,7 +54,7 @@ namespace RpgMenager.Mvc.Models
             {
                 if (!IsInListLikeThat(NickToCreateNameOfList + item.CharacterId))
                 {
-                    BigList.Add(new ListOfStatistic() { Name = NickToCreateNameOfList + item.CharacterId, IdOfCharacter = item.CharacterId });
+                    BigList.Add(new ListOfStatistic() { Name = NickToCreateNameOfList + item.CharacterId.ToString(), IdOfCharacter = item.CharacterId });
 
                 }
                 BigList[FindId((NickToCreateNameOfList + item.CharacterId))].MainList.Add(item);
@@ -70,7 +70,7 @@ namespace RpgMenager.Mvc.Models
                 BigList[FindId((item.NameOfTheList))].MainList.Add(item);
             }
             //statystyki co mają iD i nazwe listy
-            foreach (var item in ListWithNameOfList)
+            foreach (var item in ListWithNameOfListAndIdOfCharacter)
             {
                 if (!IsInListLikeThat(item.NameOfTheList))
                 {
@@ -98,18 +98,22 @@ namespace RpgMenager.Mvc.Models
                 if (item.CharacterId != null && item.NameOfTheList != null)
                 {
                     ListWithNameOfListAndIdOfCharacter.Add(item);
+                    continue;
                 }
                 if (item.CharacterId == null && item.NameOfTheList != null)
                 {
-                    ListWithIdOfCharacter.Add(item);
+                    ListWithNameOfList.Add(item);
+                    continue;
                 }
                 if (item.CharacterId != null && item.NameOfTheList == null)
                 {
-                    ListWithNameOfList.Add(item);
+                    ListWithIdOfCharacter.Add(item);
+                    continue;
                 }
                 if (item.CharacterId == null && item.NameOfTheList == null)
                 {
                     ListWithoutAnything.Add(item);
+                    continue;
                 }
             }
         }
