@@ -23,11 +23,14 @@ namespace RpgMenager.Mvc.Controllers
         }
         #endregion
         #region Index
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string nameOflist = null, int idOfchracter = -1)
         {
             IEnumerable<StatisticDto> allStatistic = await _mediator.Send(new GetAllStatisticQuery());
             CreateListOfListOfStatistic Creator = new CreateListOfListOfStatistic(allStatistic);
+            
             var model = Creator.BigList;
+            
+                
             return View(model);
         }
         #endregion
