@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol.Core.Types;
 using RpgMenager.Application.DtosAnd;
 using RpgMenager.Application.DtosAnd.Character;
 using RpgMenager.Application.DtosAnd.Character.Commands.Create;
@@ -9,9 +10,12 @@ using RpgMenager.Application.DtosAnd.Character.Queries.GetAllCharacters;
 using RpgMenager.Application.DtosAnd.Character.Queries.GetCharacterByEncodedName;
 using RpgMenager.Application.DtosAnd.Player;
 using RpgMenager.Application.DtosAnd.Player.Commands.Create;
+using RpgMenager.Application.DtosAnd.Player.Queries.GetAllPlayers;
 using RpgMenager.Application.DtosAnd.Player.Queries.GetPlayersByEncodedName;
+using RpgMenager.Application.DtosAnd.Statistic;
 using RpgMenager.Domain.Entities;
 using RpgMenager.Infrastructure.Persistence;
+using RpgMenager.Mvc.Models;
 
 namespace RpgMenager.Mvc.Controllers
 {
@@ -147,6 +151,32 @@ namespace RpgMenager.Mvc.Controllers
             await _mediator.Send(command);
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> AddStatistics(string listName)
+        {
+            // Pobierz statystyki na podstawie nazwy listy
+            IEnumerable<StatisticDto> allStatistic = await _mediator.Send(new GetAllStatisticQuery());
+            CreateListOfListOfStatistic Creator = new CreateListOfListOfStatistic(allStatistic);
+
+            var statistics = Creator.returnOneList(listName);
+
+            if (statistics != null)
+            {
+                // Dodaj domyślne statystyki do modelu, w zależności od tego, jak zarządzasz modelem
+                foreach (var stat in statistics)
+                {
+                    // Zapisz statystyki do bazy danych lub wykonaj odpowiednią logikę
+                    await _repository.AddAsync(stat);
+                }
+
+                return Ok(); // Zwraca status 200, jeśli sukces
+            }
+
+            return BadRequest("No statistics found for the provided list name.");
+        }
+
+
         #endregion
     }
 }

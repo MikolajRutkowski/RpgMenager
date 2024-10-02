@@ -134,15 +134,15 @@ namespace RpgMenager.Infrastructure.Repositorries
             {
                 case Type _ when typeof(T) == typeof(Player):
                     result = await _context.Players.Include(p => p.PlayerCharacters)
-                        .FirstAsync(c => c.Id == id);
+                        .FirstOrDefaultAsync(c => c.Id == id);
                     break;
                 case Type _ when typeof(T) == typeof(Character):
                 case Type _ when typeof(T) == typeof(NPC):
                 case Type _ when typeof(T) == typeof(PC):
-                    result =  await _context.PCs.FirstOrDefaultAsync(c => c.Id == id);
+                    result =  await _context.PCs.Include(s => s.ListOfStatistics).FirstOrDefaultAsync(c => c.Id == id);
                     if (result == null)
                     {
-                        result = await _context.NPCs.FirstOrDefaultAsync(c => c.Id == id);
+                        result = await _context.NPCs.Include(s => s.ListOfStatistics).FirstOrDefaultAsync(c => c.Id == id);
                     }
                     break;
 

@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
+    int counter = 0;
 }
 
 <h1>Index</h1>
@@ -22,20 +23,22 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdOfCharacter)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdOfCharacter)
+                </td>
+                <td>
+                    
+                    <a asp-action="Details" asp-controller="Statistic" asp-route-id="@counter" class="btn btn-primary">Details</a> 
+                   
+                    @{counter++;}
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
