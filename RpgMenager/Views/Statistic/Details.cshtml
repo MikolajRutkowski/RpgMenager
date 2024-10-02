@@ -1,0 +1,83 @@
+﻿@model IEnumerable<RpgMenager.Application.DtosAnd.Statistic.StatisticDto>
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Value)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.statisticsEnum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CharacterId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NameOfTheList)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EncodedName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PathToImage)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.statisticsEnum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CharacterId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameOfTheList)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EncodedName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PathToImage)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

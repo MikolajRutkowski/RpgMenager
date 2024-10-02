@@ -97,6 +97,7 @@ namespace RpgMenager.Mvc.Models
             {
                 if (item.CharacterId != null && item.NameOfTheList != null)
                 {
+                    item.NameOfTheList = item.NameOfTheList +" Charaktetu o Id = " + item.CharacterId;
                     ListWithNameOfListAndIdOfCharacter.Add(item);
                     continue;
                 }
@@ -124,6 +125,11 @@ namespace RpgMenager.Mvc.Models
                 if (item.Name == identifier) { return true; }
             }
             return false;
+        }
+
+        public ListOfStatistic returnOneList(string identifierName)
+        {
+
         }
 
     } 

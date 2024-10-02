@@ -1,11 +1,16 @@
-﻿@model RpgMenager.Application.DtosAnd.Character.CharacterDto
+﻿@using RpgMenager.Application.DtosAnd.Statistic
+@using RpgMenager.Mvc.Models
+@model RpgMenager.Application.DtosAnd.Character.CharacterDto
 
 @{
     ViewData["Title"] = "Details";
 }
 
 <h1>Details</h1>
-
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ })
+    <button class="btn btn-secondary" onclick="window.history.back();">Powrót</button>
+</div>
 <div>
     <h4>CharacterDto</h4>
     <hr />
@@ -73,6 +78,10 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) 
-    <button class="btn btn-secondary" onclick="window.history.back();">Powrót</button>
+    @{
+        var newmodel = this.Model.Statistics;
+        Html.RenderPartial("~/Views/Statistic/DetailsGroupe.cshtml",(List<StatisticDto>) newmodel);
+    }
 </div>
+
+

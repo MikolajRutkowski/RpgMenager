@@ -23,7 +23,7 @@ namespace RpgMenager.Mvc.Controllers
         }
         #endregion
         #region Index
-        public async Task<IActionResult> Index(string nameOflist = null, int idOfchracter = -1)
+        public async Task<IActionResult> Index(string nameOflist = null, int idOfchracter = 0)
         {
             IEnumerable<StatisticDto> allStatistic = await _mediator.Send(new GetAllStatisticQuery());
             CreateListOfListOfStatistic Creator = new CreateListOfListOfStatistic(allStatistic);
@@ -37,9 +37,12 @@ namespace RpgMenager.Mvc.Controllers
         #region Details
         
         // GET: StatisticController/Details/5
-        public ActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            return View();
+            IEnumerable<StatisticDto> allStatistic = await _mediator.Send(new GetAllStatisticQuery());
+            CreateListOfListOfStatistic Creator = new CreateListOfListOfStatistic(allStatistic);
+            List<StatisticDto> model = Creator.BigList[id].MainList;
+            return View(model);
         }
         #endregion
         #region Create
