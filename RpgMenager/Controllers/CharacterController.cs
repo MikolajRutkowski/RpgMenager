@@ -152,29 +152,7 @@ namespace RpgMenager.Mvc.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddStatistics(string listName)
-        {
-            // Pobierz statystyki na podstawie nazwy listy
-            IEnumerable<StatisticDto> allStatistic = await _mediator.Send(new GetAllStatisticQuery());
-            CreateListOfListOfStatistic Creator = new CreateListOfListOfStatistic(allStatistic);
-
-            var statistics = Creator.returnOneList(listName);
-
-            if (statistics != null)
-            {
-                // Dodaj domyślne statystyki do modelu, w zależności od tego, jak zarządzasz modelem
-                foreach (var stat in statistics)
-                {
-                    // Zapisz statystyki do bazy danych lub wykonaj odpowiednią logikę
-                    await _repository.AddAsync(stat);
-                }
-
-                return Ok(); // Zwraca status 200, jeśli sukces
-            }
-
-            return BadRequest("No statistics found for the provided list name.");
-        }
+        
 
 
         #endregion

@@ -2,12 +2,15 @@
 
 @{
     ViewData["Title"] = "Details";
+    var list = Model.ToList();
+    var nameOfTheList = list[0].NameOfTheList;
 }
 
 <h1>Details</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Dodaj nowy</a>
+    <a asp-action="EditList" asp-controller="Statistic" asp-route-nameOfTheList="@nameOfTheList" class="btn btn-primary">Edytuj Liste</a>
 </p>
 <table class="table">
     <thead>
@@ -39,7 +42,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.PathToImage)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -72,11 +74,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PathToImage)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
+
         </tr>
 }
     </tbody>

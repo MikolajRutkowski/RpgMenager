@@ -129,7 +129,11 @@ namespace RpgMenager.Mvc.Models
 
         public ListOfStatistic returnOneList(string identifierName)
         {
-
+            foreach(ListOfStatistic item in BigList)
+            {
+                if (item.Name == identifierName) { return item; }
+            }
+            return new ListOfStatistic();
         }
 
     } 
