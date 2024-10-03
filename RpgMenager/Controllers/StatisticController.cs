@@ -70,9 +70,12 @@ namespace RpgMenager.Mvc.Controllers
         #region Edit
 
         // GET: StatisticController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> EditListAsync(string nameOfTheList)
         {
-            return View();
+            IEnumerable<StatisticDto> allStatistic = await _mediator.Send(new GetAllStatisticQuery());
+            CreateListOfListOfStatistic Creator = new CreateListOfListOfStatistic(allStatistic);
+            var model = Creator.returnOneList(nameOfTheList);
+            return View(model.MainList);
         }
 
         // POST: StatisticController/Edit/5

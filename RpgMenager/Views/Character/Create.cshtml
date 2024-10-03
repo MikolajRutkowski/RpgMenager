@@ -83,8 +83,8 @@
 
             <!-- Przyciski do zarządzania statystykami -->
             <div class="form-group">
-                <button type="button" id="addStatistics" class="btn btn-secondary">Add Default Statistics</button>
-                <button type="button" id="openNewWindow" class="btn btn-secondary">Open New Window</button>
+                <button type="button" id="addStatistics" class="btn btn-secondary">Dodaj Statystyki</button>
+                
             </div>
 
             <!-- Przyciski -->
@@ -145,29 +145,5 @@
             });
         });
     </script>
-    <script>
-        document.getElementById("addStatistics").addEventListener("click", function () {
-            var listName = "x"; // Tutaj podaj wartość nazwy listy, np. 'x'
-
-            // Wywołanie AJAX do kontrolera, aby dodać statystyki
-            fetch(`/YourController/AddStatistics?listName=${listName}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            })
-                .then(response => {
-                    if (response.ok) {
-                        // Zaktualizuj stronę lub powiadom o sukcesie
-                        alert("Statistics added successfully.");
-                        location.reload(); // Odśwież stronę, aby zobaczyć zmiany
-                    } else {
-                        alert("Error adding statistics.");
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        });
-    </script>
+    
 }

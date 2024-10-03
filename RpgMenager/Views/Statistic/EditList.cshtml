@@ -1,0 +1,81 @@
+﻿@model IEnumerable<RpgMenager.Application.DtosAnd.Statistic.StatisticDto>
+
+@{
+    ViewData["Title"] = "Edit Details";
+}
+
+<h1>Edit Details</h1>
+
+<form asp-action="SaveChanges" method="post">
+    <p>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Value)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.statisticsEnum)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CharacterId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NameOfTheList)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EncodedName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PathToImage)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="text" name="Value" value="@item.Value" class="form-control" />
+                    </td>
+                    <td>
+                        <input type="text" name="statisticsEnum" value="@item.statisticsEnum" class="form-control" />
+                    </td>
+                    <td>
+                        <input type="text" name="CharacterId" value="@item.CharacterId" class="form-control" />
+                    </td>
+                    <td>
+                        <input type="text" name="NameOfTheList" value="@item.NameOfTheList" class="form-control" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id) <!-- Id is usually not editable -->
+                        <input type="hidden" name="Id" value="@item.Id" />
+                    </td>
+                    <td>
+                        <input type="text" name="Name" value="@item.Name" class="form-control" />
+                    </td>
+                    <td>
+                        <input type="text" name="Description" value="@item.Description" class="form-control" />
+                    </td>
+                    <td>
+                        <input type="text" name="EncodedName" value="@item.EncodedName" class="form-control" />
+                    </td>
+                    <td>
+                        <input type="text" name="PathToImage" value="@item.PathToImage" class="form-control" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>
