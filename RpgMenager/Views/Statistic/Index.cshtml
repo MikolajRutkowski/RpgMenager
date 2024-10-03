@@ -33,9 +33,9 @@
                     @Html.DisplayFor(modelItem => item.IdOfCharacter)
                 </td>
                 <td>
-                    
-                    <a asp-action="Details" asp-controller="Statistic" asp-route-id="@counter" class="btn btn-primary">Details</a> 
-                   
+
+                    <a asp-action="Details" asp-controller="Statistic" asp-route-encodedName="@item.Name.ToLower().Replace(" ", "-");" asp-route-id="@counter" class="btn btn-primary">Details</a>
+
                     @{counter++;}
                 </td>
             </tr>
