@@ -35,8 +35,8 @@ namespace RpgMenager.Mvc.Controllers
         }
         #endregion
         #region Details
-        
-        // GET: StatisticController/Details/5
+
+        [Route("Statistic/{encodedName}/Details")]
         public async Task<IActionResult> Details(int id)
         {
             IEnumerable<StatisticDto> allStatistic = await _mediator.Send(new GetAllStatisticQuery());
