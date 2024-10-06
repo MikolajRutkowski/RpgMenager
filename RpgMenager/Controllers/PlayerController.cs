@@ -8,6 +8,8 @@ using RpgMenager.Application.DtosAnd.Player.Commands.Edit;
 using RpgMenager.Application.DtosAnd.Player;
 using RpgMenager.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using RpgMenager.Mvc.Models;
+using Newtonsoft.Json;
 
 namespace RpgMenager.Mvc.Controllers
 {
@@ -73,7 +75,11 @@ namespace RpgMenager.Mvc.Controllers
             {
                 return View(command);
             }
+
             await _mediator.Send(command);
+            //dodanie notifikacji aby wyswietliła nam się wiadomość o stworznieu 
+            var notification = new Notification("success", $"Stworzono gracza: {command.Name}");
+            TempData["Notification"] = JsonContent. notification;
             return RedirectToAction(nameof(Index));
         }
         #endregion
