@@ -1,0 +1,68 @@
+﻿@model RpgMenager.Application.DtosAnd.Statistic.Commands.Create.CreateStatisticCommand
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createStatisticModal">
+    Dodaj Statystyke
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="createStatisticModal" tabindex="-1" aria-labelledby="createStatisticModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form asp-action="CreateStatistic">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createStatisticModalLabel"> Dodaj Statystyke</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Value" class="control-label"></label>
+                        <input asp-for="Value" class="form-control" />
+                        <span asp-validation-for="Value" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="statisticsEnum" class="control-label"></label>
+                        <input asp-for="statisticsEnum" class="form-control" />
+                        <span asp-validation-for="statisticsEnum" class="text-danger"></span>
+                    </div>
+
+                    <input asp-for="CharacterId" class="form-control" type="hidden" />
+
+                    <div class="form-group">
+                        <label asp-for="NameOfTheList" class="control-label"></label>
+                        <input asp-for="NameOfTheList" class="form-control" />
+                        <span asp-validation-for="NameOfTheList" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Id" class="control-label"></label>
+                        <input asp-for="Id" class="form-control" />
+                        <span asp-validation-for="Id" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <input type="submit" value="Create" class="btn btn-primary">
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
