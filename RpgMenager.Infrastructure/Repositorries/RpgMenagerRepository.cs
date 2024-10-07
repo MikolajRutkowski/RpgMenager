@@ -50,7 +50,7 @@ namespace RpgMenager.Infrastructure.Repositorries
 
         public async Task CreateStatistic(Statistic statistic)
         {
-            _context.Add(statistic);
+            _context.Statistics.Add(statistic);
             await _context.SaveChangesAsync();
         }
 

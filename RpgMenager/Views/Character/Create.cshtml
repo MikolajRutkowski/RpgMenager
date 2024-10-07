@@ -1,4 +1,5 @@
-﻿@model RpgMenager.Application.DtosAnd.Character.Commands.Create.CreateCharacterCommand
+﻿@using RpgMenager.Application.DtosAnd.Statistic.Commands.Create
+@model RpgMenager.Application.DtosAnd.Character.Commands.Create.CreateCharacterCommand
 
 @{
     ViewData["Title"] = "Create";
@@ -84,7 +85,14 @@
             <!-- Przyciski do zarządzania statystykami -->
             <div class="form-group">
                 <button type="button" id="addStatistics" class="btn btn-secondary">Dodaj Statystyki</button>
-                
+                @if (Model != null)
+                {
+                    <partial name="~/Statistic/_CreateStatistic" model="new CreateStatisticCommand() { CharacterId = Model.Id }" />
+                }
+                else
+                {
+                    <p>Error: Model is null</p>
+                }
             </div>
 
             <!-- Przyciski -->
@@ -99,6 +107,7 @@
 
 <!-- Skrypt do dynamicznego przełączania pól formularza i ustawiania wartości TypeOfCharacter -->
 @section Scripts {
+    <script src="~/js/Character/Create.js"></script>
     <script>
         $(document).ready(function () {
             // Funkcja do zmiany pól formularza w zależności od wyboru typu postaci

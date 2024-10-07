@@ -11,7 +11,7 @@ namespace RpgMenager.Application.DtosAnd
         public int? Id { get; set; } = default;
         public string? Name { get; set; } = default;
         public string? Description { get; set; }
-        public string? EncodedName { get; set; }
+        public string? EncodedName { get; set; } = default;
         public string? PathToImage { get; set; }
     }
 }

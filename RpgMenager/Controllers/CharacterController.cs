@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Core.Types;
@@ -13,6 +14,7 @@ using RpgMenager.Application.DtosAnd.Player.Commands.Create;
 using RpgMenager.Application.DtosAnd.Player.Queries.GetAllPlayers;
 using RpgMenager.Application.DtosAnd.Player.Queries.GetPlayersByEncodedName;
 using RpgMenager.Application.DtosAnd.Statistic;
+using RpgMenager.Application.DtosAnd.Statistic.Commands.Create;
 using RpgMenager.Domain.Entities;
 using RpgMenager.Infrastructure.Persistence;
 using RpgMenager.Mvc.Models;
@@ -152,7 +154,21 @@ namespace RpgMenager.Mvc.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost]
         
+        [Route("Character/Statistic")]
+        public async Task<IActionResult> CreateStatistic(CreateStatisticCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+
+            }
+            await _mediator.Send(command);
+
+            return Ok();
+        }
+
 
 
         #endregion
