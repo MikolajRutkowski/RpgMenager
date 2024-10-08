@@ -7,10 +7,12 @@ using NuGet.Protocol.Core.Types;
 using RpgMenager.Application.DtosAnd;
 using RpgMenager.Application.DtosAnd.Character;
 using RpgMenager.Application.DtosAnd.Character.Commands.Create;
+using RpgMenager.Application.DtosAnd.Character.Commands.Edit;
 using RpgMenager.Application.DtosAnd.Character.Queries.GetAllCharacters;
 using RpgMenager.Application.DtosAnd.Character.Queries.GetCharacterByEncodedName;
 using RpgMenager.Application.DtosAnd.Player;
 using RpgMenager.Application.DtosAnd.Player.Commands.Create;
+using RpgMenager.Application.DtosAnd.Player.Commands.Edit;
 using RpgMenager.Application.DtosAnd.Player.Queries.GetAllPlayers;
 using RpgMenager.Application.DtosAnd.Player.Queries.GetPlayersByEncodedName;
 using RpgMenager.Application.DtosAnd.Statistic;
@@ -77,6 +79,28 @@ namespace RpgMenager.Mvc.Controllers
         }
         #endregion
         #region Edit
+
+        [Route("Character/{encodedName}/Edit")]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var dto = await _mediator.Send(new GetCharacterIdNameQuery(id));
+            EditCharacterCommand model = _mapper.Map<EditCharacterCommand>(dto);
+            return View(model);
+        }
+
+        [HttpPost]
+        [Route("Character/Statistic")]
+        public async Task<IActionResult> CreateStatistic(CreateStatisticCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+
+            }
+            await _mediator.Send(command);
+
+            return Ok();
+        }
         #endregion
         #region Delete
         [HttpPost]
@@ -154,20 +178,7 @@ namespace RpgMenager.Mvc.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost]
         
-        [Route("Character/Statistic")]
-        public async Task<IActionResult> CreateStatistic(CreateStatisticCommand command)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-
-            }
-            await _mediator.Send(command);
-
-            return Ok();
-        }
 
 
 
