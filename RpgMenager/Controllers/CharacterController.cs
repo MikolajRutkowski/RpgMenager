@@ -89,7 +89,7 @@ namespace RpgMenager.Mvc.Controllers
         }
 
         [HttpPost]
-        [Route("Character/Statistic")]
+        [Route("Character/Index")]
         public async Task<IActionResult> CreateStatistic(CreateStatisticCommand command)
         {
             if (!ModelState.IsValid)
