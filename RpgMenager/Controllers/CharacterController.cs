@@ -88,8 +88,8 @@ namespace RpgMenager.Mvc.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        [Route("Character/Index")]
+        [HttpPost]  
+        [Route("Character/Edit")]
         public async Task<IActionResult> CreateStatistic(CreateStatisticCommand command)
         {
             if (!ModelState.IsValid)
@@ -160,6 +160,14 @@ namespace RpgMenager.Mvc.Controllers
             CharacterDto dto = await _mediator.Send(new GetCharacterIdNameQuery(id));
             return View(dto);
         }
+
+        //[Route("Character/{encodedName}/Details")]
+        //public async Task<IActionResult> GetStatisticList(string encodedName, int id)
+        //{
+        //    CharacterDto dto = await _mediator.Send(new GetCharacterIdNameQuery(id));
+        //    return View(dto);
+        //}
+
         #endregion
         #region Create
         public ActionResult Create()
