@@ -1,5 +1,5 @@
 ﻿$(document).ready(function() {
-    $("#createCarWorkshopServiceModal form").submit(function(event) {
+    $("#createStatisticModal form").submit(function(event) {
         event.preventDefault();
 
         $.ajax({

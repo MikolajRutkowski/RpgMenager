@@ -77,11 +77,11 @@ namespace RpgMenager.Mvc.Controllers
                 return View(command);
             }
 
-            //await _mediator.Send(command);
+            
             //dodanie notifikacji aby wyswietliła nam się wiadomość o stworznieu 
 
             this.SetNotification("success", $"Stworzono Gracza: {command.Name}");
-
+            await _mediator.Send(command);
             return RedirectToAction(nameof(Index));
         }
         #endregion
