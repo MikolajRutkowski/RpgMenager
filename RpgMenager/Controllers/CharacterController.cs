@@ -88,19 +88,7 @@ namespace RpgMenager.Mvc.Controllers
             return View(model);
         }
 
-        [HttpPost]  
-        [Route("Character/Edit")] //to towrzynam statystyke w tym fajnym oknie
-        public async Task<IActionResult> CreateStatistic(CreateStatisticCommand command)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-
-            }
-            await _mediator.Send(command);
-
-            return Ok();
-        }
+        
         #endregion
         #region Delete
         [HttpPost]
@@ -189,7 +177,22 @@ namespace RpgMenager.Mvc.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        
+        [HttpPost]
+        [Route("Character/Edit")] //to towrzynam statystyke w tym fajnym oknie
+        public async Task<IActionResult> CreateStatistic(CreateStatisticCommand command)
+        {
+            
+             
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+
+            }
+            await _mediator.Send(command);
+
+            return Ok();
+        }
+
 
 
 

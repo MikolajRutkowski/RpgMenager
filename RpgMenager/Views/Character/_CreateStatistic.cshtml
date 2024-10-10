@@ -36,7 +36,7 @@
 
                     <input asp-for="CharacterId" class="form-control" type="hidden" />
                     <input asp-for="NameOfTheList" class="form-control" type="hidden" />
->
+
 
 
                     <div class="form-group">
@@ -57,5 +57,6 @@
 
 
 @section Scripts {
+
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
