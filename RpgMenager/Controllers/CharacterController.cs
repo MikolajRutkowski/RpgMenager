@@ -89,7 +89,7 @@ namespace RpgMenager.Mvc.Controllers
         }
 
         [HttpPost]  
-        [Route("Character/Edit")]
+        [Route("Character/Edit")] //to towrzynam statystyke w tym fajnym oknie
         public async Task<IActionResult> CreateStatistic(CreateStatisticCommand command)
         {
             if (!ModelState.IsValid)
@@ -161,12 +161,15 @@ namespace RpgMenager.Mvc.Controllers
             return View(dto);
         }
 
-        //[Route("Character/{encodedName}/Details")]
-        //public async Task<IActionResult> GetStatisticList(string encodedName, int id)
-        //{
-        //    CharacterDto dto = await _mediator.Send(new GetCharacterIdNameQuery(id));
-        //    return View(dto);
-        //}
+        [Route("Character/{encodedName}/Statistic")]
+        public async Task<IActionResult> GetStatisticList(string encodedName,int idName)
+        {
+            IEnumerable<StatisticDto> allStatistic = await _mediator.Send(new GetAllStatisticQuery());
+            CreateListOfListOfStatistic Creator = new CreateListOfListOfStatistic(allStatistic);
+            var Lista = Creator.returnOneList(idName);
+            var data = Lista.MainList;
+            return Ok(data);
+        }
 
         #endregion
         #region Create
