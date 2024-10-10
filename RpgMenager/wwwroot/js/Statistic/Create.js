@@ -90,6 +90,7 @@
             data: $(this).serialize(),
             success: function(data) {
                 toastr["success"]("Created carworkshop service")
+                LoadStatistics();
             },
             error: function() {
                 toastr["error"]("Something went wrong")
