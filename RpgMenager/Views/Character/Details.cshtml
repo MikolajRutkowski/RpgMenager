@@ -5,13 +5,14 @@
 
 @{
     ViewData["Title"] = "Details";
+    string x = "dsds";
 }
 
 <h1>Details</h1>
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ })
     <button class="btn btn-secondary" onclick="window.history.back();">Powrót</button>
-    <partial name="_CreateStatistic" model="new CreateStatisticCommand() { CharacterId = Model.Id }" />
+    <partial name="_CreateStatistic" model="new CreateStatisticCommand() { CharacterId = Model.Id , NameOfTheList=x}" />
 </div>
 <div>
     <h4>CharacterDto</h4>
@@ -89,7 +90,9 @@
 </div>
 
 @section Scripts {
-    
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 
     <script src="~/js/Statistic/Create.js"></script>
 }
