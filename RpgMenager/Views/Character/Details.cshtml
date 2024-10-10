@@ -82,9 +82,12 @@
 <div>
     @{
         var newmodel = this.Model.Statistics;
-        Html.RenderPartial("~/Views/Statistic/DetailsGroupe.cshtml",(List<StatisticDto>) newmodel);
+        //Html.RenderPartial("~/Views/Statistic/DetailsGroupe.cshtml",(List<StatisticDto>) newmodel);
+        <div id="statistics-container" class="row" data-encoded-name="@Model.EncodedName" data-id-name="@Model.Id"></div>
+         
     }
 </div>
+
 @section Scripts {
     
 

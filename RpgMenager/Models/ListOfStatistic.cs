@@ -1,5 +1,6 @@
 ﻿using RpgMenager.Application.DtosAnd.Statistic;
 using RpgMenager.Domain.Entities;
+using System.Data.Common;
 using System.Linq;
 
 namespace RpgMenager.Mvc.Models
@@ -37,7 +38,7 @@ namespace RpgMenager.Mvc.Models
 
         public CreateListOfListOfStatistic(IEnumerable<StatisticDto> allStatistic)
         {
-            SorteStatisticsDto(allStatistic);
+            SortStatisticsDto(allStatistic);
             CreateBigList();
         }
         public void CreateBigList()
@@ -91,7 +92,7 @@ namespace RpgMenager.Mvc.Models
             }
             return 0;
         }
-        public void SorteStatisticsDto(IEnumerable<StatisticDto> allStatistic)
+        public void SortStatisticsDto(IEnumerable<StatisticDto> allStatistic)
         {
             foreach (var item in allStatistic)
             {
@@ -135,7 +136,14 @@ namespace RpgMenager.Mvc.Models
             }
             return new ListOfStatistic();
         }
-
+        public ListOfStatistic returnOneList(int idOfCharacter)
+        {
+            foreach (ListOfStatistic item in BigList)
+            {
+                if (item.IdOfCharacter == idOfCharacter) { return item; }
+            }
+            return new ListOfStatistic();
+        }
     } 
 
 
