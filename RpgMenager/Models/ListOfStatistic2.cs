@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace RpgMenager.Mvc.Models
 {
-    public class ListOfStatistic
+    public class ListOfStatistic2
     {
         public string Name { get; set; } = default;
         public int? IdOfCharacter { get; set; } = default;
@@ -28,7 +28,7 @@ namespace RpgMenager.Mvc.Models
         public string NickToCreateNameOfList { get; set; } = "List Character Id = ";
 
         public int howManyList { get; private set; } = 0;
-        public List<ListOfStatistic> BigList { get; set; } = new List<ListOfStatistic>();
+        public List<ListOfStatistic2> BigList { get; set; } = new List<ListOfStatistic2>();
         public List<StatisticDto> ListWithIdOfCharacter { get; set; } = new List<StatisticDto>();
         public List<StatisticDto> ListWithNameOfList { get; set; } = new List<StatisticDto>();
         public List<StatisticDto> ListWithNameOfListAndIdOfCharacter { get; set; } = new List<StatisticDto>();
@@ -44,7 +44,7 @@ namespace RpgMenager.Mvc.Models
         public void CreateBigList()
         {
             BigList.Clear();
-            BigList.Add(new ListOfStatistic() { Name = "Pozostałe", IdOfCharacter = -1, });
+            BigList.Add(new ListOfStatistic2() { Name = "Pozostałe", IdOfCharacter = -1, });
             //statystyki co nie mają nic 
             foreach (var item in ListWithoutAnything)
             {
@@ -55,7 +55,7 @@ namespace RpgMenager.Mvc.Models
             {
                 if (!IsInListLikeThat(NickToCreateNameOfList + item.CharacterId))
                 {
-                    BigList.Add(new ListOfStatistic() { Name = NickToCreateNameOfList + item.CharacterId.ToString(), IdOfCharacter = item.CharacterId });
+                    BigList.Add(new ListOfStatistic2() { Name = NickToCreateNameOfList + item.CharacterId.ToString(), IdOfCharacter = item.CharacterId });
 
                 }
                 BigList[FindId((NickToCreateNameOfList + item.CharacterId))].MainList.Add(item);
@@ -65,7 +65,7 @@ namespace RpgMenager.Mvc.Models
             {
                 if (!IsInListLikeThat(item.NameOfTheList))
                 {
-                    BigList.Add(new ListOfStatistic() { Name = item.NameOfTheList, IdOfCharacter = item.CharacterId });
+                    BigList.Add(new ListOfStatistic2() { Name = item.NameOfTheList, IdOfCharacter = item.CharacterId });
 
                 }
                 BigList[FindId((item.NameOfTheList))].MainList.Add(item);
@@ -75,7 +75,7 @@ namespace RpgMenager.Mvc.Models
             {
                 if (!IsInListLikeThat(item.NameOfTheList))
                 {
-                    BigList.Add(new ListOfStatistic() { Name = item.NameOfTheList, IdOfCharacter = item.CharacterId });
+                    BigList.Add(new ListOfStatistic2() { Name = item.NameOfTheList, IdOfCharacter = item.CharacterId });
 
                 }
                 BigList[FindId((item.NameOfTheList))].MainList.Add(item);
@@ -128,21 +128,21 @@ namespace RpgMenager.Mvc.Models
             return false;
         }
 
-        public ListOfStatistic returnOneList(string identifierName)
+        public ListOfStatistic2 returnOneList(string identifierName)
         {
-            foreach(ListOfStatistic item in BigList)
+            foreach(ListOfStatistic2 item in BigList)
             {
                 if (item.Name == identifierName) { return item; }
             }
-            return new ListOfStatistic();
+            return new ListOfStatistic2();
         }
-        public ListOfStatistic returnOneList(int idOfCharacter)
+        public ListOfStatistic2 returnOneList(int idOfCharacter)
         {
-            foreach (ListOfStatistic item in BigList)
+            foreach (ListOfStatistic2 item in BigList)
             {
                 if (item.IdOfCharacter == idOfCharacter) { return item; }
             }
-            return new ListOfStatistic();
+            return new ListOfStatistic2();
         }
     } 
 

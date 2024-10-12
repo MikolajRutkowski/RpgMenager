@@ -19,7 +19,7 @@ namespace RpgMenager.Application.DtosAnd.Character.Queries.GetAllCharacters
 
         async Task<IEnumerable<CharacterDto>> IRequestHandler<GetAllCharactersQuery, IEnumerable<CharacterDto>>.Handle(GetAllCharactersQuery request, CancellationToken cancellationToken)
         {
-            var listOfCharacter = await _repository.GetAll<Domain.Entities.Character>();
+            var listOfCharacter = await _repository.GetAll<Domain.Entities.Abstract.Character>();
             var dtos = _mapper.Map<IEnumerable<CharacterDto>>(listOfCharacter);
             return dtos;
         }

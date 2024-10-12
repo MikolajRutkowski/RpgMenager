@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RpgMenager.Domain.Entities
+namespace RpgMenager.Domain.Entities.Abstract
 {
     public abstract class Character : Entity
     {

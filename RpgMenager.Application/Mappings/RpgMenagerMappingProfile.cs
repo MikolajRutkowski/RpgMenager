@@ -5,6 +5,7 @@ using RpgMenager.Application.DtosAnd.Player;
 using RpgMenager.Application.DtosAnd.Player.Commands.Edit;
 using RpgMenager.Application.DtosAnd.Statistic;
 using RpgMenager.Domain.Entities;
+using RpgMenager.Domain.Entities.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;

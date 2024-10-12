@@ -19,14 +19,14 @@ namespace RpgMenager.Application.DtosAnd.Character.Commands.Edit
         public async Task Handle(EditCharacterCommand request, CancellationToken cancellationToken)
         {
             string type = request.TypeOfCharacter;
-            Domain.Entities.Character character;
+            Domain.Entities.Abstract.Character character;
 
             switch (type) {
                 case "PC":
-                    character = (Domain.Entities.Character)await _repository.GetByID<PC>((int)request.Id);
+                    character = (Domain.Entities.Abstract.Character)await _repository.GetByID<PC>((int)request.Id);
                     break;
                 case "NPC":
-                    character = (Domain.Entities.Character)await _repository.GetByID<NPC>((int)request.Id);
+                    character = (Domain.Entities.Abstract.Character)await _repository.GetByID<NPC>((int)request.Id);
                     break;
                 default:
                     throw new Exception();
