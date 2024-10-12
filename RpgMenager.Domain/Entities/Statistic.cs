@@ -1,4 +1,5 @@
-﻿using RpgMenager.Domain.Enums;
+﻿using RpgMenager.Domain.Entities.Abstract;
+using RpgMenager.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;

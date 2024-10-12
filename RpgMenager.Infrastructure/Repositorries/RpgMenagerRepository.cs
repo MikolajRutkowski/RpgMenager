@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RpgMenager.Domain.Entities;
+using RpgMenager.Domain.Entities.Abstract;
 using RpgMenager.Domain.Interfaces;
 using RpgMenager.Infrastructure.Persistence;
 using System;

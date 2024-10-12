@@ -42,6 +42,7 @@ namespace RpgMenager.Mvc.Controllers
             IEnumerable<StatisticDto> allStatistic = await _mediator.Send(new GetAllStatisticQuery());
             CreateListOfListOfStatistic Creator = new CreateListOfListOfStatistic(allStatistic);
             List<StatisticDto> model = Creator.BigList[id].MainList;
+            ViewBag.NameOfTheList = Creator.BigList[id].Name;
             return View(model);
         }
         #endregion

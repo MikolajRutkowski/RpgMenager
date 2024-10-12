@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Details";
     var list = Model.ToList();
-    var nameOfTheList = list[0].NameOfTheList;
+    string nameOfTheList = ViewBag.NameOfTheList;
 }
 
 <h1>Details</h1>

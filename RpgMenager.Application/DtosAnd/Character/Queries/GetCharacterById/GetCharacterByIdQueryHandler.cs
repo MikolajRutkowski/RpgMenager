@@ -17,7 +17,7 @@ namespace RpgMenager.Application.DtosAnd.Character.Queries.GetCharacterByEncoded
 
         public async Task<CharacterDto> Handle(GetCharacterIdNameQuery request, CancellationToken cancellationToken)
         {
-            var character = await _repository.GetByID<Domain.Entities.Character>(request.Id);
+            var character = await _repository.GetByID<Domain.Entities.Abstract.Character>(request.Id);
             var dto = _mapper.Map<CharacterDto>(character);
             return dto;
         }
