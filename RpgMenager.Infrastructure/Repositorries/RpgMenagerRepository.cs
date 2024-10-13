@@ -30,12 +30,7 @@ namespace RpgMenager.Infrastructure.Repositorries
 
         public async Task CreateCharacter(Character character, List<Statistic> listOfStatic)
         {
-            await CreateCharacter(character);
-            foreach (Statistic statistic in listOfStatic) {
-            statistic.Character = character;
-            statistic.CharacterId = character.Id;
-            await CreateStatistic(statistic);
-            }
+            
         }
 
         public Task CreateItem(Item item)
@@ -141,11 +136,7 @@ namespace RpgMenager.Infrastructure.Repositorries
                 case Type _ when typeof(T) == typeof(Character):
                 case Type _ when typeof(T) == typeof(NPC):
                 case Type _ when typeof(T) == typeof(PC):
-                    result =  await _context.PCs.Include(s => s.ListOfStatistics).FirstOrDefaultAsync(c => c.Id == id);
-                    if (result == null)
-                    {
-                        result = await _context.NPCs.Include(s => s.ListOfStatistics).FirstOrDefaultAsync(c => c.Id == id);
-                    }
+                    
                     break;
 
                 case Type _ when typeof(T) == typeof(Statistic):
