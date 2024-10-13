@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace RpgMenager.Domain.Entities
 {
-    public class ListOfStatistic : ListOfSmt<Statistic>
+    public class ListOfItem : ListOfSmt<Item>
     {
-        public override List<Statistic> MainList { get; set; } = new List<Statistic>();
-
+        
+        public override List<Item> MainList { get; set; } = new List<Item>();
     }
-
 }

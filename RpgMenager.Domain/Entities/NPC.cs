@@ -10,5 +10,13 @@ namespace RpgMenager.Domain.Entities
     public class NPC : Character
     {
         public string? AttitudeToAnotherCharacter { get; set; } = default;
+        public NPC()
+        {
+            ListOfStatistic = new ListOfStatistic
+            {
+                Owner = this  // Przypisanie siebie jako właściciela listy statystyk
+            };
+            ListOfItem = new ListOfItem { Owner = this };
+        }
     }
 }

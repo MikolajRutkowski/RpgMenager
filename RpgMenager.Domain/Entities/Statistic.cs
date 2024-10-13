@@ -12,9 +12,8 @@ namespace RpgMenager.Domain.Entities
     {
         public int Value { get; set; }  = 0;
         public StatisticsEnum statisticsEnum { get; set; } = StatisticsEnum.None;
-
-        public int? CharacterId { get; set; }
-        public Character? Character { get; set; } = null;
-        public string? NameOfTheList { get; set; } = default;
+        public int? ListId { get; set; }
+        public ListOfStatistic? ListOfStatistic { get; set; } = default;
+        
     }
 }
