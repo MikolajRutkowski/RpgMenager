@@ -216,7 +216,7 @@ namespace RpgMenager.Infrastructure.Migrations
             modelBuilder.Entity("RpgMenager.Domain.Entities.Statistic", b =>
                 {
                     b.HasOne("RpgMenager.Domain.Entities.Character", "Character")
-                        .WithMany("ListOfStatistics")
+                        .WithMany("HasListOfList")
                         .HasForeignKey("CharacterId");
 
                     b.Navigation("Character");
@@ -235,7 +235,7 @@ namespace RpgMenager.Infrastructure.Migrations
                 {
                     b.Navigation("ListOfItems");
 
-                    b.Navigation("ListOfStatistics");
+                    b.Navigation("HasListOfList");
                 });
 
             modelBuilder.Entity("RpgMenager.Domain.Entities.Player", b =>

@@ -29,9 +29,27 @@ namespace RpgMenager.Infrastructure.Persistence
             modelBuilder.Entity<Statistic>()
                 .Property(s => s.statisticsEnum)
                 .HasConversion<string>();
-            
-           
-        }
+            modelBuilder.Entity<Statistic>()
+                .HasOne(s => s.ListOfStatistic)
+                .WithMany(L => L.MainList)
+                .HasForeignKey(s => s.ListId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Character>()
+            .HasMany(c => c.ListOfListStats)  // Character ma wiele ListOfStatistic
+            .WithOne(l => (Character)l.Owner)  // Każda ListOfStatistic ma jednego właściciela typu Character
+            .HasForeignKey(l => l.OwnerId)     // ListOfStatistic przechowuje OwnerId jako klucz obcy
+            .OnDelete(DeleteBehavior.Cascade);
+
+            // Relacja jeden-do-wielu między Item a ListOfStatistic
+            modelBuilder.Entity<Item>()
+                .HasMany(i => i.ListOfListStats)  // Item może mieć wiele ListOfStatistic
+                .WithOne(l => (Item)l.Owner)       // Każda ListOfStatistic ma jednego właściciela typu Item
+                .HasForeignKey(l => l.OwnerId)     // ListOfStatistic przechowuje OwnerId jako klucz obcy
+                .OnDelete(DeleteBehavior.Cascade);
+
 
         }
+
+    }
 }

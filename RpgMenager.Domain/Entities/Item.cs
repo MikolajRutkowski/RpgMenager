@@ -8,19 +8,17 @@ using RpgMenager.Domain.Interfaces;
 
 namespace RpgMenager.Domain.Entities
 {
-    public class Item : Entity , IHasListOfStatistic
+    public class Item : Entity , IHasListOfListStats
     {
         public int? Charges { get; set; } = 0;
-
-        // Implementacja ListOfStatistic
-        public ListOfStatistic ListOfStatistic { get; set; } = new ListOfStatistic();
+        public string? Stan { get; set; } = default;
         public int? ListId { get; set; }
         public ListOfItem? ListOfItem { get; set; } = default;
+        public List<ListOfStatistic> ListOfListStats { get ; set ; } = new List<ListOfStatistic>();
 
         public Item()
         {
-            // Przypisanie właściciela do listy statystyk
-            ListOfStatistic.Owner = this;
+            
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using RpgMenager.Domain.Entities;
+using RpgMenager.Domain.Entities.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace RpgMenager.Domain.Interfaces
 {
-    public interface IHasListOfStatistic
+    public interface IHasListOfListStats 
     {
-        ListOfStatistic ListOfStatistic { get; set; }
+        List<ListOfStatistic> ListOfListStats { get; set; }
     }
 }

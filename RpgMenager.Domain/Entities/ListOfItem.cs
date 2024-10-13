@@ -9,6 +9,7 @@ namespace RpgMenager.Domain.Entities
 {
     public class ListOfItem : ListOfSmt<Item>
     {
+        
         public override List<Item> MainList { get; set; } = new List<Item>();
     }
 }

@@ -26,10 +26,10 @@ namespace RpgMenager.Application.Mappings
                 src is PC ? "PC" : src is NPC ? "NPC" : "Unknown")); 
             CreateMap<CharacterDto, Character>();
             CreateMap<PC, CharacterDto>().ForMember(dest => dest.TypeOfCharacter, opt => opt.Ignore());
-            //   .ForMember(dest => dest.Statistics, opt => opt.MapFrom(src => src.ListOfStatistics));  // Ignorujemy pole Type podczas mapowania
+            //   .ForMember(dest => dest.Statistics, opt => opt.MapFrom(src => src.HasListOfList));  // Ignorujemy pole Type podczas mapowania
 
             CreateMap<NPC, CharacterDto>().ForMember(dest => dest.TypeOfCharacter, opt => opt.Ignore());
-            //.ForMember(dest => dest.Statistics, opt => opt.MapFrom(src => src.ListOfStatistics))
+            //.ForMember(dest => dest.Statistics, opt => opt.MapFrom(src => src.HasListOfList))
 
             CreateMap<CharacterDto, NPC>();
 
