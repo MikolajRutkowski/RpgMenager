@@ -123,12 +123,12 @@ namespace RpgMenager.Mvc.Controllers
                     _dbcontext.PCs.Remove(pc);
                     await _dbcontext.SaveChangesAsync();
                 }
-                var listOfStatistik = await _dbcontext.Statistics.Where(s => s.CharacterId == id).ToListAsync();
-                foreach (var statistic in listOfStatistik)
-                {
-                    _dbcontext.Remove(statistic);
+                //var listOfStatistik = await _dbcontext.Statistics.Where(s => s.CharacterId == id).ToListAsync();
+                //foreach (var statistic in listOfStatistik)
+                //{
+                //    _dbcontext.Remove(statistic);
 
-                }
+                //}
                 await _dbcontext.SaveChangesAsync();
 
                 return RedirectToAction("Index");

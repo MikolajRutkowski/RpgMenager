@@ -13,7 +13,7 @@ namespace RpgMenager.Domain.Entities
         public int Value { get; set; }  = 0;
         public StatisticsEnum statisticsEnum { get; set; } = StatisticsEnum.None;
         public int? ListId { get; set; }
-        public ListOfStatistic? ListOfStatistic { get; set; } = default;
+        public IndexOfStatistic? IndexOfStatistic { get; set; } = default;
         
     }
 }

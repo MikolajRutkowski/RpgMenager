@@ -76,42 +76,44 @@ namespace RpgMenager.Infrastructure.Seeders
         {
             if (await _db.Database.CanConnectAsync())
             {
-                 
-                bool IfListOfCharacterTraitsExiste = _db.Statistics.Where(s => s.NameOfTheList == NameOfListOfCharacterTraits).Any();
-                if (!IfListOfCharacterTraitsExiste) { 
-                    foreach(string traits in BaseCharacteristicName)
-                    {
-                        var seed = new Statistic()
-                        {
-                            Name = traits,
-                            NameOfTheList = NameOfListOfCharacterTraits,
-                            Value = 1,
-                            statisticsEnum = Domain.Enums.StatisticsEnum.Character
 
-                        };
-                        seed.Encode();
-                        _db.Statistics.Add(seed);
-                        await _db.SaveChangesAsync();
-                    }
-                }
-                bool IfListOfSkilstsExiste = _db.Statistics.Where(s => s.NameOfTheList == NameOfListOfCharacterSkils).Any();
-                if (!IfListOfSkilstsExiste) {
-                    foreach (string skil in SkillNames)
-                    {
-                        var seed = new Statistic()
-                        {
-                            Name = skil,
-                            NameOfTheList = NameOfListOfCharacterSkils,
-                            Value = 0,
-                            statisticsEnum = Domain.Enums.StatisticsEnum.Skill
+                var isEmpty =  _db.ListOfStatistics.Any();
+                int x = 10;
+                
 
-                        };
-                        seed.Encode();
-                        _db.Statistics.Add(seed);
-                        await _db.SaveChangesAsync();
+                if (isEmpty == false)
+                {
+                    IndexOfStatistic seed = new IndexOfStatistic() { Name = NameOfListOfCharacterTraits, Description = "Bazowa Lista Cech dla Call Cthulhu 7ed."  };
+                    seed.Encode();
+                    foreach (string s in BaseCharacteristicName)
+                    {
+                        seed.Add(new Statistic() { Name = s, Value = 1 });
                     }
+                    foreach(var s in seed.MainList)
+                    {
+                        s.Encode();
+                    }
+                    _db.ListOfStatistics.Add(seed);
+                    await _db.SaveChangesAsync();
                 }
+                if (isEmpty == false)
+                {
+                    IndexOfStatistic seed = new IndexOfStatistic() { Name = NameOfListOfCharacterSkils, Description = "Bazowa Lista Statystyk dla Call Cthulhu 7ed." };
+                    seed.Encode();
+                    foreach (string s in SkillNames)
+                    {
+                        seed.Add(new Statistic() { Name = s, Value = 1 });
+                    }
+                    foreach (var s in seed.MainList)
+                    {
+                        s.Encode();
+                    }
+                    _db.ListOfStatistics.Add(seed);
+                    await _db.SaveChangesAsync();
+                }
+                
             }
+
         }
     }
 }

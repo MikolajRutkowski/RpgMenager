@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RpgMenager.Domain.Entities
 {
-    public class ListOfItem : ListOfSmt<Item>
+    public class IndexOfItem : IndexOfSmt<Item>
     {
         
         public override List<Item> MainList { get; set; } = new List<Item>();

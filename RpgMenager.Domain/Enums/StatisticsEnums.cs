@@ -10,6 +10,7 @@ namespace RpgMenager.Domain.Enums
     {
         None = 0,
         Character = 1, //cecha
-        Skill  = 2     //Umiejętność
+        Skill  = 2,     //Umiejętność
+        ItemStats = 3
     }
 }
