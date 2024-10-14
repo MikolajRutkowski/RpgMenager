@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace RpgMenager.Domain.Entities.Abstract
 {
-    public abstract class Character : Entity, IHasListOfListStats
+    public abstract class Character : Entity, IHasListOfIndexStats, IHasListOfIndexItem
     {
         public int Hp { get; set; } = 1;
         public string? Lastname { get; set; } = default;
 
-        public List<ListOfStatistic> ListOfListStats { get; set; } = new List<ListOfStatistic>();
+        public List<IndexOfStatistic> ListOfIndexStats { get; set; } = new List<IndexOfStatistic>();
 
-        public ListOfItem ListOfItem { get; set; }
+        public List<IndexOfItem> ListOfIndexItem { get; set; } = new List<IndexOfItem>();
         
 
     }

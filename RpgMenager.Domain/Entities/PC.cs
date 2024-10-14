@@ -13,13 +13,6 @@ namespace RpgMenager.Domain.Entities
         public int? PlayerId { get; set; }
         public Player? Player { get; set; } = default;
 
-        public PC()
-        {
-            ListOfStatistic = new ListOfStatistic
-            {
-                Owner = this  // Przypisanie siebie jako właściciela listy statystyk
-            };
-            ListOfItem = new ListOfItem { Owner = this };
-        }
+        
     }
 }

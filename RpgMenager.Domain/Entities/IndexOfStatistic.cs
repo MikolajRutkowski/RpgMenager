@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RpgMenager.Domain.Entities
 {
-    public class ListOfStatistic : ListOfSmt<Statistic>
+    public class IndexOfStatistic : IndexOfSmt<Statistic>
     {
         public override List<Statistic> MainList { get; set; } = new List<Statistic>();
 

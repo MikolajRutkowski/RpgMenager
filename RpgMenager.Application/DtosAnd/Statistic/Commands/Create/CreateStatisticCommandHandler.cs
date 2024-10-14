@@ -18,10 +18,7 @@ namespace RpgMenager.Application.DtosAnd.Statistic.Commands.Create
         public async Task Handle(CreateStatisticCommand request, CancellationToken cancellationToken)
         {
             var stats = _mapper.Map<Domain.Entities.Statistic>(request);
-            if(stats.CharacterId != null)
-            {
-                stats.NameOfTheList = "List Character Id = " + stats.CharacterId;
-            }   
+             
             stats.Encode();
             await _repository.CreateStatistic(stats);
         }
