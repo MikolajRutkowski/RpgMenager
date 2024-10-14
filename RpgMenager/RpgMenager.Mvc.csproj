@@ -57,5 +57,9 @@
     <ProjectReference Include="..\RpgMenager.Application\RpgMenager.Application.csproj" />
     <ProjectReference Include="..\RpgMenager.Infrastructure\RpgMenager.Infrastructure.csproj" />
   </ItemGroup>
+	
+  <ItemGroup>
+    <Folder Include="Views\Statistic\" />
+  </ItemGroup>
 
 </Project>

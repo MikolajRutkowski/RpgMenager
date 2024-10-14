@@ -123,7 +123,7 @@ namespace RpgMenager.Mvc.Controllers
                     _dbcontext.PCs.Remove(pc);
                     await _dbcontext.SaveChangesAsync();
                 }
-                //var listOfStatistik = await _dbcontext.Statistics.Where(s => s.CharacterId == id).ToListAsync();
+                //var listOfStatistik = await _dbcontext.Statistics.Where(s => s.OwnerId == id).ToListAsync();
                 //foreach (var statistic in listOfStatistik)
                 //{
                 //    _dbcontext.Remove(statistic);
@@ -149,15 +149,15 @@ namespace RpgMenager.Mvc.Controllers
             return View(dto);
         }
 
-        [Route("Character/{encodedName}/Statistic")]
-        public async Task<IActionResult> GetStatisticList(string encodedName,int idName)
-        {
-            IEnumerable<StatisticDto> allStatistic = await _mediator.Send(new GetAllStatisticQuery());
-            CreateListOfListOfStatistic Creator = new CreateListOfListOfStatistic(allStatistic);
-            var Lista = Creator.returnOneList(idName);
-            var data = Lista.MainList;
-            return Ok(data);
-        }
+        //[Route("Character/{encodedName}/Statistic")]
+        //public async Task<IActionResult> GetStatisticList(string encodedName,int idName)
+        //{
+        //    IEnumerable<StatisticDto> allStatistic = await _mediator.Send(new GetAllStatisticQuery());
+        //    CreateListOfListOfStatistic Creator = new CreateListOfListOfStatistic(allStatistic);
+        //    var Lista = Creator.returnOneList(idName);
+        //    var data = Lista.MainList;
+        //    return Ok(data);
+        //}
 
         #endregion
         #region Create

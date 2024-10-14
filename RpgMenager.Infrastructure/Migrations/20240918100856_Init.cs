@@ -107,12 +107,12 @@ namespace RpgMenager.Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Items_CharacterId",
                 table: "Items",
-                column: "CharacterId");
+                column: "OwnerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Statistics_CharacterId",
                 table: "Statistics",
-                column: "CharacterId");
+                column: "OwnerId");
         }
 
         /// <inheritdoc />

@@ -107,7 +107,7 @@ namespace RpgMenager.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CharacterId")
+                    b.Property<int?>("OwnerId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -129,7 +129,7 @@ namespace RpgMenager.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CharacterId");
+                    b.HasIndex("OwnerId");
 
                     b.HasIndex("OwnerId");
 
@@ -293,7 +293,7 @@ namespace RpgMenager.Infrastructure.Migrations
                 {
                     b.HasOne("RpgMenager.Domain.Entities.Abstract.Character", null)
                         .WithMany("ListOfIndexStats")
-                        .HasForeignKey("CharacterId");
+                        .HasForeignKey("OwnerId");
 
                     b.HasOne("RpgMenager.Domain.Entities.Item", "Owner")
                         .WithMany("ListOfIndexStats")

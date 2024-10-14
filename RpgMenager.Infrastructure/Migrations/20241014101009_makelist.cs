@@ -23,7 +23,7 @@ namespace RpgMenager.Infrastructure.Migrations
                 table: "Statistics");
 
             migrationBuilder.RenameColumn(
-                name: "CharacterId",
+                name: "OwnerId",
                 table: "Statistics",
                 newName: "ListId");
 
@@ -33,7 +33,7 @@ namespace RpgMenager.Infrastructure.Migrations
                 newName: "IX_Statistics_ListId");
 
             migrationBuilder.RenameColumn(
-                name: "CharacterId",
+                name: "OwnerId",
                 table: "Items",
                 newName: "ListOfItemId");
 
@@ -114,7 +114,7 @@ namespace RpgMenager.Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_ListOfStatistics_CharacterId",
                 table: "IndexOfStatistics",
-                column: "CharacterId");
+                column: "OwnerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ListOfStatistics_OwnerId",
@@ -165,7 +165,7 @@ namespace RpgMenager.Infrastructure.Migrations
             migrationBuilder.RenameColumn(
                 name: "ListId",
                 table: "Statistics",
-                newName: "CharacterId");
+                newName: "OwnerId");
 
             migrationBuilder.RenameIndex(
                 name: "IX_Statistics_ListId",
@@ -175,7 +175,7 @@ namespace RpgMenager.Infrastructure.Migrations
             migrationBuilder.RenameColumn(
                 name: "ListOfItemId",
                 table: "Items",
-                newName: "CharacterId");
+                newName: "OwnerId");
 
             migrationBuilder.RenameIndex(
                 name: "IX_Items_ListOfItemId",
@@ -191,14 +191,14 @@ namespace RpgMenager.Infrastructure.Migrations
             migrationBuilder.AddForeignKey(
                 name: "FK_Items_Character_CharacterId",
                 table: "Items",
-                column: "CharacterId",
+                column: "OwnerId",
                 principalTable: "Character",
                 principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Statistics_Character_CharacterId",
                 table: "Statistics",
-                column: "CharacterId",
+                column: "OwnerId",
                 principalTable: "Character",
                 principalColumn: "Id");
         }

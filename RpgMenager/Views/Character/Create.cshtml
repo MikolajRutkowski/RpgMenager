@@ -87,7 +87,7 @@
                 <button type="button" id="addStatistics" class="btn btn-secondary">Dodaj Statystyki</button>
                 @if (Model != null)
                 {
-                    <partial name="~/Statistic/_CreateStatistic" model="new CreateStatisticCommand() { CharacterId = Model.Id }" />
+                    <partial name="~/Statistic/_CreateStatistic" model="new CreateStatisticCommand() { OwnerId = Model.Id }" />
                 }
                 else
                 {

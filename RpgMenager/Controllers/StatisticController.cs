@@ -25,26 +25,25 @@ namespace RpgMenager.Mvc.Controllers
         #region Index
         public async Task<IActionResult> Index(string nameOflist = null, int idOfchracter = 0)
         {
-            IEnumerable<StatisticDto> allStatistic = await _mediator.Send(new GetAllStatisticQuery());
-            CreateListOfListOfStatistic Creator = new CreateListOfListOfStatistic(allStatistic);
+            var allStatistic = await _mediator.Send(new GetAll());
             
-            var model = Creator.BigList;
+            
+            
             
                 
-            return View(model);
+            return View(allStatistic);
         }
         #endregion
         #region Details
 
-        [Route("Statistic/{encodedName}/Details")]
-        public async Task<IActionResult> Details(int id)
-        {
-            IEnumerable<StatisticDto> allStatistic = await _mediator.Send(new GetAllStatisticQuery());
-            CreateListOfListOfStatistic Creator = new CreateListOfListOfStatistic(allStatistic);
-            List<StatisticDto> model = Creator.BigList[id].MainList;
-            ViewBag.NameOfTheList = Creator.BigList[id].Name;
-            return View(model);
-        }
+        //[Route("Statistic/{encodedName}/Details")]
+        //public async Task<IActionResult> Details(int id)
+        //{
+        //    IEnumerable<StatisticDto> allIndexs = await _mediator.Send(new GetAllIndexs);
+            
+            
+        //   // return View(model);
+        //}
         #endregion
         #region Create
 
@@ -73,10 +72,7 @@ namespace RpgMenager.Mvc.Controllers
         // GET: StatisticController/Edit/5
         public async Task<ActionResult> EditListAsync(string nameOfTheList)
         {
-            IEnumerable<StatisticDto> allStatistic = await _mediator.Send(new GetAllStatisticQuery());
-            CreateListOfListOfStatistic Creator = new CreateListOfListOfStatistic(allStatistic);
-            var model = Creator.returnOneList(nameOfTheList);
-            return View(model.MainList);
+            return View();
         }
 
         // POST: StatisticController/Edit/5

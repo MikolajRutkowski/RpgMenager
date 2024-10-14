@@ -12,7 +12,7 @@
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ })
     <button class="btn btn-secondary" onclick="window.history.back();">Powrót</button>
-    <partial name="_CreateStatistic" model="new CreateStatisticCommand() { CharacterId = Model.Id , NameOfTheList=x}" />
+    <partial name="_CreateStatistic" model="new CreateStatisticCommand() { OwnerId = Model.Id , NameOfTheList=x}" />
 </div>
 <div>
     <h4>CharacterDto</h4>
