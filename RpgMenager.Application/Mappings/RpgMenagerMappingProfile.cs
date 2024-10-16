@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using RpgMenager.Application.DtosAnd.Character;
 using RpgMenager.Application.DtosAnd.Character.Commands.Edit;
+using RpgMenager.Application.DtosAnd.Index;
 using RpgMenager.Application.DtosAnd.Player;
 using RpgMenager.Application.DtosAnd.Player.Commands.Edit;
 using RpgMenager.Application.DtosAnd.Statistic;
@@ -38,6 +39,11 @@ namespace RpgMenager.Application.Mappings
             CreateMap<StatisticDto, Statistic>();
 
             CreateMap<CharacterDto, EditCharacterCommand>();
+
+            CreateMap<IndexOfStatistic,StatisticIndexDto>();
+            CreateMap<StatisticIndexDto, IndexOfStatistic>();
+
+
         }
     }
 }

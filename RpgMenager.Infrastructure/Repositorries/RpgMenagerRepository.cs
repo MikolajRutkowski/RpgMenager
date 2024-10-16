@@ -80,7 +80,12 @@ namespace RpgMenager.Infrastructure.Repositorries
                     var combinedList = npcList.Cast<Character>().Concat(pcList.Cast<Character>());
                     resultList = (IEnumerable<T>)combinedList;
                     break;
-
+                case Type _ when typeof (T) == typeof(IndexOfStatistic):
+                    resultList = (IEnumerable<T>)await _context.ListOfStatistics.Include(x => x.MainList).ToListAsync();
+                    break;
+                case Type _ when typeof(T) == typeof(IndexOfItem):
+                    resultList = (IEnumerable<T>)await _context.listOfItems.ToListAsync();
+                    break;
                 default:
                     throw new InvalidOperationException("Nieobsługiwany typ encji");
             }

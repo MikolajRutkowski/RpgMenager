@@ -75,7 +75,7 @@ namespace RpgMenager.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CharacterId")
+                    b.Property<int?>("OwnerId")
                         .HasColumnType("int");
 
                     b.Property<int?>("Charges")
@@ -97,7 +97,7 @@ namespace RpgMenager.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CharacterId");
+                    b.HasIndex("OwnerId");
 
                     b.ToTable("Items");
                 });
@@ -151,7 +151,7 @@ namespace RpgMenager.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CharacterId")
+                    b.Property<int?>("OwnerId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -180,7 +180,7 @@ namespace RpgMenager.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CharacterId");
+                    b.HasIndex("OwnerId");
 
                     b.ToTable("Statistics");
                 });
@@ -211,7 +211,7 @@ namespace RpgMenager.Infrastructure.Migrations
                 {
                     b.HasOne("RpgMenager.Domain.Entities.Character", "Character")
                         .WithMany("ListOfItems")
-                        .HasForeignKey("CharacterId");
+                        .HasForeignKey("OwnerId");
 
                     b.Navigation("Character");
                 });
@@ -220,7 +220,7 @@ namespace RpgMenager.Infrastructure.Migrations
                 {
                     b.HasOne("RpgMenager.Domain.Entities.Character", "Character")
                         .WithMany("HasListOfList")
-                        .HasForeignKey("CharacterId");
+                        .HasForeignKey("OwnerId");
 
                     b.Navigation("Character");
                 });

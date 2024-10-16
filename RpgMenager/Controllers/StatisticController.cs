@@ -2,6 +2,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RpgMenager.Application.DtosAnd.Index;
+using RpgMenager.Application.DtosAnd.Index.Queries.GetAllStatisticIndex;
 using RpgMenager.Application.DtosAnd.Player.Queries.GetAllPlayers;
 using RpgMenager.Application.DtosAnd.Statistic;
 using RpgMenager.Infrastructure.Persistence;
@@ -25,25 +27,21 @@ namespace RpgMenager.Mvc.Controllers
         #region Index
         public async Task<IActionResult> Index(string nameOflist = null, int idOfchracter = 0)
         {
-            IEnumerable<StatisticDto> allStatistic = await _mediator.Send(new GetAllStatisticQuery());
-            CreateListOfListOfStatistic Creator = new CreateListOfListOfStatistic(allStatistic);
-            
-            var model = Creator.BigList;
-            
-                
-            return View(model);
+            var allStatistic = await _mediator.Send(new GetAllStatisticIndexQuery());
+             
+            return View(allStatistic);
         }
         #endregion
         #region Details
 
         [Route("Statistic/{encodedName}/Details")]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(string encodedName)
         {
-            IEnumerable<StatisticDto> allStatistic = await _mediator.Send(new GetAllStatisticQuery());
-            CreateListOfListOfStatistic Creator = new CreateListOfListOfStatistic(allStatistic);
-            List<StatisticDto> model = Creator.BigList[id].MainList;
-            ViewBag.NameOfTheList = Creator.BigList[id].Name;
-            return View(model);
+            var allStatistic = await _mediator.Send(new GetAllStatisticIndexQuery());
+            StatisticIndexDto concretIndex = (StatisticIndexDto)allStatistic.First(i => i.EncodedName == encodedName);
+
+            
+           return View(concretIndex.MainList);
         }
         #endregion
         #region Create
@@ -73,10 +71,7 @@ namespace RpgMenager.Mvc.Controllers
         // GET: StatisticController/Edit/5
         public async Task<ActionResult> EditListAsync(string nameOfTheList)
         {
-            IEnumerable<StatisticDto> allStatistic = await _mediator.Send(new GetAllStatisticQuery());
-            CreateListOfListOfStatistic Creator = new CreateListOfListOfStatistic(allStatistic);
-            var model = Creator.returnOneList(nameOfTheList);
-            return View(model.MainList);
+            return View();
         }
 
         // POST: StatisticController/Edit/5

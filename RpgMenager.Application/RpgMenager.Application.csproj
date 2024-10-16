@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <Folder Include="DtosAnd\Character\Queries\GetAllCharactersById\" />
+    <Folder Include="DtosAnd\Index\Commands\" />
   </ItemGroup>
 
 </Project>

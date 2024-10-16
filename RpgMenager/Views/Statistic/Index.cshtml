@@ -1,11 +1,4 @@
-﻿@model IEnumerable<RpgMenager.Mvc.Models.ListOfStatistic2>
-
-@{
-    ViewData["Title"] = "Index";
-    int counter = 0;
-}
-
-<h1>Index</h1>
+﻿@model IEnumerable<RpgMenager.Application.DtosAnd.Index.StatisticIndexDto>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -14,31 +7,56 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.OwnerId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdOfCharacter)
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EncodedName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PathToImage)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdOfCharacter)
-                </td>
-                <td>
-
-                    <a asp-action="Details" asp-controller="Statistic" asp-route-encodedName="@item.Name.ToLower().Replace(" ", "-");" asp-route-id="@counter" class="btn btn-primary">Details</a>
-
-                    @{counter++;}
-                </td>
-            </tr>
-        }
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OwnerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EncodedName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PathToImage)
+            </td>
+            <td>
+                    @* <a asp-action="Edit" asp-controller="Player" asp-route-encodedName="@item.EncodedName" class="btn btn-primary">Edit</a> *@
+                    <a asp-action="Details" asp-controller="Statistic" asp-route-encodedName="@item.EncodedName" class="btn btn-primary">Details</a>
+                    @* <form asp-action="Delete" asp-controller="Player" method="post" style="display:inline;">
+                        <input type="hidden" name="encodedName" value="@item.EncodedName" />
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Czy na pewno chcesz usunąć?');">Usuń</button>
+                    </form> *@
+            </td>
+        </tr>
+}
     </tbody>
 </table>
