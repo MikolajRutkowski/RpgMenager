@@ -81,7 +81,7 @@ namespace RpgMenager.Infrastructure.Repositorries
                     resultList = (IEnumerable<T>)combinedList;
                     break;
                 case Type _ when typeof (T) == typeof(IndexOfStatistic):
-                    resultList = (IEnumerable<T>)await _context.ListOfStatistics.ToListAsync();
+                    resultList = (IEnumerable<T>)await _context.ListOfStatistics.Include(x => x.MainList).ToListAsync();
                     break;
                 case Type _ when typeof(T) == typeof(IndexOfItem):
                     resultList = (IEnumerable<T>)await _context.listOfItems.ToListAsync();

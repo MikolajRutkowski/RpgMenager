@@ -9,15 +9,17 @@ using System.Threading.Tasks;
 
 namespace RpgMenager.Application.DtosAnd.Index.Queries.GetAllStatisticIndex
 {
-    public class GetAllStatisticIndexQueryHandler : RpgHandler, IRequestHandler<GetAllStatisticIndexQuery>
+    public class GetAllStatisticIndexQueryHandler : RpgHandler, IRequestHandler<GetAllStatisticIndexQuery, IEnumerable<StatisticIndexDto>>
     {
         public GetAllStatisticIndexQueryHandler(IMapper mapper, IRpgMenagerRepository rpgMenagerRepository) : base(mapper, rpgMenagerRepository)
         {
         }
 
-        public async Task Handle(GetAllStatisticIndexQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<StatisticIndexDto>> Handle(GetAllStatisticIndexQuery request, CancellationToken cancellationToken)
         {
-            var listofIndex = await _repository.GetAll<Domain.Entities.IndexOfStatistic>();
+            var indexs = await _repository.GetAll<Domain.Entities.IndexOfStatistic>();
+            var dtos = _mapper.Map<IEnumerable<StatisticIndexDto>>(indexs);
+            return dtos;
         }
     }
 }

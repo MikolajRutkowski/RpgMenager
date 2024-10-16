@@ -2,6 +2,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RpgMenager.Application.DtosAnd.Index;
+using RpgMenager.Application.DtosAnd.Index.Queries.GetAllStatisticIndex;
 using RpgMenager.Application.DtosAnd.Player.Queries.GetAllPlayers;
 using RpgMenager.Application.DtosAnd.Statistic;
 using RpgMenager.Infrastructure.Persistence;
@@ -25,25 +27,22 @@ namespace RpgMenager.Mvc.Controllers
         #region Index
         public async Task<IActionResult> Index(string nameOflist = null, int idOfchracter = 0)
         {
-            var allStatistic = await _mediator.Send(new GetAll());
-            
-            
-            
-            
-                
+            var allStatistic = await _mediator.Send(new GetAllStatisticIndexQuery());
+             
             return View(allStatistic);
         }
         #endregion
         #region Details
 
-        //[Route("Statistic/{encodedName}/Details")]
-        //public async Task<IActionResult> Details(int id)
-        //{
-        //    IEnumerable<StatisticDto> allIndexs = await _mediator.Send(new GetAllIndexs);
+        [Route("Statistic/{encodedName}/Details")]
+        public async Task<IActionResult> Details(string encodedName)
+        {
+            var allStatistic = await _mediator.Send(new GetAllStatisticIndexQuery());
+            StatisticIndexDto concretIndex = (StatisticIndexDto)allStatistic.First(i => i.EncodedName == encodedName);
+
             
-            
-        //   // return View(model);
-        //}
+           return View(concretIndex.MainList);
+        }
         #endregion
         #region Create
 
