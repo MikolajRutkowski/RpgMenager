@@ -18,22 +18,27 @@ namespace RpgMenager.Application.DtosAnd.Character.Commands.Create
 
         public async Task Handle(CreateCharacterCommand request, CancellationToken cancellationToken)
         {
-            if(request.TypeOfCharacter == "NPC")
+            switch (request.TypeOfCharacter)
             {
-                var character = _mapper.Map<Domain.Entities.NPC>(request);
-                character.Encode();
-                await _repository.CreateCharacter(character);
+                case "NPC":
+                    {
+                        var character = _mapper.Map<Domain.Entities.NPC>(request);
+                        character.Encode();
+                        await _repository.CreateCharacter(character);
+                        break;
+                    }
+                case "PC":
+                    {
+                        var pc = _mapper.Map<Domain.Entities.PC>(request);
+                        pc.Encode();
+                        await _repository.CreateCharacter(pc);
+                        break;
+                    }
+                default:
+                    throw new Exception("Nieznany typ postaci");
             }
-            if (request.TypeOfCharacter == "PC") {
-                var pc = _mapper.Map<Domain.Entities.PC>(request);
-                pc.Encode();
-                await _repository.CreateCharacter(pc);
-            }
-            else
-            {
-                throw new Exception("Nieznany typ postaci");
-            }
-           
+
+
         }
     }
 }

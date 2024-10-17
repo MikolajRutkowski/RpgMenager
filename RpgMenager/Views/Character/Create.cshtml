@@ -55,7 +55,7 @@
                 <span asp-validation-for="PlayerId" class="text-danger"></span>
             </div>
 
-            <div id="npcAttitudeSection" class="form-group" style="display: none;">
+            <div  id="npcAttitudeSection"  class="form-group" style="display: none;">
                 <label asp-for="AttitudeToAnotherCharacter" class="control-label">Attitude to Other Characters</label>
                 <input asp-for="AttitudeToAnotherCharacter" class="form-control" />
                 <span asp-validation-for="AttitudeToAnotherCharacter" class="text-danger"></span>
@@ -81,19 +81,9 @@
                 <input asp-for="PathToImage" class="form-control" />
                 <span asp-validation-for="PathToImage" class="text-danger"></span>
             </div>
+            <div>
 
-            <!-- Przyciski do zarządzania statystykami -->
-            <div class="form-group">
-                <button type="button" id="addStatistics" class="btn btn-secondary">Dodaj Statystyki</button>
-                @if (Model != null)
-                {
-                    <partial name="~/Statistic/_CreateStatistic" model="new CreateStatisticCommand() { OwnerId = Model.Id }" />
-                }
-                else
-                {
-                    <p>Error: Model is null</p>
-                }
-            </div>
+             </div>
 
             <!-- Przyciski -->
             <div class="form-group">
@@ -126,30 +116,9 @@
             // Wywołaj zmianę od razu po załadowaniu strony, aby ustawić początkowy stan pól
             $('input[name="CharacterType"]:checked').trigger('change');
 
-            // Dodaj domyślne statystyki do modelu
-            $('#addStatistics').click(function () {
-                // Dodawanie przykładowych statystyk do modelu
-                var defaultStats = [
-                    { name: 'Strength', value: 10 },
-                    { name: 'Agility', value: 8 },
-                    { name: 'Intelligence', value: 12 }
-                ];
+           
 
-                // Przykład dodania tych danych do formularza jako JSON, który będzie przesłany do serwera
-                // Upewnij się, że obsługujesz to w kontrolerze, jeśli to wymagane
-                defaultStats.forEach(stat => {
-                    // Możesz wysłać te dane do serwera lub pokazać w formularzu jako ukryte pola
-                    var input = $('<input>').attr('type', 'hidden').attr('name', 'Statistics').val(JSON.stringify(stat));
-                    $('form').append(input);
-                });
-
-                alert('Default statistics added to the character!');
-            });
-
-            // Otwórz nowe okno
-            $('#openNewWindow').click(function () {
-                window.open('https://example.com', '_blank', 'width=800,height=600');
-            });
+            
         });
     </script>
     

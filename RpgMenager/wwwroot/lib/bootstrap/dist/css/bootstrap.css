@@ -12609,3 +12609,12 @@ body {
 .offcanvas .text-muted {
   color: rgba(255, 255, 255, 0.7) !important;
 }
+#npcAttitudeSection select {
+    color: black;
+    background-color: white;
+}
+
+#npcAttitudeSection option {
+    color: black;
+    background-color: white;
+}
