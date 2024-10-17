@@ -35,7 +35,8 @@
                 <a class="btn btn-primary" asp-route-encodedName="@item.EncodedName" asp-route-id="@item.Id" asp-controller="Character" asp-action="Details" asp-route-id="@item.Id">Details</a>
                 <a class="btn btn-primary" asp-route-encodedName="@item.EncodedName" asp-route-id="@item.Id" asp-controller="Character" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                 <form asp-action="Delete" asp-controller="Character" method="post" style="display:inline;">
-                    <input type="hidden" name="Id" value="@item.Id" />
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <input type="hidden" name="type" value="@item.TypeOfCharacter" />
                     <button type="submit" class="btn btn-danger" onclick="return confirm('Czy na pewno chcesz usunąć?');">Usuń</button>
                 </form>
             </div>

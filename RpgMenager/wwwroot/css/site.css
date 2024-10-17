@@ -20,3 +20,13 @@ html {
 body {
   margin-bottom: 60px;
 }
+#npcAttitudeSection select {
+    color: black; /* Kolor tekstu tylko dla tego elementu */
+    background-color: white; /* Kolor t³a tylko dla tego elementu */
+}
+
+#npcAttitudeSection option {
+    color: black; /* Kolor tekstu dla opcji */
+    background-color: white; /* Kolor t³a dla opcji */
+}
+
