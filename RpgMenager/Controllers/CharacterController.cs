@@ -83,12 +83,19 @@ namespace RpgMenager.Mvc.Controllers
         [Route("Character/{encodedName}/Edit")]
         public async Task<IActionResult> Edit(int id)
         {
-            var dto = await _mediator.Send(new GetCharacterIdNameQuery(id));
+            var dto = await _mediator.Send(new GetCharacterByIdNameQuery(id));
             EditCharacterCommand model = _mapper.Map<EditCharacterCommand>(dto);
             return View(model);
         }
+        [HttpPost]
+        [Route("Character/{encodedName}/Edit")]
+        public async Task<IActionResult> Edit(EditCharacterCommand command)
+        {
+            if (!ModelState.IsValid) { return View(command); }
+            await _mediator.Send(command);
+            return RedirectToAction(nameof(Index));
+        }
 
-        
         #endregion
         #region Delete
         [HttpPost]
@@ -149,7 +156,7 @@ namespace RpgMenager.Mvc.Controllers
             [Route("Character/{encodedName}/Details")]
         public async Task<IActionResult> Details(string encodedName,int id)
         {
-            CharacterDto dto = await _mediator.Send(new GetCharacterIdNameQuery(id));
+            CharacterDto dto = await _mediator.Send(new GetCharacterByIdNameQuery(id));
             return View(dto);
         }
 
