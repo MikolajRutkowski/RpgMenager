@@ -7,6 +7,25 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="TypeOfCharacter" class="control-label"></label>
+                <input asp-for="TypeOfCharacter" class="form-control" id="TypeOfCharacter" />
+                <span asp-validation-for="TypeOfCharacter" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" id="playerIdGroup" style="display:none;">
+                <label asp-for="PlayerId" class="control-label"></label>
+                <input asp-for="PlayerId" class="form-control" readonly />
+                <span asp-validation-for="PlayerId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" id="attitudeToAnotherCharacterGroup" style="display:none;">
+                <label asp-for="AttitudeToAnotherCharacter" class="control-label"></label>
+                <input asp-for="AttitudeToAnotherCharacter" class="form-control" />
+                <span asp-validation-for="AttitudeToAnotherCharacter" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <label asp-for="Hp" class="control-label"></label>
                 <input asp-for="Hp" class="form-control" />
@@ -16,21 +35,6 @@
                 <label asp-for="Lastname" class="control-label"></label>
                 <input asp-for="Lastname" class="form-control" />
                 <span asp-validation-for="Lastname" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TypeOfCharacter" class="control-label"></label>
-                <input asp-for="TypeOfCharacter" class="form-control" />
-                <span asp-validation-for="TypeOfCharacter" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PlayerId" class="control-label"></label>
-                <input asp-for="PlayerId" class="form-control" />
-                <span asp-validation-for="PlayerId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AttitudeToAnotherCharacter" class="control-label"></label>
-                <input asp-for="AttitudeToAnotherCharacter" class="form-control" />
-                <span asp-validation-for="AttitudeToAnotherCharacter" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Id" class="control-label"></label>
@@ -47,20 +51,11 @@
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="EncodedName" class="control-label"></label>
-                <input asp-for="EncodedName" class="form-control" />
-                <span asp-validation-for="EncodedName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PathToImage" class="control-label"></label>
-                <input asp-for="PathToImage" class="form-control" />
-                <span asp-validation-for="PathToImage" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
-            <input asp-for="TypeOfCharacter" class=""  
+            <input type="hidden" asp-for="TypeOfCharacter" />
         </form>
     </div>
 </div>
@@ -71,7 +66,36 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 
-    <script src="~/js/Statistic/Create.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize the visibility of fields based on the current TypeOfCharacter value
+            function toggleFields() {
+                var typeOfCharacter = document.getElementById('TypeOfCharacter').value;
+                var playerIdGroup = document.getElementById('playerIdGroup');
+                var attitudeToAnotherCharacterGroup = document.getElementById('attitudeToAnotherCharacterGroup');
+
+                if (typeOfCharacter === "PC") {
+                    playerIdGroup.style.display = "block";
+                    attitudeToAnotherCharacterGroup.style.display = "none";
+                } else if (typeOfCharacter === "NPC") {
+                    playerIdGroup.style.display = "none";
+                    attitudeToAnotherCharacterGroup.style.display = "block";
+                } else {
+                    // Hide both if it's not PC or NPC
+                    playerIdGroup.style.display = "none";
+                    attitudeToAnotherCharacterGroup.style.display = "none";
+                }
+            }
+
+            // Attach event listener to TypeOfCharacter field
+            document.getElementById('TypeOfCharacter').addEventListener('input', toggleFields);
+
+            // Call the function on load to set the initial visibility
+            toggleFields();
+        });
+    </script>
 }

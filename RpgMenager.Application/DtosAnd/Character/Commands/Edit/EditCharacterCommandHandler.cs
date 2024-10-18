@@ -35,6 +35,7 @@ namespace RpgMenager.Application.DtosAnd.Character.Commands.Edit
             character.Hp = (int)request.Hp;
             character.Name = request.Name;
             character.Description = request.Description;
+            character.Encode();
             await _repository.Commit();
             return Unit.Value;
         }
