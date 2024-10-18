@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RpgMenager.Application.DtosAnd.Player.Commands.Edit
 {
-    public class EditPlayerCommand: PlayerDto, IRequest
+    public class EditPlayerCommand: PlayerDto, IRequest<Unit>
     {
     }
 }
