@@ -14,6 +14,7 @@ namespace RpgMenager.Domain.Interfaces
         Task CreateItem(Item item);
         Task CreateStatistic(Statistic statistic);
         Task CreateCharacter(Character character);
+        Task CreateCharacter(Character character, bool AddBasicStac);
         Task CreateCharacter(Character character,List<Statistic> listOfStatic);
         Task<IEnumerable<T>> GetAll<T>() where T : Entity;
         Task<Entity> GetByEncodedName<T>(string endodedName ) where T : Entity;

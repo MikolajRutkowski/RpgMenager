@@ -29,9 +29,26 @@ namespace RpgMenager.Infrastructure.Repositorries
             await _context.SaveChangesAsync();
         }
 
+
         public async Task CreateCharacter(Character character, List<Statistic> listOfStatic)
         {
-            
+            _context.Add(character);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task CreateCharacter(Character character, bool AddBasicStac)
+        {
+
+            if (AddBasicStac)
+            {
+                var FeatureList = _context.ListOfStatistics.Where(l => l.Name == "Lista Cech").FirstOrDefault();
+                var SkillList  = _context.ListOfStatistics.Where(l => l.Name == "Lista Umiejetności").FirstOrDefault();
+                character.ListOfIndexStats.Add(SkillList);
+                character.ListOfIndexStats.Add(FeatureList);
+
+            }     
+            _context.Add(character);
+            await _context.SaveChangesAsync();
         }
 
         public Task CreateItem(Item item)
