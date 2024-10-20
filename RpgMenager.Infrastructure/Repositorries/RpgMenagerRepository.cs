@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.DataProtection.KeyManagement.Internal;
+using Microsoft.EntityFrameworkCore;
 using RpgMenager.Domain.Entities;
 using RpgMenager.Domain.Entities.Abstract;
 using RpgMenager.Domain.Interfaces;
@@ -28,9 +29,26 @@ namespace RpgMenager.Infrastructure.Repositorries
             await _context.SaveChangesAsync();
         }
 
+
         public async Task CreateCharacter(Character character, List<Statistic> listOfStatic)
         {
-            
+            _context.Add(character);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task CreateCharacter(Character character, bool AddBasicStac)
+        {
+
+            if (AddBasicStac)
+            {
+                var FeatureList = _context.ListOfStatistics.Where(l => l.Name == "Lista Cech").FirstOrDefault();
+                var SkillList  = _context.ListOfStatistics.Where(l => l.Name == "Lista Umiejetności").FirstOrDefault();
+                character.ListOfIndexStats.Add(SkillList);
+                character.ListOfIndexStats.Add(FeatureList);
+
+            }     
+            _context.Add(character);
+            await _context.SaveChangesAsync();
         }
 
         public Task CreateItem(Item item)
@@ -141,7 +159,16 @@ namespace RpgMenager.Infrastructure.Repositorries
                 case Type _ when typeof(T) == typeof(Character):
                 case Type _ when typeof(T) == typeof(NPC):
                 case Type _ when typeof(T) == typeof(PC):
-                    
+                   var chracter = await _context.NPCs.Include(Ch => Ch.ListOfIndexStats)
+                        .FirstOrDefaultAsync(c => c.Id == id);
+                    if(chracter == null)
+                    {
+                        var chracter2 = await _context.PCs.Include(Ch => Ch.ListOfIndexStats)
+                        .FirstOrDefaultAsync(c => c.Id == id);
+                        result = chracter2;
+                        break;
+                    }
+                    result = chracter;
                     break;
 
                 case Type _ when typeof(T) == typeof(Statistic):

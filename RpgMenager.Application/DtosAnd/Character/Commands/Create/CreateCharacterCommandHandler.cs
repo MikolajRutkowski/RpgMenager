@@ -24,14 +24,14 @@ namespace RpgMenager.Application.DtosAnd.Character.Commands.Create
                     {
                         var character = _mapper.Map<Domain.Entities.NPC>(request);
                         character.Encode();
-                        await _repository.CreateCharacter(character);
+                        await _repository.CreateCharacter(character,request.AddBasicStats);
                         break;
                     }
                 case "PC":
                     {
                         var pc = _mapper.Map<Domain.Entities.PC>(request);
                         pc.Encode();
-                        await _repository.CreateCharacter(pc);
+                        await _repository.CreateCharacter(pc, request.AddBasicStats);
                         break;
                     }
                 default:

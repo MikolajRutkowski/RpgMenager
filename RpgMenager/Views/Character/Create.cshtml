@@ -81,11 +81,19 @@
                 <input asp-for="PathToImage" class="form-control" />
                 <span asp-validation-for="PathToImage" class="text-danger"></span>
             </div>
-            <div>
-
-             </div>
+            <div class="form-group">
+                <label class="control-label">Czy dodać statystyki ?</label>
+                <div>
+                    <input type="radio" name="AddBasicStats" value="true" id="AddBasicStatsTrue" checked />
+                    <label for="AddBasicStatsTrue">Dodaj Podstawowe Statystyki</label>
+                    <br />
+                    <input type="radio" name="AddBasicStats" value="false" id="AddBasicStatsFalse" />
+                    <label for="AddBasicStatsFalse">Nie Dodawaj Podstawowych Statystyk</label>
+                </div>
+            </div>
 
             <!-- Przyciski -->
+            <br />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

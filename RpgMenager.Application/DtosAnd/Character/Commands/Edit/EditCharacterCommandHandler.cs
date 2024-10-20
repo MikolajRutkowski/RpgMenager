@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace RpgMenager.Application.DtosAnd.Character.Commands.Edit
 {
-    public class EditCharacterCommandHandler : RpgHandler, IRequestHandler<EditCharacterCommand>
+    public class EditCharacterCommandHandler : RpgHandler, IRequestHandler<EditCharacterCommand,Unit>
     {
         public EditCharacterCommandHandler(IMapper mapper, IRpgMenagerRepository rpgMenagerRepository) : base(mapper, rpgMenagerRepository)
         {
         }
 
-        public async Task Handle(EditCharacterCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(EditCharacterCommand request, CancellationToken cancellationToken)
         {
             string type = request.TypeOfCharacter;
             Domain.Entities.Abstract.Character character;
@@ -30,12 +30,14 @@ namespace RpgMenager.Application.DtosAnd.Character.Commands.Edit
                     break;
                 default:
                     throw new Exception();
-                    }
-                character.Hp = (int)request.Hp;
+            }
+
+            character.Hp = (int)request.Hp;
             character.Name = request.Name;
             character.Description = request.Description;
+            character.Encode();
             await _repository.Commit();
-            
+            return Unit.Value;
         }
     }
 }

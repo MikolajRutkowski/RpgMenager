@@ -10,5 +10,7 @@ namespace RpgMenager.Application.DtosAnd.Character.Commands.Create
 {
     public class CreateCharacterCommand : CharacterDto, IRequest
     {
+        public bool AddBasicStats { get; set; } = true;
+        public CreateCharacterCommand() { AddBasicStats = true; }
     }
 }
