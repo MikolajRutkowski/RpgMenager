@@ -29,6 +29,7 @@ namespace RpgMenager.Infrastructure.Persistence
             modelBuilder.Entity<Statistic>()
                 .Property(s => s.statisticsEnum)
                 .HasConversion<string>();
+
             modelBuilder.Entity<Statistic>()
                 .HasOne(s => s.IndexOfStatistic)
                 .WithMany(L => L.MainList)

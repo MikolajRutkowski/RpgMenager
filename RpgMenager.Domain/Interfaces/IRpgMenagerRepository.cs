@@ -21,5 +21,7 @@ namespace RpgMenager.Domain.Interfaces
         Task<Entity> GetByID<T>(int id) where T : Entity;
         Task Commit();
 
+        
+
     }
 }
