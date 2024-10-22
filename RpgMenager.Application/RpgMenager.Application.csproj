@@ -18,8 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DtosAnd\Character\Queries\GetAllCharactersById\" />
-    <Folder Include="DtosAnd\Index\Commands\" />
+    <Folder Include="DtosAndFactories\Character\Queries\GetAllCharactersById\" />
+    <Folder Include="DtosAndFactories\Index\Commands\" />
   </ItemGroup>
 
 </Project>

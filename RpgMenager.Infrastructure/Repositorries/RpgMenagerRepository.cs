@@ -30,50 +30,6 @@ namespace RpgMenager.Infrastructure.Repositorries
         }
 
 
-        public async Task CreateCharacter(Character character, List<Statistic> listOfStatic)
-        {
-            _context.Add(character);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task CreateCharacter(Character character, bool AddBasicStac)
-        {
-
-            if (AddBasicStac)
-            {
-                var FeatureList = _context.ListOfStatistics
-                    .Include(l => l.MainList)
-                    .Where(l => l.Name == "Lista Cech")
-                    .FirstOrDefault();
-                var SkillList  = _context.ListOfStatistics.Include(l => l.MainList)
-                    .Where(l => l.Name == "Lista Umiejetności").FirstOrDefault();
-                FeatureList.Id = default;
-                FeatureList.Description = "Lista Cech postaci o Id = ";
-                foreach (Statistic stat in SkillList.MainList) {
-                stat.Id = default;  
-                }
-                foreach (Statistic stat in FeatureList.MainList)
-                {
-                    stat.Id = default;
-                }
-                SkillList.Id = default;
-                SkillList.Description = "Lista Cech postaci o Id = ";
-                character.ListOfIndexStats.Add(SkillList);
-                character.ListOfIndexStats.Add(FeatureList);
-
-            }
-            if (character is NPC npc)
-            {
-                _context.NPCs.Add(npc);
-            }
-            else if (character is PC pc)
-            {
-                _context.PCs.Add(pc);
-            }
-
-            await _context.SaveChangesAsync();
-        }
-
         public Task CreateItem(Item item)
         {
             throw new NotImplementedException();

@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using RpgMenager.Application.DtosAnd.Character;
-using RpgMenager.Application.DtosAnd.Character.Commands.Edit;
-using RpgMenager.Application.DtosAnd.Index;
-using RpgMenager.Application.DtosAnd.Player;
-using RpgMenager.Application.DtosAnd.Player.Commands.Edit;
-using RpgMenager.Application.DtosAnd.Statistic;
+using RpgMenager.Application.DtosAndFactories.Character;
+using RpgMenager.Application.DtosAndFactories.Character.Commands.Edit;
+using RpgMenager.Application.DtosAndFactories.Index;
+using RpgMenager.Application.DtosAndFactories.Player;
+using RpgMenager.Application.DtosAndFactories.Player.Commands.Edit;
+using RpgMenager.Application.DtosAndFactories.Statistic;
 using RpgMenager.Domain.Entities;
 using RpgMenager.Domain.Entities.Abstract;
 using System;
