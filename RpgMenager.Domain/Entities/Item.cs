@@ -13,7 +13,7 @@ namespace RpgMenager.Domain.Entities
         public int? Charges { get; set; } = 0;
         public string? State { get; set; } = default;
         public int? ListId { get; set; }
-        public IndexOfItem? ListOfItem { get; set; } = default;
+        public IndexOfItem? IndexOfItems { get; set; } = default;
         public List<IndexOfStatistic> ListOfIndexStats { get ; set ; } = new List<IndexOfStatistic>();
 
         

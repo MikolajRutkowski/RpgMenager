@@ -12,8 +12,8 @@ using RpgMenager.Infrastructure.Persistence;
 namespace RpgMenager.Infrastructure.Migrations
 {
     [DbContext(typeof(RpgMenagerDbContext))]
-    [Migration("20241014110253_ChangeName")]
-    partial class ChangeName
+    [Migration("20241023134349_NewStart")]
+    partial class NewStart
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -75,6 +75,9 @@ namespace RpgMenager.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("CharacterId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -82,21 +85,23 @@ namespace RpgMenager.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ItemId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("OwnerId")
-                        .HasColumnType("int");
 
                     b.Property<string>("PathToImage")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OwnerId");
+                    b.HasIndex("CharacterId");
 
-                    b.ToTable("IndexOfItems");
+                    b.HasIndex("ItemId");
+
+                    b.ToTable("IndexsOfItems");
                 });
 
             modelBuilder.Entity("RpgMenager.Domain.Entities.IndexOfStatistic", b =>
@@ -107,7 +112,7 @@ namespace RpgMenager.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("OwnerId")
+                    b.Property<int?>("CharacterId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -117,23 +122,23 @@ namespace RpgMenager.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ItemId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("OwnerId")
-                        .HasColumnType("int");
 
                     b.Property<string>("PathToImage")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OwnerId");
+                    b.HasIndex("CharacterId");
 
-                    b.HasIndex("OwnerId");
+                    b.HasIndex("ItemId");
 
-                    b.ToTable("IndexOfStatistics");
+                    b.ToTable("IndexsOfStatistic");
                 });
 
             modelBuilder.Entity("RpgMenager.Domain.Entities.Item", b =>
@@ -157,9 +162,6 @@ namespace RpgMenager.Infrastructure.Migrations
                     b.Property<int?>("ListId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ListOfItemId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -172,7 +174,7 @@ namespace RpgMenager.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ListOfItemId");
+                    b.HasIndex("ListId");
 
                     b.ToTable("Items");
                 });
@@ -281,35 +283,45 @@ namespace RpgMenager.Infrastructure.Migrations
 
             modelBuilder.Entity("RpgMenager.Domain.Entities.IndexOfItem", b =>
                 {
-                    b.HasOne("RpgMenager.Domain.Entities.Abstract.Character", "Owner")
+                    b.HasOne("RpgMenager.Domain.Entities.Abstract.Character", "Character")
                         .WithMany("ListOfIndexItem")
-                        .HasForeignKey("OwnerId")
+                        .HasForeignKey("CharacterId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.Navigation("Owner");
+                    b.HasOne("RpgMenager.Domain.Entities.Item", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemId");
+
+                    b.Navigation("Character");
+
+                    b.Navigation("Item");
                 });
 
             modelBuilder.Entity("RpgMenager.Domain.Entities.IndexOfStatistic", b =>
                 {
-                    b.HasOne("RpgMenager.Domain.Entities.Abstract.Character", null)
+                    b.HasOne("RpgMenager.Domain.Entities.Abstract.Character", "Character")
                         .WithMany("ListOfIndexStats")
-                        .HasForeignKey("OwnerId");
-
-                    b.HasOne("RpgMenager.Domain.Entities.Item", "Owner")
-                        .WithMany("ListOfIndexStats")
-                        .HasForeignKey("OwnerId")
+                        .HasForeignKey("CharacterId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.Navigation("Owner");
+                    b.HasOne("RpgMenager.Domain.Entities.Item", "Item")
+                        .WithMany("ListOfIndexStats")
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Character");
+
+                    b.Navigation("Item");
                 });
 
             modelBuilder.Entity("RpgMenager.Domain.Entities.Item", b =>
                 {
-                    b.HasOne("RpgMenager.Domain.Entities.IndexOfItem", "ListOfItem")
+                    b.HasOne("RpgMenager.Domain.Entities.IndexOfItem", "IndexOfItems")
                         .WithMany("MainList")
-                        .HasForeignKey("ListOfItemId");
+                        .HasForeignKey("ListId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.Navigation("ListOfItem");
+                    b.Navigation("IndexOfItems");
                 });
 
             modelBuilder.Entity("RpgMenager.Domain.Entities.Statistic", b =>

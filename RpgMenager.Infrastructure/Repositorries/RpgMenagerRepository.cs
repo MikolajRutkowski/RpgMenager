@@ -25,7 +25,17 @@ namespace RpgMenager.Infrastructure.Repositorries
 
         public async Task CreateCharacter(Character character)
         {
-            _context.Add(character);
+
+            if (character is NPC)
+            {
+                _context.NPCs.Add((NPC)character);
+            }
+            else if (character is PC)
+            {
+                _context.PCs.Add((PC)character);
+            }
+
+
             await _context.SaveChangesAsync();
         }
 
@@ -78,10 +88,10 @@ namespace RpgMenager.Infrastructure.Repositorries
                     resultList = (IEnumerable<T>)combinedList;
                     break;
                 case Type _ when typeof (T) == typeof(IndexOfStatistic):
-                    resultList = (IEnumerable<T>)await _context.ListOfStatistics.Include(x => x.MainList).ToListAsync();
+                    resultList = (IEnumerable<T>)await _context.IndexsOfStatistic.Include(x => x.MainList).ToListAsync();
                     break;
                 case Type _ when typeof(T) == typeof(IndexOfItem):
-                    resultList = (IEnumerable<T>)await _context.listOfItems.ToListAsync();
+                    resultList = (IEnumerable<T>)await _context.IndexsOfItems.ToListAsync();
                     break;
                 default:
                     throw new InvalidOperationException("Nieobsługiwany typ encji");

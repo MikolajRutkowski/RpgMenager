@@ -67,8 +67,9 @@ namespace RpgMenager.Application.DtosAndFactories.Character
             {
                 Name = nameOfNewList,
                 Description = indexOfStatistic.Description + " Postaci " + character.Name,
+                Character = character
             });
-            int idOfNewList = character.ListOfIndexStats.Where(x => x.Name == nameOfNewList).FirstOrDefault().Id;
+            int idOfNewList = character.ListOfIndexStats.FindIndex(x => x.Name == nameOfNewList);
             character.ListOfIndexStats[idOfNewList].Encode(); /// cos to nie dizała zawsze id = 0 
             foreach (var stats in indexOfStatistic.MainList)
             {

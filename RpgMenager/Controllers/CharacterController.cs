@@ -145,14 +145,14 @@ namespace RpgMenager.Mvc.Controllers
                     _dbcontext.PCs.Remove(pc);
                     await _dbcontext.SaveChangesAsync();
                 }
-                var listOfStatistik = await _dbcontext.ListOfStatistics.FirstOrDefaultAsync(s => s.OwnerId ==id);
+                var listOfStatistik = await _dbcontext.IndexsOfStatistic.FirstOrDefaultAsync(s => s.OwnerId() ==id);
                 if (listOfStatistik != null) {
                     foreach (var statistic in listOfStatistik.MainList)
                     {
                         _dbcontext.Statistics.Remove(statistic);
 
                     }
-                    _dbcontext.ListOfStatistics.Remove(listOfStatistik);
+                    _dbcontext.IndexsOfStatistic.Remove(listOfStatistik);
                 }
                 
                 await _dbcontext.SaveChangesAsync();
