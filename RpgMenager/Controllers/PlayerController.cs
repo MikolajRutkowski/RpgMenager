@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using RpgMenager.Application.DtosAnd.Player.Queries.GetAllPlayers;
-using RpgMenager.Application.DtosAnd.Player.Commands.Create;
-using RpgMenager.Application.DtosAnd.Player.Queries.GetPlayersByEncodedName;
-using RpgMenager.Application.DtosAnd.Player.Commands.Edit;
-using RpgMenager.Application.DtosAnd.Player;
+using RpgMenager.Application.DtosAndFactories.Player.Queries.GetAllPlayers;
+using RpgMenager.Application.DtosAndFactories.Player.Commands.Create;
+using RpgMenager.Application.DtosAndFactories.Player.Queries.GetPlayersByEncodedName;
+using RpgMenager.Application.DtosAndFactories.Player.Commands.Edit;
+using RpgMenager.Application.DtosAndFactories.Player;
 using RpgMenager.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using RpgMenager.Mvc.Models;

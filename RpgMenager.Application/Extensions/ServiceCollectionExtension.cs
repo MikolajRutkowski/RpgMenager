@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using RpgMenager.Application.DtosAnd.Player.Queries.GetAllPlayers;
+using RpgMenager.Application.DtosAndFactories.Player.Queries.GetAllPlayers;
 using RpgMenager.Application.Mappings;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using MediatR;
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using RpgMenager.Application.DtosAnd.Player.Commands.Create;
+using RpgMenager.Application.DtosAndFactories.Player.Commands.Create;
 
 
 namespace RpgMenager.Application.Extensions

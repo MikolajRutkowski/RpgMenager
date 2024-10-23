@@ -77,7 +77,7 @@ namespace RpgMenager.Infrastructure.Seeders
             if (await _db.Database.CanConnectAsync())
             {
 
-                var isEmpty =  _db.ListOfStatistics.Any();
+                var isEmpty =  _db.IndexsOfStatistic.Any();
                 int x = 10;
                 
 
@@ -93,7 +93,7 @@ namespace RpgMenager.Infrastructure.Seeders
                     {
                         s.Encode();
                     }
-                    _db.ListOfStatistics.Add(seed);
+                    _db.IndexsOfStatistic.Add(seed);
                     await _db.SaveChangesAsync();
                 }
                 if (isEmpty == false)
@@ -108,7 +108,7 @@ namespace RpgMenager.Infrastructure.Seeders
                     {
                         s.Encode();
                     }
-                    _db.ListOfStatistics.Add(seed);
+                    _db.IndexsOfStatistic.Add(seed);
                     await _db.SaveChangesAsync();
                 }
                 

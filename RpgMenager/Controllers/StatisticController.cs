@@ -2,10 +2,10 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RpgMenager.Application.DtosAnd.Index;
-using RpgMenager.Application.DtosAnd.Index.Queries.GetAllStatisticIndex;
-using RpgMenager.Application.DtosAnd.Player.Queries.GetAllPlayers;
-using RpgMenager.Application.DtosAnd.Statistic;
+using RpgMenager.Application.DtosAndFactories.Index;
+using RpgMenager.Application.DtosAndFactories.Index.Queries.GetAllStatisticIndex;
+using RpgMenager.Application.DtosAndFactories.Player.Queries.GetAllPlayers;
+using RpgMenager.Application.DtosAndFactories.Statistic;
 using RpgMenager.Infrastructure.Persistence;
 using RpgMenager.Mvc.Models;
 

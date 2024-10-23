@@ -25,54 +25,20 @@ namespace RpgMenager.Infrastructure.Repositorries
 
         public async Task CreateCharacter(Character character)
         {
-            _context.Add(character);
+
+            if (character is NPC)
+            {
+                _context.NPCs.Add((NPC)character);
+            }
+            else if (character is PC)
+            {
+                _context.PCs.Add((PC)character);
+            }
+
+
             await _context.SaveChangesAsync();
         }
 
-
-        public async Task CreateCharacter(Character character, List<Statistic> listOfStatic)
-        {
-            _context.Add(character);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task CreateCharacter(Character character, bool AddBasicStac)
-        {
-
-            if (AddBasicStac)
-            {
-                var FeatureList = _context.ListOfStatistics
-                    .Include(l => l.MainList)
-                    .Where(l => l.Name == "Lista Cech")
-                    .FirstOrDefault();
-                var SkillList  = _context.ListOfStatistics.Include(l => l.MainList)
-                    .Where(l => l.Name == "Lista Umiejetności").FirstOrDefault();
-                FeatureList.Id = default;
-                FeatureList.Description = "Lista Cech postaci o Id = ";
-                foreach (Statistic stat in SkillList.MainList) {
-                stat.Id = default;  
-                }
-                foreach (Statistic stat in FeatureList.MainList)
-                {
-                    stat.Id = default;
-                }
-                SkillList.Id = default;
-                SkillList.Description = "Lista Cech postaci o Id = ";
-                character.ListOfIndexStats.Add(SkillList);
-                character.ListOfIndexStats.Add(FeatureList);
-
-            }
-            if (character is NPC npc)
-            {
-                _context.NPCs.Add(npc);
-            }
-            else if (character is PC pc)
-            {
-                _context.PCs.Add(pc);
-            }
-
-            await _context.SaveChangesAsync();
-        }
 
         public Task CreateItem(Item item)
         {
@@ -122,10 +88,10 @@ namespace RpgMenager.Infrastructure.Repositorries
                     resultList = (IEnumerable<T>)combinedList;
                     break;
                 case Type _ when typeof (T) == typeof(IndexOfStatistic):
-                    resultList = (IEnumerable<T>)await _context.ListOfStatistics.Include(x => x.MainList).ToListAsync();
+                    resultList = (IEnumerable<T>)await _context.IndexsOfStatistic.Include(x => x.MainList).ToListAsync();
                     break;
                 case Type _ when typeof(T) == typeof(IndexOfItem):
-                    resultList = (IEnumerable<T>)await _context.listOfItems.ToListAsync();
+                    resultList = (IEnumerable<T>)await _context.IndexsOfItems.ToListAsync();
                     break;
                 default:
                     throw new InvalidOperationException("Nieobsługiwany typ encji");

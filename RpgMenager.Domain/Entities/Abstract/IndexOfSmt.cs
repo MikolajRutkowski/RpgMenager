@@ -10,11 +10,13 @@ namespace RpgMenager.Domain.Entities.Abstract
     {
         public virtual List<T> MainList { get; set; } = new List<T>();
 
-        
-        public int? OwnerId { get; set; }
+        // Klucz obcy do Character
+        public int? CharacterId { get; set; }
+        public virtual Character Character { get; set; }
 
-        
-        public virtual Entity? Owner { get; set; }
+        // Klucz obcy do Item
+        public int? ItemId { get; set; }
+        public virtual Item Item { get; set; }
 
         public bool Add(T item)
         {
@@ -28,9 +30,16 @@ namespace RpgMenager.Domain.Entities.Abstract
                 return false;
             }
         }
-
-
+        public int? OwnerId()
+        {
+            if (CharacterId != null)
+            {
+                return CharacterId;
+            }
+            if (ItemId != null) { 
+            return ItemId;
+            }
+            return null;
+        }
     }
-
-
 }

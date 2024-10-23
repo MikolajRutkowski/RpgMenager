@@ -4,19 +4,19 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Core.Types;
-using RpgMenager.Application.DtosAnd;
-using RpgMenager.Application.DtosAnd.Character;
-using RpgMenager.Application.DtosAnd.Character.Commands.Create;
-using RpgMenager.Application.DtosAnd.Character.Commands.Edit;
-using RpgMenager.Application.DtosAnd.Character.Queries.GetAllCharacters;
-using RpgMenager.Application.DtosAnd.Character.Queries.GetCharacterByEncodedName;
-using RpgMenager.Application.DtosAnd.Player;
-using RpgMenager.Application.DtosAnd.Player.Commands.Create;
-using RpgMenager.Application.DtosAnd.Player.Commands.Edit;
-using RpgMenager.Application.DtosAnd.Player.Queries.GetAllPlayers;
-using RpgMenager.Application.DtosAnd.Player.Queries.GetPlayersByEncodedName;
-using RpgMenager.Application.DtosAnd.Statistic;
-using RpgMenager.Application.DtosAnd.Statistic.Commands.Create;
+using RpgMenager.Application.DtosAndFactories;
+using RpgMenager.Application.DtosAndFactories.Character;
+using RpgMenager.Application.DtosAndFactories.Character.Commands.Create;
+using RpgMenager.Application.DtosAndFactories.Character.Commands.Edit;
+using RpgMenager.Application.DtosAndFactories.Character.Queries.GetAllCharacters;
+using RpgMenager.Application.DtosAndFactories.Character.Queries.GetCharacterByEncodedName;
+using RpgMenager.Application.DtosAndFactories.Player;
+using RpgMenager.Application.DtosAndFactories.Player.Commands.Create;
+using RpgMenager.Application.DtosAndFactories.Player.Commands.Edit;
+using RpgMenager.Application.DtosAndFactories.Player.Queries.GetAllPlayers;
+using RpgMenager.Application.DtosAndFactories.Player.Queries.GetPlayersByEncodedName;
+using RpgMenager.Application.DtosAndFactories.Statistic;
+using RpgMenager.Application.DtosAndFactories.Statistic.Commands.Create;
 using RpgMenager.Domain.Entities;
 using RpgMenager.Infrastructure.Persistence;
 using RpgMenager.Mvc.Models;
@@ -145,14 +145,14 @@ namespace RpgMenager.Mvc.Controllers
                     _dbcontext.PCs.Remove(pc);
                     await _dbcontext.SaveChangesAsync();
                 }
-                var listOfStatistik = await _dbcontext.ListOfStatistics.FirstOrDefaultAsync(s => s.OwnerId ==id);
+                var listOfStatistik = await _dbcontext.IndexsOfStatistic.FirstOrDefaultAsync(s => s.OwnerId() ==id);
                 if (listOfStatistik != null) {
                     foreach (var statistic in listOfStatistik.MainList)
                     {
                         _dbcontext.Statistics.Remove(statistic);
 
                     }
-                    _dbcontext.ListOfStatistics.Remove(listOfStatistik);
+                    _dbcontext.IndexsOfStatistic.Remove(listOfStatistik);
                 }
                 
                 await _dbcontext.SaveChangesAsync();
