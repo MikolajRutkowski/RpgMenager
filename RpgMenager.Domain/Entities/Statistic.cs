@@ -14,6 +14,14 @@ namespace RpgMenager.Domain.Entities
         public StatisticsEnum statisticsEnum { get; set; } = StatisticsEnum.None;
         public int? ListId { get; set; }
         public IndexOfStatistic? IndexOfStatistic { get; set; } = default;
-        
+        public Statistic(Statistic clone)
+        {
+            this.Value = clone.Value;
+            this.statisticsEnum = clone.statisticsEnum;
+            this.Description = clone.Description;
+            this.Name = clone.Name;
+            Encode();
+        }
+        public Statistic() { }
     }
 }
