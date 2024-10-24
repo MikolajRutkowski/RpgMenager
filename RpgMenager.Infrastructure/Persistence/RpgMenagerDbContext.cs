@@ -36,7 +36,7 @@ namespace RpgMenager.Infrastructure.Persistence
             modelBuilder.Entity<Character>()
                 .HasMany(c => c.ListOfIndexStats)  // Character ma wiele IndexOfStatistic
                 .WithOne(l => l.Character)
-                .HasForeignKey(l => l.CharacterId)     // IndexOfStatistic przechowuje OwnerId jako klucz obcy
+                .HasForeignKey(l => l.CharacterId)     // IndexOfStatistic przechowuje ListId jako klucz obcy
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Character>()
@@ -49,7 +49,7 @@ namespace RpgMenager.Infrastructure.Persistence
             modelBuilder.Entity<Item>()
                 .HasMany(i => i.ListOfIndexStats)  // Item może mieć wiele IndexOfStatistic
                 .WithOne(l => l.Item)       // Każda IndexOfStatistic ma jednego właściciela typu Item
-                .HasForeignKey(l => l.ItemId)     // IndexOfStatistic przechowuje OwnerId jako klucz obcy
+                .HasForeignKey(l => l.ItemId)     // IndexOfStatistic przechowuje ListId jako klucz obcy
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Statistic>()

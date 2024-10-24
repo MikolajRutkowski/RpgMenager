@@ -62,7 +62,7 @@
 
 <div>
     <a asp-action="Index">Back to List</a>
-    <partial name="_CreateStatistic" model="new CreateStatisticCommand() { OwnerId = Model.Id }" />
+    <partial name="_CreateStatistic" model="new CreateStatisticCommand() { ListId = Model.Id }" />
 </div>
 
 @section Scripts {

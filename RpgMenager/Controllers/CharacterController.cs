@@ -10,6 +10,7 @@ using RpgMenager.Application.DtosAndFactories.Character.Commands.Create;
 using RpgMenager.Application.DtosAndFactories.Character.Commands.Edit;
 using RpgMenager.Application.DtosAndFactories.Character.Queries.GetAllCharacters;
 using RpgMenager.Application.DtosAndFactories.Character.Queries.GetCharacterByEncodedName;
+using RpgMenager.Application.DtosAndFactories.Index.Queries.GetAllIndexByOwnerIdAndType;
 using RpgMenager.Application.DtosAndFactories.Player;
 using RpgMenager.Application.DtosAndFactories.Player.Commands.Create;
 using RpgMenager.Application.DtosAndFactories.Player.Commands.Edit;
@@ -83,7 +84,7 @@ namespace RpgMenager.Mvc.Controllers
         [Route("Character/{encodedName}/Edit")]
         public async Task<IActionResult> Edit(int id)
         {
-            var dto = await _mediator.Send(new GetCharacterByIdNameQuery(id));
+            var dto = await _mediator.Send(new GetCharacterByIdQuery(id));
             EditCharacterCommand model = _mapper.Map<EditCharacterCommand>(dto);
             return View(model);
         }
@@ -168,15 +169,18 @@ namespace RpgMenager.Mvc.Controllers
         }
             #endregion
         #region Details
-            [Route("Character/{encodedName}/Details")]
+
+        [Route("Character/{encodedName}/Details")]
         public async Task<IActionResult> Details(string encodedName,int id)
         {
-            CharacterDto dto = await _mediator.Send(new GetCharacterByIdNameQuery(id));
+            CharacterDto dto = await _mediator.Send(new GetCharacterByIdQuery(id));
+            var stats  = await _mediator.Send(new GetAllStatisticIndexByOwnerIdQuery(id, "Character"));
+            dto.ListOfIndexStats = stats.ToList();
             return View(dto);
         }
 
         //[Route("Character/{encodedName}/Statistic")]
-        //public async Task<IActionResult> GetStatisticList(string encodedName,int idName)
+        //public async Task<IActionResult> GetStatisticList(string encodedName, int idName)
         //{
         //    IEnumerable<StatisticDto> allStatistic = await _mediator.Send(new GetAllStatisticQuery());
         //    CreateListOfListOfStatistic Creator = new CreateListOfListOfStatistic(allStatistic);

@@ -1,4 +1,5 @@
-﻿using RpgMenager.Application.DtosAndFactories.Item;
+﻿using RpgMenager.Application.DtosAndFactories.Index;
+using RpgMenager.Application.DtosAndFactories.Item;
 using RpgMenager.Application.DtosAndFactories.Statistic;
 using System;
 using System.Collections.Generic;
@@ -13,8 +14,8 @@ namespace RpgMenager.Application.DtosAndFactories.Character
         public int? Hp {  get; set; }
         public string? Lastname { get; set; }
 
-        public List<StatisticDto> Statistics { get; set; } = new List<StatisticDto>();
-        public List<ItemDto> Items { get; set; } = new List<ItemDto>();
+        public List<StatisticIndexDto> ListOfIndexStats { get; set; } = new List<StatisticIndexDto>(); 
+      //  public List<ItemDto> ListOfIndexStats { get; set; } = new List<ItemDto>(); // na puźniej
 
         public string? TypeOfCharacter { get; set; } = default;
 

@@ -256,7 +256,7 @@ namespace RpgMenager.Infrastructure.Migrations
 
                     b.HasIndex("ListId");
 
-                    b.ToTable("Statistics");
+                    b.ToTable("ListOfIndexStats");
                 });
 
             modelBuilder.Entity("RpgMenager.Domain.Entities.NPC", b =>
