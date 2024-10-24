@@ -8,6 +8,6 @@ using System.Threading.Tasks;
 namespace RpgMenager.Application.DtosAndFactories.Index.Queries.GetAllStatisticIndex
 {
     public class GetAllStatisticIndexQuery: IRequest<IEnumerable<StatisticIndexDto>>
-    {
+    {     
     }
 }

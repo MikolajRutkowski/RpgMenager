@@ -136,7 +136,7 @@ namespace RpgMenager.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Statistics",
+                name: "ListOfIndexStats",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -192,7 +192,7 @@ namespace RpgMenager.Infrastructure.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Statistics_ListId",
-                table: "Statistics",
+                table: "ListOfIndexStats",
                 column: "ListId");
 
             migrationBuilder.AddForeignKey(
@@ -219,7 +219,7 @@ namespace RpgMenager.Infrastructure.Migrations
                 table: "IndexsOfItems");
 
             migrationBuilder.DropTable(
-                name: "Statistics");
+                name: "ListOfIndexStats");
 
             migrationBuilder.DropTable(
                 name: "IndexsOfStatistic");

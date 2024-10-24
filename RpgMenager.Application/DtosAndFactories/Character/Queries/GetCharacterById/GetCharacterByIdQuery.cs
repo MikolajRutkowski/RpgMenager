@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace RpgMenager.Application.DtosAndFactories.Character.Queries.GetCharacterByEncodedName
 {
-    public class GetCharacterByIdNameQuery : IRequest<CharacterDto>
+    public class GetCharacterByIdQuery : IRequest<CharacterDto>
     {
         public int Id { get; set; }
         
-        public GetCharacterByIdNameQuery(int id)
+        public GetCharacterByIdQuery(int id)
         {
             Id = id;
         }

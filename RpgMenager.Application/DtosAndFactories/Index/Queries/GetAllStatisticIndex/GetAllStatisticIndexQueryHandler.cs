@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Http.Metadata;
 using RpgMenager.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,13 @@ namespace RpgMenager.Application.DtosAndFactories.Index.Queries.GetAllStatisticI
         {
             var indexs = await _repository.GetAll<Domain.Entities.IndexOfStatistic>();
             var dtos = _mapper.Map<IEnumerable<StatisticIndexDto>>(indexs);
+            foreach(var  index in dtos)
+            {
+                foreach(var item in index.MainList)
+                {
+                    item.NameOfTheList = index.Name;
+                }
+            }
             return dtos;
         }
     }
