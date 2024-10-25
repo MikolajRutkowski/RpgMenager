@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using RpgMenager.Mvc.Models;
 using Newtonsoft.Json;
 using RpgMenager.Mvc.Extensions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RpgMenager.Mvc.Controllers
 {
@@ -64,12 +65,14 @@ namespace RpgMenager.Mvc.Controllers
         #endregion
         #region Create
         //To przenosi na strone
+        [Authorize]
         public ActionResult Create()
         {
             return View();
         }
         //To tworzy nowego gracza
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(CreatePlayerCommand command)
         {
             if (!ModelState.IsValid)

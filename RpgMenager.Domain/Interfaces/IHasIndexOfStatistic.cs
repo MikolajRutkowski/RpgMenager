@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace RpgMenager.Domain.Interfaces
 {
-    public interface IHasListOfIndexStats 
+    public interface IHasIndexOfStatistic 
     {
-        List<IndexOfStatistic> ListOfIndexStats { get; set; }
+        List<IndexOfStatistic> IndexOfStatistic { get; set; }
     }
 }

@@ -14,8 +14,8 @@ namespace RpgMenager.Application.DtosAndFactories.Character
         public int? Hp {  get; set; }
         public string? Lastname { get; set; }
 
-        public List<StatisticIndexDto> ListOfIndexStats { get; set; } = new List<StatisticIndexDto>(); 
-      //  public List<ItemDto> ListOfIndexStats { get; set; } = new List<ItemDto>(); // na puźniej
+        public List<StatisticIndexDto> IndexOfStatistic { get; set; } = new List<StatisticIndexDto>(); 
+      //  public List<ItemDto> IndexOfStatistic { get; set; } = new List<ItemDto>(); // na puźniej
 
         public string? TypeOfCharacter { get; set; } = default;
 

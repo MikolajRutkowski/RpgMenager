@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using RpgMenager.Domain.Entities;
 using RpgMenager.Domain.Entities.Abstract;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace RpgMenager.Infrastructure.Persistence
 {
-    public class RpgMenagerDbContext: DbContext
+    public class RpgMenagerDbContext: IdentityDbContext
     {
         public RpgMenagerDbContext(DbContextOptions<RpgMenagerDbContext> options): base(options) { }
         public DbSet<PC> PCs { get; set; }
@@ -22,6 +23,8 @@ namespace RpgMenager.Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<PC>()
                 .HasOne(PC => PC.Player)
                 .WithMany(p => p.PlayerCharacters)
@@ -31,23 +34,22 @@ namespace RpgMenager.Infrastructure.Persistence
                 .Property(s => s.statisticsEnum)
                 .HasConversion<string>();
 
-            
-
             modelBuilder.Entity<Character>()
-                .HasMany(c => c.ListOfIndexStats)  // Character ma wiele IndexOfStatistic
+                .HasMany(c => c.IndexOfStatistic)  // Character ma wiele IndexOfStatistic
                 .WithOne(l => l.Character)
                 .HasForeignKey(l => l.CharacterId)     // IndexOfStatistic przechowuje ListId jako klucz obcy
                 .OnDelete(DeleteBehavior.Cascade);
+           
 
             modelBuilder.Entity<Character>()
-                .HasMany(c => c.ListOfIndexItem)  
+                .HasMany(c => c.IndexOfItem)  
                 .WithOne(l => l.Character)  
                 .HasForeignKey(l => l.CharacterId)     
                 .OnDelete(DeleteBehavior.Cascade);
 
             
             modelBuilder.Entity<Item>()
-                .HasMany(i => i.ListOfIndexStats)  // Item może mieć wiele IndexOfStatistic
+                .HasMany(i => i.IndexOfStatistic)  // Item może mieć wiele IndexOfStatistic
                 .WithOne(l => l.Item)       // Każda IndexOfStatistic ma jednego właściciela typu Item
                 .HasForeignKey(l => l.ItemId)     // IndexOfStatistic przechowuje ListId jako klucz obcy
                 .OnDelete(DeleteBehavior.Restrict);

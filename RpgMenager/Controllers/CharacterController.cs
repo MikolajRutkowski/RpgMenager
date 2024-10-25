@@ -175,7 +175,7 @@ namespace RpgMenager.Mvc.Controllers
         {
             CharacterDto dto = await _mediator.Send(new GetCharacterByIdQuery(id));
             var stats  = await _mediator.Send(new GetAllStatisticIndexByOwnerIdQuery(id, "Character"));
-            dto.ListOfIndexStats = stats.ToList();
+            dto.IndexOfStatistic = stats.ToList();
             return View(dto);
         }
 

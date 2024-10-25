@@ -1,8 +1,8 @@
 ﻿@using Newtonsoft.Json;
 @using RpgMenager.Mvc.Models
 @{
-    var action = ViewContext.RouteData.Values["Action"]!.ToString();
-    var controler = ViewContext.RouteData.Values["Controller"]!.ToString();
+    var action = ViewContext.RouteData.Values["Action"]?.ToString();
+    var controler = ViewContext.RouteData.Values["Controller"]?.ToString();
     var notification = TempData["Notification"] != null
        ? (Notification)JsonConvert.DeserializeObject<Notification>(TempData["Notification"]!.ToString()!)!
        : null;
@@ -46,6 +46,7 @@
                             <a class="nav-link  @(controler=="Statistic" && action == "Index" ? "active" : "")" asp-area="" asp-controller="Statistic" asp-action="Index">Lista Statystyk</a>
                         </li>
                     </ul>
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>

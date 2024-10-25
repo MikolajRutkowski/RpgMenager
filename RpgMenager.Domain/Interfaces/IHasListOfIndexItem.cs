@@ -10,6 +10,6 @@ namespace RpgMenager.Domain.Interfaces
 {
     public interface IHasListOfIndexItem
     {
-         List<IndexOfItem> ListOfIndexItem { get; set; }
+         List<IndexOfItem> IndexOfItem { get; set; }
     }
 }
