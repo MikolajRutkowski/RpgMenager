@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using RpgMenager.Application.ApplicationUser;
 using RpgMenager.Application.DtosAndFactories.Character.Commands.Create;
 using RpgMenager.Domain.Entities;
 using RpgMenager.Domain.Entities.Abstract;
@@ -15,7 +16,7 @@ namespace RpgMenager.Application.DtosAndFactories.Character
 {
      class CharacterFactory : RpgHandler
     {
-        public CharacterFactory(IMapper mapper, IRpgMenagerRepository rpgMenagerRepository) : base(mapper, rpgMenagerRepository)
+        public CharacterFactory(IMapper mapper, IRpgMenagerRepository rpgMenagerRepository, IUserContext userContext) : base(mapper, rpgMenagerRepository, userContext)
         {
         }
         public async Task<Domain.Entities.Abstract.Character> returnCharacterRedyToGoDataBaseAsync(CreateCharacterCommand request)

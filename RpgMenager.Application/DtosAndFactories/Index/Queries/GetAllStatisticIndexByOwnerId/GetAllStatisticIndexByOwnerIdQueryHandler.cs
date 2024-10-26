@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http.Metadata;
+using RpgMenager.Application.ApplicationUser;
 using RpgMenager.Application.DtosAndFactories.Index.Queries.GetAllIndexByOwnerIdAndType;
 using RpgMenager.Application.DtosAndFactories.Index.Queries.GetAllStatisticIndex;
 using RpgMenager.Domain.Interfaces;
@@ -10,7 +11,7 @@ namespace RpgMenager.Application.DtosAndFactories.Index.Queries.GetAllStatisticI
 {
     public class GetAllStatisticIndexByOwnerIdQueryHandler : RpgHandler, IRequestHandler<GetAllStatisticIndexByOwnerIdQuery, IEnumerable<StatisticIndexDto>>
     {
-        public GetAllStatisticIndexByOwnerIdQueryHandler(IMapper mapper, IRpgMenagerRepository rpgMenagerRepository) : base(mapper, rpgMenagerRepository)
+        public GetAllStatisticIndexByOwnerIdQueryHandler(IMapper mapper, IRpgMenagerRepository rpgMenagerRepository, IUserContext userContext) : base(mapper, rpgMenagerRepository, userContext)
         {
         }
 

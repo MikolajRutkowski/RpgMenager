@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using RpgMenager.Application.ApplicationUser;
 using RpgMenager.Domain.Entities;
 using RpgMenager.Domain.Interfaces;
 using System;
@@ -12,7 +13,7 @@ namespace RpgMenager.Application.DtosAndFactories.Character.Commands.Create
 {
     public class CreateCharacterCommandHandler : RpgHandler, IRequestHandler<CreateCharacterCommand>
     {
-        public CreateCharacterCommandHandler(IMapper mapper, IRpgMenagerRepository rpgMenagerRepository) : base(mapper, rpgMenagerRepository)
+        public CreateCharacterCommandHandler(IMapper mapper, IRpgMenagerRepository rpgMenagerRepository, IUserContext userContext) : base(mapper, rpgMenagerRepository, userContext)
         {
         }
 

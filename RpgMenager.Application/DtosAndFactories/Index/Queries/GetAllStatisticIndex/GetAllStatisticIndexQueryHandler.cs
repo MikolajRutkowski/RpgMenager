@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http.Metadata;
+using RpgMenager.Application.ApplicationUser;
 using RpgMenager.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace RpgMenager.Application.DtosAndFactories.Index.Queries.GetAllStatisticI
 {
     public class GetAllStatisticIndexQueryHandler : RpgHandler, IRequestHandler<GetAllStatisticIndexQuery, IEnumerable<StatisticIndexDto>>
     {
-        public GetAllStatisticIndexQueryHandler(IMapper mapper, IRpgMenagerRepository rpgMenagerRepository) : base(mapper, rpgMenagerRepository)
+        public GetAllStatisticIndexQueryHandler(IMapper mapper, IRpgMenagerRepository rpgMenagerRepository, IUserContext userContext) : base(mapper, rpgMenagerRepository, userContext)
         {
         }
 

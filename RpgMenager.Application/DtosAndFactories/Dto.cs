@@ -13,5 +13,6 @@ namespace RpgMenager.Application.DtosAndFactories
         public string? Description { get; set; }
         public string? EncodedName { get; set; } = default;
         public string? PathToImage { get; set; }
+        public bool IsEditable { get; set; } = false;
     }
 }
