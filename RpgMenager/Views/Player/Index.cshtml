@@ -58,7 +58,10 @@
                     @Html.DisplayFor(modelItem => item.Phone)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-controller="Player" asp-route-encodedName="@item.EncodedName" class="btn btn-primary">Edit</a>
+                    @if (item.IsEditable)
+                    {
+                        <a asp-action="Edit" asp-controller="Player" asp-route-encodedName="@item.EncodedName" class="btn btn-primary">Edit</a>
+                    }
                     <a asp-action="Details" asp-controller="Player" asp-route-encodedName="@item.EncodedName" class="btn btn-primary">Details</a>
                     <form asp-action="Delete" asp-controller="Player" method="post" style="display:inline;">
                         <input type="hidden" name="encodedName" value="@item.EncodedName" />

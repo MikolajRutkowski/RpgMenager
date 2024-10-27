@@ -21,11 +21,19 @@ namespace RpgMenager.Application.DtosAndFactories.Player.Commands.Create
 
         public async Task Handle(CreatePlayerCommand request, CancellationToken cancellationToken)
         {
-            var player = _mapper.Map<Domain.Entities.Player>(request);
-            player.Encode();
-            player.CreatedById = _userContext.GetCurrentUser().Id;
+            var currentUser = _userContext.GetCurrentUser();
+            if (currentUser == null || !currentUser.IsInRole("Owner"))
+            {
 
-            await _repository.CreatePlayer(player);         
+            }
+            else
+            {
+                var player = _mapper.Map<Domain.Entities.Player>(request);
+                player.Encode();
+                player.CreatedById = currentUser.Id;
+
+                await _repository.CreatePlayer(player);
+            }       
         }
     }
 }

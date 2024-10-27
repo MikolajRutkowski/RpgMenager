@@ -19,7 +19,7 @@ namespace RpgMenager.Application.DtosAndFactories.Character.Commands.Create
 
         public async Task Handle(CreateCharacterCommand request, CancellationToken cancellationToken)
         {
-           CharacterFactory factory = new  CharacterFactory(_mapper, _repository);
+           CharacterFactory factory = new  CharacterFactory(_mapper, _repository, _userContext);
 
             var character = await factory.returnCharacterRedyToGoDataBaseAsync(request);
             await _repository.CreateCharacter(character);

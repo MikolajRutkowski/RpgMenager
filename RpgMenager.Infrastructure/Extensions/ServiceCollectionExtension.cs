@@ -21,6 +21,7 @@ namespace RpgMenager.Infrastructure.Extensions
             string contetionString = configuration.GetConnectionString("RpgMenager");
             service.AddDbContext<RpgMenagerDbContext>(options => options.UseSqlServer(contetionString));
             service.AddDefaultIdentity<IdentityUser>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<RpgMenagerDbContext>();
 
 

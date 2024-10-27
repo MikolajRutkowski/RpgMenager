@@ -35,6 +35,7 @@ namespace RpgMenager.Mvc.Controllers
         }
         #endregion
         #region Details
+        [Authorize(Roles = "Owner")]
         [Route("Players/{encodedName}/Details")]
         public async Task<IActionResult> Details(string encodedName)
         {
@@ -47,6 +48,11 @@ namespace RpgMenager.Mvc.Controllers
         public async Task<IActionResult> Edit(string encodedName)
         {
             var dto = await _mediator.Send(new GetPlayersByEncodedNameQuery(encodedName));
+            if (!dto.IsEditable)
+            {
+                return RedirectToAction("NoAccess", "Home");
+            }
+
             EditPlayerCommand model = _mapper.Map<EditPlayerCommand>(dto);
             return View(model);
         }
@@ -65,14 +71,14 @@ namespace RpgMenager.Mvc.Controllers
         #endregion
         #region Create
         //To przenosi na strone
-        [Authorize]
+        [Authorize(Roles = "Owner")]
         public ActionResult Create()
         {
             return View();
         }
         //To tworzy nowego gracza
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Owner")]
         public async Task<IActionResult> Create(CreatePlayerCommand command)
         {
             if (!ModelState.IsValid)

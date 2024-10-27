@@ -67,6 +67,9 @@
 
 <p></p>
 <div>
-    <a asp-action="Edit" asp-controller="Player" asp-route-encodedName="@Model.EncodedName" class="btn btn-primary">Edit</a>
+    @if (Model.IsEditable)
+    {
+        <a asp-action="Edit" asp-controller="Player" asp-route-encodedName="@Model.EncodedName" class="btn btn-primary">Edit</a>
+    }
     <button class="btn btn-secondary" onclick="window.history.back();">Powrót</button>
 </div>
