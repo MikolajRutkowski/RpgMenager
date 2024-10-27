@@ -7,32 +7,18 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Value)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.statisticsEnum)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OwnerId)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.NameOfTheList)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EncodedName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PathToImage)
-            </th>
+            </th>          
+                  
             <th></th>
         </tr>
     </thead>
@@ -40,32 +26,18 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Value)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.statisticsEnum)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OwnerId)
-            </td>
+         
             <td>
                 @Html.DisplayFor(modelItem => item.NameOfTheList)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EncodedName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PathToImage)
-            </td>
+            </td>                      
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |

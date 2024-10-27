@@ -1,4 +1,5 @@
-﻿@using RpgMenager.Application.DtosAndFactories.Statistic
+﻿@using RpgMenager.Application.DtosAndFactories.Index
+@using RpgMenager.Application.DtosAndFactories.Statistic
 @using RpgMenager.Application.DtosAndFactories.Statistic.Commands.Create
 @using RpgMenager.Mvc.Models
 @model RpgMenager.Application.DtosAndFactories.Character.CharacterDto
@@ -12,7 +13,7 @@
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ })
     <button class="btn btn-secondary" onclick="window.history.back();">Powrót</button>
-    <partial name="_CreateStatistic" model="new CreateStatisticCommand() { OwnerId = Model.Id , NameOfTheList=x}" />
+    <partial name="_CreateStatistic" model="new CreateStatisticCommand() { ListId = Model.Id , NameOfTheList=x}" />
 </div>
 <div>
     <h4>CharacterDto</h4>
@@ -82,10 +83,10 @@
 </div>
 <div>
     @{
-        var newmodel = this.Model.Statistics;
-        //Html.RenderPartial("~/Views/Statistic/DetailsGroupe.cshtml",(List<StatisticDto>) newmodel);
+        var newmodel = this.Model.IndexOfStatistic;
+        // Html.RenderPartial("~/Views/Statistic/Details.cshtml",(StatisticIndexDto) newmodel);
         <div id="statistics-container" class="row" data-encoded-name="@Model.EncodedName" data-id-name="@Model.Id"></div>
-         
+        int xxx = 0; 
     }
 </div>
 

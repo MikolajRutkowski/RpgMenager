@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using RpgMenager.Application.ApplicationUser;
 using RpgMenager.Application.DtosAndFactories.Character.Commands.Create;
 using RpgMenager.Domain.Entities;
 using RpgMenager.Domain.Entities.Abstract;
@@ -15,7 +16,7 @@ namespace RpgMenager.Application.DtosAndFactories.Character
 {
      class CharacterFactory : RpgHandler
     {
-        public CharacterFactory(IMapper mapper, IRpgMenagerRepository rpgMenagerRepository) : base(mapper, rpgMenagerRepository)
+        public CharacterFactory(IMapper mapper, IRpgMenagerRepository rpgMenagerRepository, IUserContext userContext) : base(mapper, rpgMenagerRepository, userContext)
         {
         }
         public async Task<Domain.Entities.Abstract.Character> returnCharacterRedyToGoDataBaseAsync(CreateCharacterCommand request)
@@ -63,17 +64,17 @@ namespace RpgMenager.Application.DtosAndFactories.Character
         Domain.Entities.Abstract.Character CloneStats(Domain.Entities.Abstract.Character character, IndexOfStatistic indexOfStatistic)
         {
             string nameOfNewList = indexOfStatistic.Name + " Postaci " + character.Name;
-            character.ListOfIndexStats.Add(new IndexOfStatistic()
+            character.IndexOfStatistic.Add(new IndexOfStatistic()
             {
                 Name = nameOfNewList,
                 Description = indexOfStatistic.Description + " Postaci " + character.Name,
                 Character = character
             });
-            int idOfNewList = character.ListOfIndexStats.FindIndex(x => x.Name == nameOfNewList);
-            character.ListOfIndexStats[idOfNewList].Encode(); /// cos to nie dizała zawsze id = 0 
+            int idOfNewList = character.IndexOfStatistic.FindIndex(x => x.Name == nameOfNewList);
+            character.IndexOfStatistic[idOfNewList].Encode(); /// cos to nie dizała zawsze id = 0 
             foreach (var stats in indexOfStatistic.MainList)
             {
-                character.ListOfIndexStats[idOfNewList].Add(new Domain.Entities.Statistic(stats));
+                character.IndexOfStatistic[idOfNewList].Add(new Domain.Entities.Statistic(stats));
             }
             return character;
         }

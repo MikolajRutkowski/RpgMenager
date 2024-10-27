@@ -10,6 +10,8 @@ using MediatR;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using RpgMenager.Application.DtosAndFactories.Player.Commands.Create;
+using RpgMenager.Application.ApplicationUser;
+using AutoMapper;
 
 
 namespace RpgMenager.Application.Extensions
@@ -18,8 +20,17 @@ namespace RpgMenager.Application.Extensions
     {
         public static void AddApplication(this IServiceCollection services)
         {
+            services.AddScoped<IUserContext, UserContext>();
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetAllPlayersQuery).Assembly));
-            services.AddAutoMapper(typeof(RpgMenagerMappingProfile));
+            
+            services.AddScoped(provider => new MapperConfiguration(cfg =>
+            {
+                var scope = provider.CreateScope();
+                var userContext = scope.ServiceProvider.GetRequiredService<IUserContext>();
+                cfg.AddProfile(new RpgMenagerMappingProfile(userContext));
+            }).CreateMapper()
+            );
+
 
             services.AddValidatorsFromAssemblyContaining<CreatePlayerCommandValidator>()
                     .AddFluentValidation()

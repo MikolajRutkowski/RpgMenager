@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace RpgMenager.Domain.Entities.Abstract
 {
@@ -14,5 +15,8 @@ namespace RpgMenager.Domain.Entities.Abstract
         public string EncodedName { get; private set; } = default!;
         public void Encode() { EncodedName = Name.ToLower().Replace(" ", "-"); }
         public string? PathToImage { get; set; } = default;
+
+        public string? CreatedById { get; set; }
+        public IdentityUser? CreatedBy { get; set; }
     }
 }

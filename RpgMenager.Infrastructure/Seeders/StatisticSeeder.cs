@@ -92,6 +92,7 @@ namespace RpgMenager.Infrastructure.Seeders
                     foreach(var s in seed.MainList)
                     {
                         s.Encode();
+                        s.statisticsEnum = Domain.Enums.StatisticsEnum.Character;
                     }
                     _db.IndexsOfStatistic.Add(seed);
                     await _db.SaveChangesAsync();
@@ -107,6 +108,7 @@ namespace RpgMenager.Infrastructure.Seeders
                     foreach (var s in seed.MainList)
                     {
                         s.Encode();
+                        s.statisticsEnum = Domain.Enums.StatisticsEnum.Skill;
                     }
                     _db.IndexsOfStatistic.Add(seed);
                     await _db.SaveChangesAsync();

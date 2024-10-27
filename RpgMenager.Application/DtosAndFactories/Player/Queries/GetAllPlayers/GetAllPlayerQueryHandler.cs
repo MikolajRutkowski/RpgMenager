@@ -7,12 +7,13 @@ using MediatR;
 using AutoMapper;
 using AutoMapper.Execution;
 using RpgMenager.Domain.Interfaces;
+using RpgMenager.Application.ApplicationUser;
 
 namespace RpgMenager.Application.DtosAndFactories.Player.Queries.GetAllPlayers
 {
     public class GetAllPlayerQueryHandler: RpgHandler, IRequestHandler<GetAllPlayersQuery, IEnumerable<PlayerDto>>
     {
-        public GetAllPlayerQueryHandler(IMapper mapper, IRpgMenagerRepository rpgMenagerRepository) : base(mapper, rpgMenagerRepository)
+        public GetAllPlayerQueryHandler(IMapper mapper, IRpgMenagerRepository rpgMenagerRepository, IUserContext userContext) : base(mapper, rpgMenagerRepository, userContext)
         {
         }
 

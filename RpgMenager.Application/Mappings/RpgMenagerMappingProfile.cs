@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using RpgMenager.Application.ApplicationUser;
 using RpgMenager.Application.DtosAndFactories.Character;
 using RpgMenager.Application.DtosAndFactories.Character.Commands.Edit;
 using RpgMenager.Application.DtosAndFactories.Index;
@@ -17,8 +18,11 @@ namespace RpgMenager.Application.Mappings
 {
     public class RpgMenagerMappingProfile : Profile
     {
-        public RpgMenagerMappingProfile() {
-            CreateMap<Player, PlayerDto>();
+        public RpgMenagerMappingProfile(IUserContext userContext) 
+        {
+            var user = userContext.GetCurrentUser();
+            CreateMap<Player, PlayerDto>()
+                .ForMember(dto => dto.IsEditable, opt => opt.MapFrom(src => user != null && src.CreatedById == user.Id || user.IsInRole("Moderator")));
             CreateMap<PlayerDto, Player>()
                 .ForMember(dest => dest.PlayerCharacters, opt => opt.MapFrom(src => src.PlayerCharacters)); ;
             CreateMap<PlayerDto,EditPlayerCommand>();
@@ -27,10 +31,10 @@ namespace RpgMenager.Application.Mappings
                 src is PC ? "PC" : src is NPC ? "NPC" : "Unknown")); 
             CreateMap<CharacterDto, Character>();
             CreateMap<PC, CharacterDto>().ForMember(dest => dest.TypeOfCharacter, opt => opt.Ignore());
-            //   .ForMember(dest => dest.Statistics, opt => opt.MapFrom(src => src.HasListOfList));  // Ignorujemy pole Type podczas mapowania
+            //   .ForMember(dest => dest.IndexOfStatistic, opt => opt.MapFrom(src => src.HasListOfList));  // Ignorujemy pole Type podczas mapowania
 
             CreateMap<NPC, CharacterDto>().ForMember(dest => dest.TypeOfCharacter, opt => opt.Ignore());
-            //.ForMember(dest => dest.Statistics, opt => opt.MapFrom(src => src.HasListOfList))
+            //.ForMember(dest => dest.IndexOfStatistic, opt => opt.MapFrom(src => src.HasListOfList))
 
             CreateMap<CharacterDto, NPC>();
 

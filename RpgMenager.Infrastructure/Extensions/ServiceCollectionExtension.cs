@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +20,11 @@ namespace RpgMenager.Infrastructure.Extensions
         {
             string contetionString = configuration.GetConnectionString("RpgMenager");
             service.AddDbContext<RpgMenagerDbContext>(options => options.UseSqlServer(contetionString));
+            service.AddDefaultIdentity<IdentityUser>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<RpgMenagerDbContext>();
+
+
             service.AddScoped<SeederOne>();
             service.AddScoped<StatisticSeeder>();
             service.AddScoped<IRpgMenagerRepository, RpgMenagerRepository>();

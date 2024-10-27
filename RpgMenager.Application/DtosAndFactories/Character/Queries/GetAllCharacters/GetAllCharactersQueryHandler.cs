@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using RpgMenager.Application.ApplicationUser;
 using RpgMenager.Application.DtosAndFactories.Player;
 using RpgMenager.Domain.Interfaces;
 using System;
@@ -13,7 +14,7 @@ namespace RpgMenager.Application.DtosAndFactories.Character.Queries.GetAllCharac
 {
     public class GetAllCharactersQueryHandler : RpgHandler, IRequestHandler<GetAllCharactersQuery, IEnumerable<CharacterDto>>
     {
-        public GetAllCharactersQueryHandler(IMapper mapper, IRpgMenagerRepository rpgMenagerRepository) : base(mapper, rpgMenagerRepository)
+        public GetAllCharactersQueryHandler(IMapper mapper, IRpgMenagerRepository rpgMenagerRepository, IUserContext userContext) : base(mapper, rpgMenagerRepository, userContext)
         {
         }
 

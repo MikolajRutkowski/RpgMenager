@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using RpgMenager.Application.ApplicationUser;
 using RpgMenager.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace RpgMenager.Application.DtosAndFactories.Statistic.Commands.Create
 {
     public class CreateStatisticCommandHandler : RpgHandler, IRequestHandler<CreateStatisticCommand>
     {
-        public CreateStatisticCommandHandler(IMapper mapper, IRpgMenagerRepository rpgMenagerRepository) : base(mapper, rpgMenagerRepository)
+        public CreateStatisticCommandHandler(IMapper mapper, IRpgMenagerRepository rpgMenagerRepository, IUserContext userContext) : base(mapper, rpgMenagerRepository, userContext)
         {
         }
 
