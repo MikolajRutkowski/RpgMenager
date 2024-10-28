@@ -83,10 +83,11 @@
 </div>
 <div>
     @{
-        var newmodel = this.Model.IndexOfStatistic;
-        // Html.RenderPartial("~/Views/Statistic/Details.cshtml",(StatisticIndexDto) newmodel);
-        <div id="statistics-container" class="row" data-encoded-name="@Model.EncodedName" data-id-name="@Model.Id"></div>
-        int xxx = 0; 
+        foreach(var index in Model.IndexOfStatistic)
+        {
+            var IndexModel = index.MainList;
+            Html.RenderPartial("~/Views/Statistic/Details.cshtml", IndexModel);
+        }
     }
 </div>
 
