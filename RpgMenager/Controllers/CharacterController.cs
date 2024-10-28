@@ -174,8 +174,6 @@ namespace RpgMenager.Mvc.Controllers
         public async Task<IActionResult> Details(string encodedName,int id)
         {
             CharacterDto dto = await _mediator.Send(new GetCharacterByIdQuery(id));
-            var stats  = await _mediator.Send(new GetAllStatisticIndexByOwnerIdQuery(id, "Character"));
-            dto.IndexOfStatistic = stats.ToList();
             return View(dto);
         }
 

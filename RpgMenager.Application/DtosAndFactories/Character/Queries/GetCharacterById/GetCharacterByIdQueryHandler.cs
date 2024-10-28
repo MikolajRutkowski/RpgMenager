@@ -21,7 +21,7 @@ namespace RpgMenager.Application.DtosAndFactories.Character.Queries.GetCharacter
             var character = await _repository.GetByID<Domain.Entities.Abstract.Character>(request.Id);
             var dto = _mapper.Map<CharacterDto>(character);
             string type = character.GetType().ToString();
-           var x =  type.Split('.');
+            var x =  type.Split('.');
             dto.TypeOfCharacter = x[x.Length - 1];
             return dto;
         }

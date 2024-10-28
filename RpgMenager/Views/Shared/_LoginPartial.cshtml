@@ -5,7 +5,7 @@
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
-        <li>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</li>
+        
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
         </li>
@@ -17,7 +17,7 @@
     }
     else
     {
-        <li>EEEEEEEEEEEEEEEEEEEEEE</li>
+        <li>Welcome </li>
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
         </li>

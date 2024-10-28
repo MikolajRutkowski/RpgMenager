@@ -148,11 +148,11 @@ namespace RpgMenager.Infrastructure.Repositorries
                 case Type _ when typeof(T) == typeof(Character):
                 case Type _ when typeof(T) == typeof(NPC):
                 case Type _ when typeof(T) == typeof(PC):
-                   var chracter = await _context.NPCs.Include(Ch => Ch.IndexOfStatistic)
+                   var chracter = await _context.NPCs.Include(Ch => Ch.IndexOfStatistic).ThenInclude(i => i.MainList)
                         .FirstOrDefaultAsync(c => c.Id == id);
                     if(chracter == null)
                     {
-                        var chracter2 = await _context.PCs.Include(Ch => Ch.IndexOfStatistic)
+                        var chracter2 = await _context.PCs.Include(Ch => Ch.IndexOfStatistic).ThenInclude(i => i.MainList)
                         .FirstOrDefaultAsync(c => c.Id == id);
                         result = chracter2;
                         break;
