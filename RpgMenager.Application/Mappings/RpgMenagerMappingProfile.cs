@@ -22,7 +22,7 @@ namespace RpgMenager.Application.Mappings
         {
             var user = userContext.GetCurrentUser();
             CreateMap<Player, PlayerDto>()
-                .ForMember(dto => dto.IsEditable, opt => opt.MapFrom(src => user != null && src.CreatedById == user.Id || user.IsInRole("Moderator")));
+                .ForMember(dto => dto.IsEditable, opt => opt.MapFrom(src => user != null && src.CreatedById == user.Id || user.IsInRole("Admin")));
             CreateMap<PlayerDto, Player>()
                 .ForMember(dest => dest.PlayerCharacters, opt => opt.MapFrom(src => src.PlayerCharacters)); ;
             CreateMap<PlayerDto,EditPlayerCommand>();

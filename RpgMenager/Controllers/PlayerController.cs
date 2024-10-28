@@ -8,8 +8,6 @@ using RpgMenager.Application.DtosAndFactories.Player.Commands.Edit;
 using RpgMenager.Application.DtosAndFactories.Player;
 using RpgMenager.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-using RpgMenager.Mvc.Models;
-using Newtonsoft.Json;
 using RpgMenager.Mvc.Extensions;
 using Microsoft.AspNetCore.Authorization;
 
@@ -35,7 +33,7 @@ namespace RpgMenager.Mvc.Controllers
         }
         #endregion
         #region Details
-        [Authorize(Roles = "Owner")]
+        [Authorize(Roles = "RpgMaster")]
         [Route("Players/{encodedName}/Details")]
         public async Task<IActionResult> Details(string encodedName)
         {
@@ -71,14 +69,14 @@ namespace RpgMenager.Mvc.Controllers
         #endregion
         #region Create
         //To przenosi na strone
-        [Authorize(Roles = "Owner")]
+        [Authorize(Roles = "RpgMaster")]
         public ActionResult Create()
         {
             return View();
         }
         //To tworzy nowego gracza
         [HttpPost]
-        [Authorize(Roles = "Owner")]
+        [Authorize(Roles = "RpgMaster")]
         public async Task<IActionResult> Create(CreatePlayerCommand command)
         {
             if (!ModelState.IsValid)
