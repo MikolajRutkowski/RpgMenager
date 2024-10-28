@@ -16,7 +16,7 @@ namespace RpgMenager.Application.DtosAndFactories.Player.Commands.Edit
         {
             Domain.Entities.Player player = (Domain.Entities.Player)await _repository.GetByEncodedName<Domain.Entities.Player>(request.EncodedName!);
             var user = _userContext.GetCurrentUser();
-            var isEdibable = user != null && (player.CreatedById == user.Id || user.IsInRole("Moderator"));
+            var isEdibable = user != null && (player.CreatedById == user.Id || user.IsInRole("Admin"));
 
             if (!isEdibable)
             {

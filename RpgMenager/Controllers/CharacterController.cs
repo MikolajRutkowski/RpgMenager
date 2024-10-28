@@ -191,6 +191,7 @@ namespace RpgMenager.Mvc.Controllers
 
         #endregion
         #region Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.Players = _dbcontext.Players.Select(p => new { p.Id, p.Name }).ToList();

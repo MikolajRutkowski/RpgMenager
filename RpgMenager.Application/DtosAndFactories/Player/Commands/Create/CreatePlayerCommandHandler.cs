@@ -22,7 +22,7 @@ namespace RpgMenager.Application.DtosAndFactories.Player.Commands.Create
         public async Task Handle(CreatePlayerCommand request, CancellationToken cancellationToken)
         {
             var currentUser = _userContext.GetCurrentUser();
-            if (currentUser == null || !currentUser.IsInRole("Owner"))
+            if (currentUser == null || !currentUser.IsInRole("RpgMaster"))
             {
 
             }
