@@ -86,16 +86,22 @@
         foreach(var index in Model.IndexOfStatistic)
         {
             var IndexModel = index.MainList;
-            Html.RenderPartial("~/Views/Statistic/Details.cshtml", IndexModel);
+           // Html.RenderPartial("~/Views/Statistic/Details.cshtml", IndexModel);
         }
     }
 </div>
+
+<div id="statistics-container" class="row"
+     
+     data-id-name="@Model.Id"></div>
+
+
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 
-    <script src="~/js/Statistic/Create.js"></script>
+    <script src="~/js/Statistic/Create.js"></script> @*To powoduje czerone pole *@
 }
 

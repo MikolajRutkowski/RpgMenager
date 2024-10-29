@@ -96,21 +96,7 @@ namespace RpgMenager.Mvc.Controllers
             await _mediator.Send(command);
             return RedirectToAction(nameof(Index));
         }
-        [HttpPost]
-        [Route("Character/Edit")] //to towrzynam statystyke w tym fajnym oknie
-        public async Task<IActionResult> CreateStatistic(CreateStatisticCommand command)
-        {
-
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-
-            }
-            await _mediator.Send(command);
-
-            return Ok();
-        }
+       
 
         #endregion
         #region Delete
@@ -176,16 +162,32 @@ namespace RpgMenager.Mvc.Controllers
             CharacterDto dto = await _mediator.Send(new GetCharacterByIdQuery(id));
             return View(dto);
         }
+        #endregion
+        #region AddAndGetStatistic
+        [HttpPost]
+        [Route("Character/Edit")] //to towrzynam statystyke w tym fajnym oknie
+        public async Task<IActionResult> CreateStatistic(CreateStatisticCommand command)
+        {
 
-        //[Route("Character/{encodedName}/Statistic")]
-        //public async Task<IActionResult> GetStatisticList(string encodedName, int idName)
-        //{
-        //    IEnumerable<StatisticDto> allStatistic = await _mediator.Send(new GetAllStatisticQuery());
-        //    CreateListOfListOfStatistic Creator = new CreateListOfListOfStatistic(allStatistic);
-        //    var Lista = Creator.returnOneList(idName);
-        //    var data = Lista.MainList;
-        //    return Ok(data);
-        //}
+            int x = 0;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+
+            }
+            await _mediator.Send(command);
+
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("Character/{id}/Statistic")]
+        public async Task<IActionResult> GetCarWorkshopServices(int id )
+        {
+            var data = await _mediator.Send(new GetAllStatisticIndexByOwnerIdQuery(id, "Character"));
+            return Ok(data);
+        }
+
 
         #endregion
         #region Create
