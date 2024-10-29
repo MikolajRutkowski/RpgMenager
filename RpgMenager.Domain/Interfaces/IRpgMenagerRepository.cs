@@ -14,6 +14,7 @@ namespace RpgMenager.Domain.Interfaces
         Task CreateItem(Item item);
         Task CreateStatistic(Statistic statistic);
         Task CreateCharacter(Character character);
+        Task CrateIndex<T>(IndexOfSmt<T> index) where T : Entity;
         Task<IEnumerable<T>> GetAll<T>() where T : Entity;
         Task<Entity> GetByEncodedName<T>(string endodedName ) where T : Entity;
         Task<Entity> GetByID<T>(int id) where T : Entity;

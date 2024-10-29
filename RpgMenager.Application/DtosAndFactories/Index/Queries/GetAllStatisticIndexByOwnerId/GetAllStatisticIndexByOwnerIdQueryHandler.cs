@@ -23,7 +23,7 @@ namespace RpgMenager.Application.DtosAndFactories.Index.Queries.GetAllStatisticI
             {
                 if (request.Type == "Character")
                 {
-                    if (item.Id == request.Id) {
+                    if (item.CharacterId == request.Id) {
                         ListToReturn.Add(_mapper.Map<StatisticIndexDto>(item));
                     }
                 }

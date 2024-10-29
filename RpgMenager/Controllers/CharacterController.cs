@@ -10,6 +10,7 @@ using RpgMenager.Application.DtosAndFactories.Character.Commands.Create;
 using RpgMenager.Application.DtosAndFactories.Character.Commands.Edit;
 using RpgMenager.Application.DtosAndFactories.Character.Queries.GetAllCharacters;
 using RpgMenager.Application.DtosAndFactories.Character.Queries.GetCharacterByEncodedName;
+using RpgMenager.Application.DtosAndFactories.Index.Commands;
 using RpgMenager.Application.DtosAndFactories.Index.Queries.GetAllIndexByOwnerIdAndType;
 using RpgMenager.Application.DtosAndFactories.Player;
 using RpgMenager.Application.DtosAndFactories.Player.Commands.Create;
@@ -96,21 +97,7 @@ namespace RpgMenager.Mvc.Controllers
             await _mediator.Send(command);
             return RedirectToAction(nameof(Index));
         }
-        [HttpPost]
-        [Route("Character/Edit")] //to towrzynam statystyke w tym fajnym oknie
-        public async Task<IActionResult> CreateStatistic(CreateStatisticCommand command)
-        {
-
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-
-            }
-            await _mediator.Send(command);
-
-            return Ok();
-        }
+       
 
         #endregion
         #region Delete
@@ -173,19 +160,53 @@ namespace RpgMenager.Mvc.Controllers
         [Route("Character/{encodedName}/Details")]
         public async Task<IActionResult> Details(string encodedName,int id)
         {
+            
             CharacterDto dto = await _mediator.Send(new GetCharacterByIdQuery(id));
+            ViewBag.Indexs = dto.IndexOfStatistic;
             return View(dto);
         }
+        #endregion
+        #region AddAndGetStatistic
+        [HttpPost]
+        [Route("Character/CreateStatistic")] //to towrzynam statystyke w tym fajnym oknie
+        public async Task<IActionResult> CreateStatistic(CreateStatisticCommand command)
+        {
 
-        //[Route("Character/{encodedName}/Statistic")]
-        //public async Task<IActionResult> GetStatisticList(string encodedName, int idName)
-        //{
-        //    IEnumerable<StatisticDto> allStatistic = await _mediator.Send(new GetAllStatisticQuery());
-        //    CreateListOfListOfStatistic Creator = new CreateListOfListOfStatistic(allStatistic);
-        //    var Lista = Creator.returnOneList(idName);
-        //    var data = Lista.MainList;
-        //    return Ok(data);
-        //}
+            int x = 0;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+
+            }
+            await _mediator.Send(command);
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("Character/CreateIndex")] //to towrzynam Index w tym fajnym oknie
+        public async Task<IActionResult> CreateStatisticIndex(CreateIndexCommand command)
+        {
+
+            int x = 0;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+
+            }
+            await _mediator.Send(command);
+
+            return Ok();
+        }
+
+        // to wyświetla nam statystyki na bierzoco 
+        [HttpGet]
+        [Route("Character/{id}/Statistic")]
+        public async Task<IActionResult> GetAllStatisticIndex(int id )
+        {
+            var data = await _mediator.Send(new GetAllStatisticIndexByOwnerIdQuery(id, "Character"));
+            return Ok(data);
+        }
 
         #endregion
         #region Create

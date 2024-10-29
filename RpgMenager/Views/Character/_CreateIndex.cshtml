@@ -1,0 +1,42 @@
+﻿@model RpgMenager.Application.DtosAndFactories.Index.Commands.CreateIndexCommand
+
+<!-- Modal Dodawania Indexu (CreateIndex) -->
+<div class="modal fade" id="createIndexModal" tabindex="-1" aria-labelledby="createIndexModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form asp-action="CreateIndex">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createIndexModalLabel">Dodaj Index</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <!-- Pole Name -->
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <!-- OwnerId (ukryte pole) -->
+                    <div class="form-group">
+                        <input asp-for="OwnerId" type="hidden" value="@Model.OwnerId" />
+                    </div>
+
+                    <!-- Opis (Description) -->
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <input type="submit" value="Create Index" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

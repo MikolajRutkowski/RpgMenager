@@ -1,4 +1,7 @@
-﻿@model RpgMenager.Application.DtosAndFactories.Statistic.Commands.Create.CreateStatisticCommand
+﻿@using RpgMenager.Application.DtosAndFactories.Index
+@using RpgMenager.Application.DtosAndFactories.Index.Commands
+@using RpgMenager.Domain.Enums
+@model RpgMenager.Application.DtosAndFactories.Statistic.Commands.Create.CreateStatisticCommand
 
 
 <!-- Button trigger modal -->
@@ -7,56 +10,96 @@
 </button>
 
 <!-- Modal -->
+<!-- Główny widok CreateStatistic -->
 <div class="modal fade" id="createStatisticModal" tabindex="-1" aria-labelledby="createStatisticModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form asp-action="CreateStatistic">
-
                 <div class="modal-header">
-                    <h5 class="modal-title" id="createStatisticModalLabel"> Dodaj Statystyke</h5>
+                    <h5 class="modal-title" id="createStatisticModalLabel">Dodaj Statystykę</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <!-- Pola dla CreateStatistic -->
+                    <!-- Name -->
                     <div class="form-group">
                         <label asp-for="Name" class="control-label"></label>
                         <input asp-for="Name" class="form-control" />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
+
+                    <!-- Value -->
                     <div class="form-group">
                         <label asp-for="Value" class="control-label"></label>
                         <input asp-for="Value" class="form-control" />
                         <span asp-validation-for="Value" class="text-danger"></span>
                     </div>
+
+                    <!-- StatisticsEnum -->
                     <div class="form-group">
                         <label asp-for="statisticsEnum" class="control-label"></label>
-                        <input asp-for="statisticsEnum" class="form-control" />
+                        <select asp-for="statisticsEnum" class="form-control">
+                            <option value="">Wybierz wartość</option>
+                            @foreach (var enumValue in Enum.GetValues(typeof(StatisticsEnum)))
+                            {
+                                <option value="@enumValue">@enumValue</option>
+                            }
+                        </select>
                         <span asp-validation-for="statisticsEnum" class="text-danger"></span>
                     </div>
 
-                    <input asp-for="ListId" class="form-control" type="hidden" />
-                    <input asp-for="NameOfTheList" class="form-control" type="hidden" />
+                    <!-- ListId (hidden) -->
+                    <input asp-for="ListId" type="hidden" />
 
+                    <!-- NameOfTheList (hidden) -->
+                    <input asp-for="NameOfTheList" type="hidden" />
 
-
+                    <!-- Description -->
                     <div class="form-group">
                         <label asp-for="Description" class="control-label"></label>
                         <input asp-for="Description" class="form-control" />
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
+
+                    <!-- EncodedName (hidden) -->
+                    <input asp-for="EncodedName" type="hidden" />
+
+                    <!-- PathToImage (optional) -->
+                    <div class="form-group">
+                        <label asp-for="PathToImage" class="control-label"></label>
+                        <input asp-for="PathToImage" class="form-control" />
+                        <span asp-validation-for="PathToImage" class="text-danger"></span>
+                    </div>
+
+                    <!-- IsEditable (checkbox) -->
+                    <div class="form-group form-check">
+                        <input asp-for="IsEditable" class="form-check-input" type="checkbox" checked />
+                        <label asp-for="IsEditable" class="form-check-label"></label>
+                    </div>
+
+                    <!-- Przycisk otwierający modal CreateIndex -->
+                    <button type="button" class="btn btn-secondary mt-3" data-bs-toggle="modal" data-bs-target="#createIndexModal">
+                        Dodaj Index
+                    </button>
                 </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <input type="submit" value="Create" class="btn btn-primary">
                 </div>
             </form>
-
         </div>
     </div>
 </div>
 
+<!-- Dołączenie modala CreateIndex z osobnego pliku -->
+@await Html.PartialAsync("_CreateIndex", new CreateIndexCommand { OwnerId = Model.Id })
+
 
 @section Scripts {
-
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
