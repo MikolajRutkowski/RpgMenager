@@ -1,4 +1,5 @@
 ﻿@using RpgMenager.Application.DtosAndFactories.Index
+@using RpgMenager.Application.DtosAndFactories.Index.Commands
 @using RpgMenager.Application.DtosAndFactories.Statistic
 @using RpgMenager.Application.DtosAndFactories.Statistic.Commands.Create
 @using RpgMenager.Mvc.Models
@@ -13,7 +14,7 @@
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ })
     <button class="btn btn-secondary" onclick="window.history.back();">Powrót</button>
-    <partial name="_CreateStatistic" model="new CreateStatisticCommand() { ListId = Model.Id , NameOfTheList=x}" />
+    
 </div>
 <div>
     <h4>CharacterDto</h4>
@@ -81,19 +82,15 @@
         </dd>
     </dl>
 </div>
+
+
 <div>
-    @{
-        foreach(var index in Model.IndexOfStatistic)
-        {
-            var IndexModel = index.MainList;
-           // Html.RenderPartial("~/Views/Statistic/Details.cshtml", IndexModel);
-        }
-    }
+   @*  @await Html.PartialAsync("_CreateStatistic", new CreateStatisticCommand { ListId = Model.Id, NameOfTheList = x }) *@
+    <partial name="_CreateStatistic" model=" new CreateStatisticCommand { ListId = Model.Id, NameOfTheList = x }" ) />
 </div>
 
-<div id="statistics-container" class="row"
-     
-     data-id-name="@Model.Id"></div>
+
+<div id="statistics-container" class="row" data-id-name="@Model.Id"></div>
 
 
 

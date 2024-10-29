@@ -100,4 +100,21 @@
             }
         });
     });
+
+    $("#createIndexModal form").submit(function (event) {
+        event.preventDefault();
+
+        $.ajax({
+            url: $(this).attr('action'),
+            type: $(this).attr('method'),
+            data: $(this).serialize(),
+            success: function (data) {
+                toastr["success"]("Created Index ");
+                
+            },
+            error: function () {
+                toastr["error"]("POSZŁO ŹLE3");
+            }
+        });
+    });
 });

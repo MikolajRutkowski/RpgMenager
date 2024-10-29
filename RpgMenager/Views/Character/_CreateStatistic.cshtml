@@ -1,4 +1,6 @@
-﻿@using RpgMenager.Domain.Enums
+﻿@using RpgMenager.Application.DtosAndFactories.Index
+@using RpgMenager.Application.DtosAndFactories.Index.Commands
+@using RpgMenager.Domain.Enums
 @model RpgMenager.Application.DtosAndFactories.Statistic.Commands.Create.CreateStatisticCommand
 
 
@@ -8,17 +10,19 @@
 </button>
 
 <!-- Modal -->
+<!-- Główny widok CreateStatistic -->
 <div class="modal fade" id="createStatisticModal" tabindex="-1" aria-labelledby="createStatisticModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form asp-action="CreateStatistic">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="createStatisticModalLabel">Dodaj Statystyke</h5>
+                    <h5 class="modal-title" id="createStatisticModalLabel">Dodaj Statystykę</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+                    <!-- Pola dla CreateStatistic -->
                     <!-- Name -->
                     <div class="form-group">
                         <label asp-for="Name" class="control-label"></label>
@@ -74,6 +78,11 @@
                         <input asp-for="IsEditable" class="form-check-input" type="checkbox" checked />
                         <label asp-for="IsEditable" class="form-check-label"></label>
                     </div>
+
+                    <!-- Przycisk otwierający modal CreateIndex -->
+                    <button type="button" class="btn btn-secondary mt-3" data-bs-toggle="modal" data-bs-target="#createIndexModal">
+                        Dodaj Index
+                    </button>
                 </div>
 
                 <div class="modal-footer">
@@ -84,6 +93,10 @@
         </div>
     </div>
 </div>
+
+<!-- Dołączenie modala CreateIndex z osobnego pliku -->
+@await Html.PartialAsync("_CreateIndex", new CreateIndexCommand { OwnerId = Model.Id })
+
 
 @section Scripts {
     @{

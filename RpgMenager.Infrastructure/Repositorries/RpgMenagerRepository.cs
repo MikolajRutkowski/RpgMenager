@@ -179,5 +179,27 @@ namespace RpgMenager.Infrastructure.Repositorries
         }
 
 
+        public async Task CrateIndex<T>(IndexOfSmt<T> index) where T : Entity
+        {
+            switch (typeof(T))
+            {
+                case Type _ when typeof(T) == typeof(Statistic):   
+                    if (index is IndexOfStatistic statisticIndex)
+                    {
+                        _context.IndexsOfStatistic.Add(statisticIndex);
+                        await _context.SaveChangesAsync();
+                    }       
+                    break;
+                case Type _ when typeof(T) == typeof(Item):
+                    if(index is IndexOfItem itemIndex)
+                    {
+                        _context.IndexsOfItems.Add(itemIndex);
+                        await _context.SaveChangesAsync();
+                    }
+                    break;
+                default :
+                    throw new InvalidOperationException("Nieobsługiwany typ encji");
+            }
+        }
     }
 }
