@@ -1,9 +1,13 @@
-﻿@using RpgMenager.Application.DtosAndFactories.Index
+﻿@using RpgMenager.Application.DtosAndFactories
+@using RpgMenager.Application.DtosAndFactories.Index
 @using RpgMenager.Application.DtosAndFactories.Index.Commands
+@using RpgMenager.Application.DtosAndFactories.Statistic
 @using RpgMenager.Domain.Enums
 @model RpgMenager.Application.DtosAndFactories.Statistic.Commands.Create.CreateStatisticCommand
 
-
+@{
+    var newIndex = new CreateIndexCommand() { OwnerId = ViewBag.Id, MainList = new List<Dto>(),typeOfIndex ="Statistic" };
+}
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createStatisticModal">
     Dodaj Statystyke
@@ -95,7 +99,7 @@
 </div>
 
 <!-- Dołączenie modala CreateIndex z osobnego pliku -->
-@await Html.PartialAsync("_CreateIndex", new CreateIndexCommand { OwnerId = Model.Id })
+@await Html.PartialAsync("_CreateIndex", newIndex)
 
 
 @section Scripts {

@@ -9,5 +9,11 @@ namespace RpgMenager.Application.DtosAndFactories.Statistic.Commands.Create
 {
     public class CreateStatisticCommand : StatisticDto, IRequest
     {
+        public int? OwenerIdForNewInex { get; set; }
+        public CreateStatisticCommand() { }
+        public CreateStatisticCommand(int owenerIdForNewInex) { 
+        OwenerIdForNewInex = owenerIdForNewInex;
+        }
+
     }
 }

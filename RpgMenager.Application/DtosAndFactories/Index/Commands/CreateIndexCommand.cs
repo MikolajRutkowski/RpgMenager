@@ -9,6 +9,7 @@ namespace RpgMenager.Application.DtosAndFactories.Index.Commands
 {
     public class CreateIndexCommand : IndexDto<Dto>, IRequest
     {
+        public string typeOfIndex { get; set; }
         public CreateIndexCommand() { }
     }
 }

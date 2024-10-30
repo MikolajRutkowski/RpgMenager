@@ -8,6 +8,7 @@
 @{
     ViewData["Title"] = "Details";
     string x = "dsds";
+    var newStatstic = new CreateStatisticCommand((int)Model.Id);
 }
 
 <h1>Details</h1>
@@ -86,7 +87,7 @@
 
 <div>
    @*  @await Html.PartialAsync("_CreateStatistic", new CreateStatisticCommand { ListId = Model.Id, NameOfTheList = x }) *@
-    <partial name="_CreateStatistic" model=" new CreateStatisticCommand { ListId = Model.Id, NameOfTheList = x }" ) />
+    <partial name="_CreateStatistic" model=newStatstic ) />
 </div>
 
 

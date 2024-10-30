@@ -171,7 +171,7 @@ namespace RpgMenager.Mvc.Controllers
         [Route("Character/CreateStatistic")] //to towrzynam statystyke w tym fajnym oknie
         public async Task<IActionResult> CreateStatistic(CreateStatisticCommand command)
         {
-
+            
             int x = 0;
             if (!ModelState.IsValid)
             {
