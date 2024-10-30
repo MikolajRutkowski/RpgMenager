@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using RpgMenager.Application.ApplicationUser;
+using RpgMenager.Application.DtosAndFactories;
 using RpgMenager.Application.DtosAndFactories.Character;
 using RpgMenager.Application.DtosAndFactories.Character.Commands.Edit;
 using RpgMenager.Application.DtosAndFactories.Index;
@@ -46,6 +47,9 @@ namespace RpgMenager.Application.Mappings
 
             CreateMap<IndexOfStatistic,StatisticIndexDto>();
             CreateMap<StatisticIndexDto, IndexOfStatistic>();
+
+            CreateMap<IndexDto<Dto>, IndexOfStatistic>();
+            CreateMap<IndexDto<Dto>, IndexOfItem>();
 
 
         }
