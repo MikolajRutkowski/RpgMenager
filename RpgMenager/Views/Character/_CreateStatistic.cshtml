@@ -2,11 +2,14 @@
 @using RpgMenager.Application.DtosAndFactories.Index
 @using RpgMenager.Application.DtosAndFactories.Index.Commands
 @using RpgMenager.Application.DtosAndFactories.Statistic
+@using RpgMenager.Domain.Entities
+@using RpgMenager.Domain.Entities.Abstract
 @using RpgMenager.Domain.Enums
 @model RpgMenager.Application.DtosAndFactories.Statistic.Commands.Create.CreateStatisticCommand
 
 @{
-    var newIndex = new CreateIndexCommand() { OwnerId = ViewBag.Id, MainList = new List<Dto>(),typeOfIndex ="Statistic" };
+    
+    var newIndex = new CreateIndexCommand() { OwnerId = Model.OwenerIdForNewIndex, MainList = new List<Dto>(), typeOfIndex = "Statistic", OwnerType ="Character" };
 }
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createStatisticModal">
@@ -96,7 +99,11 @@
             </form>
         </div>
     </div>
+    <div>
+        OwenerIdForNewInex = @Model.OwenerIdForNewIndex
+    </div>
 </div>
+
 
 <!-- Dołączenie modala CreateIndex z osobnego pliku -->
 @await Html.PartialAsync("_CreateIndex", newIndex)

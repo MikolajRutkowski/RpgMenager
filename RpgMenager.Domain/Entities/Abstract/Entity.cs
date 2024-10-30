@@ -18,5 +18,10 @@ namespace RpgMenager.Domain.Entities.Abstract
 
         public string? CreatedById { get; set; }
         public IdentityUser? CreatedBy { get; set; }
+
+        public virtual string GetTypeToString()
+        {
+            return GetType().Name;
+        }
     }
 }

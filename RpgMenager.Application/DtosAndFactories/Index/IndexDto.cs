@@ -9,7 +9,9 @@ namespace RpgMenager.Application.DtosAndFactories.Index
 {
     public abstract class IndexDto<T> :Dto where T : Dto
     {
+
         virtual public List<T> MainList { get; set; }
         public int? OwnerId { get; set; }
+        public string OwnerType { get; set; }
     }
 }
