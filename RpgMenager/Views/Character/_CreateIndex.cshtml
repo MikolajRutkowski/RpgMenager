@@ -1,4 +1,10 @@
-﻿@model RpgMenager.Application.DtosAndFactories.Index.Commands.CreateIndexCommand
+﻿@using RpgMenager.Application.DtosAndFactories.Statistic
+@using RpgMenager.Domain.Entities
+@model RpgMenager.Application.DtosAndFactories.Index.Commands.CreateIndexCommand
+@{
+    List<StatisticDto> lista = new List<StatisticDto>();
+
+}
 
 <!-- Modal Dodawania Indexu (CreateIndex) -->
 <div class="modal fade" id="createIndexModal" tabindex="-1" aria-labelledby="createIndexModalLabel" aria-hidden="true">
@@ -11,7 +17,15 @@
                 </div>
                 <div class="modal-body">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+                    <div>
+                        Id = @Model.OwnerId.ToString()
+                    </div>
+                    <div>
+                        typeOfIndex = @Model.typeOfIndex.ToString()
+                    </div>
+                    <div>
+                        MainList = @Model.MainList.ToString()
+                    </div>
                     <!-- Pole Name -->
                     <div class="form-group">
                         <label asp-for="Name" class="control-label"></label>
@@ -22,6 +36,12 @@
                     <!-- OwnerId (ukryte pole) -->
                     <div class="form-group">
                         <input asp-for="OwnerId" type="hidden" value="@Model.OwnerId" />
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="MainList" type="hidden" value="@Html.Raw(Json.Serialize(Model.MainList))" />
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="typeOfIndex" type="hidden" value="@Model.typeOfIndex" />
                     </div>
 
                     <!-- Opis (Description) -->
