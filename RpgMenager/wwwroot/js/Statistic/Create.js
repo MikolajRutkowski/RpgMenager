@@ -32,7 +32,7 @@
             error: function () {
                 toastr["error"]("POSZŁO ŹLE1");
             }
-        });
+        });     
     };
 
     // Zmieniona funkcja RenderStatistics, aby nie czyściła głównego kontenera

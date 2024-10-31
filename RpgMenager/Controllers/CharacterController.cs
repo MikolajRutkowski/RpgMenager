@@ -162,7 +162,7 @@ namespace RpgMenager.Mvc.Controllers
         {
             
             CharacterDto dto = await _mediator.Send(new GetCharacterByIdQuery(id));
-            ViewBag.Indexs = dto.IndexOfStatistic;
+            ViewBag.Indexs = dto.IndexOfStatistic; // o i ten vie bag jest dostpeny też w tworzeniu naszej statystyki jej !
             return View(dto);
         }
         #endregion
@@ -204,7 +204,7 @@ namespace RpgMenager.Mvc.Controllers
         [Route("Character/{id}/Statistic")]
         public async Task<IActionResult> GetAllStatisticIndex(int id )
         {
-            var data = await _mediator.Send(new GetAllStatisticIndexByOwnerIdQuery(id, "Character"));
+            var data = await _mediator.Send(new GetAllStatisticIndexByOwnerIdQuery(id, "Character"));         
             return Ok(data);
         }
 
