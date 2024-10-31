@@ -18,12 +18,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EncodedName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PathToImage)
-            </th>
+            <th></th>
             <th></th>
         </tr>
     </thead>
@@ -43,18 +38,14 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EncodedName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PathToImage)
-            </td>
-            <td>
                     @* <a asp-action="Edit" asp-controller="Player" asp-route-encodedName="@item.EncodedName" class="btn btn-primary">Edit</a> *@
                     <a asp-action="Details" asp-controller="Statistic" asp-route-encodedName="@item.EncodedName" class="btn btn-primary">Details</a>
-                    @* <form asp-action="Delete" asp-controller="Player" method="post" style="display:inline;">
+                </td>
+                <td>
+                    <form asp-action="Delete" asp-controller="Statistic" method="post" style="display:inline;">
                         <input type="hidden" name="encodedName" value="@item.EncodedName" />
                         <button type="submit" class="btn btn-danger" onclick="return confirm('Czy na pewno chcesz usunąć?');">Usuń</button>
-                    </form> *@
+                    </form> 
             </td>
         </tr>
 }

@@ -75,7 +75,7 @@
                     <input asp-for="ListId" type="hidden" />
 
                     <!-- NameOfTheList (hidden) -->
-                    <input asp-for="NameOfTheList" type="hidden" />
+                    <input asp-for="NameOfTheList" type="hidden" value="Nazwa" />
 
                     <!-- Description -->
                     <div class="form-group">
@@ -113,9 +113,6 @@
             </form>
         </div>
     </div>
-    <div>
-        OwenerIdForNewInex = @Model.OwenerIdForNewIndex
-    </div>
 </div>
 
 
@@ -127,4 +124,11 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script>
+        function updateNameOfTheList() {
+            const selectedOption = document.querySelector("#indexDropdown option:checked");
+            const nameOfTheList = selectedOption ? selectedOption.getAttribute("data-name") : "";
+            document.getElementById("nameOfTheList").value = nameOfTheList;
+        }
+    </script>
 }
