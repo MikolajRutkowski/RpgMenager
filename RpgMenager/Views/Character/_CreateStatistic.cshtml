@@ -55,7 +55,21 @@
                             }
                         </select>
                         <span asp-validation-for="statisticsEnum" class="text-danger"></span>
+                    </div>               
+                    <!-- Index -->
+                    <div class="form-group">
+                        <label asp-for="ListId" class="control-label"></label>
+                        <select asp-for="ListId"  name="ListId" class="form-control">
+                            <option value="">Wybierz wartość</option>
+                            @foreach (var index in ViewBag.Indexs)
+                            {
+                                <option value="@index.Id">@index.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="ListId" class="text-danger"></span>
                     </div>
+
+
 
                     <!-- ListId (hidden) -->
                     <input asp-for="ListId" type="hidden" />
