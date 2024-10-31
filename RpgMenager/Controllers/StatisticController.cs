@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RpgMenager.Application.DtosAndFactories.Index;
 using RpgMenager.Application.DtosAndFactories.Index.Queries.GetAllStatisticIndex;
 using RpgMenager.Application.DtosAndFactories.Player.Queries.GetAllPlayers;
@@ -90,27 +91,27 @@ namespace RpgMenager.Mvc.Controllers
         }
         #endregion
         #region Delete
-
-        // GET: StatisticController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: StatisticController/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> Delete(string encodedName)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var index = _dbcontext.IndexsOfStatistic.FirstAsync(c => c.EncodedName == encodedName);
+                if (index == null)
+                {
+                    return NotFound();
+                }
+                _dbcontext.IndexsOfStatistic.Remove(await index);
+                _dbcontext.SaveChanges();
+                return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }
+
         }
+
         #endregion
     }
 }
