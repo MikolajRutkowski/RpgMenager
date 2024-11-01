@@ -69,14 +69,16 @@ namespace RpgMenager.Mvc.Controllers
         #endregion
         #region Create
         //To przenosi na strone
-        [Authorize(Roles = "RpgMaster")]
+        //[Authorize(Roles = "RpgMaster")]
+        [Authorize]
         public ActionResult Create()
         {
             return View();
         }
         //To tworzy nowego gracza
         [HttpPost]
-        [Authorize(Roles = "RpgMaster")]
+        //[Authorize(Roles = "RpgMaster")]
+        [Authorize]
         public async Task<IActionResult> Create(CreatePlayerCommand command)
         {
             if (!ModelState.IsValid)

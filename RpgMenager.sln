@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35219.272
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpgMenager.Mvc", "RpgMenager\RpgMenager.Mvc.csproj", "{0FF8FB89-0CBE-4087-B88E-C73259D2FFA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RpgMenager.Mvc", "RpgMenager\RpgMenager.Mvc.csproj", "{0FF8FB89-0CBE-4087-B88E-C73259D2FFA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpgMenager.Domain", "RpgMenager.Domain\RpgMenager.Domain.csproj", "{89433086-73B7-473B-8A95-D16CE54088B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RpgMenager.Domain", "RpgMenager.Domain\RpgMenager.Domain.csproj", "{89433086-73B7-473B-8A95-D16CE54088B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpgMenager.Application", "RpgMenager.Application\RpgMenager.Application.csproj", "{152012A5-8AF0-4C6A-B61A-6B24489D68DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RpgMenager.Application", "RpgMenager.Application\RpgMenager.Application.csproj", "{152012A5-8AF0-4C6A-B61A-6B24489D68DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpgMenager.Infrastructure", "RpgMenager.Infrastructure\RpgMenager.Infrastructure.csproj", "{55963020-F495-4739-A5B5-B66CE460924C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RpgMenager.Infrastructure", "RpgMenager.Infrastructure\RpgMenager.Infrastructure.csproj", "{55963020-F495-4739-A5B5-B66CE460924C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

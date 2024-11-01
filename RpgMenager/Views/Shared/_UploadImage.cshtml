@@ -1,0 +1,38 @@
+﻿@using RpgMenager.Mvc.Models
+@model ImageUploadViewModel
+
+<form id="imageUploadForm" asp-controller="YourControllerName" asp-action="UploadImage" enctype="multipart/form-data" method="post">
+    <div class="form-group">
+        <label for="ImageFile">Wybierz obraz</label>
+        <input type="file" id="ImageFile" name="ImageFile" class="form-control" accept="image/*" />
+    </div>
+    <button type="submit" class="btn btn-primary">Dodaj obraz</button>
+</form>
+
+<script>
+    $(document).ready(function () {
+        $('#imageUploadForm').submit(function (e) {
+            e.preventDefault();
+
+            var formData = new FormData(this);
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response.success) {
+                        alert('Obraz przesłany pomyślnie. Ścieżka: ' + response.path);
+                    } else {
+                        alert('Wystąpił błąd: ' + response.message);
+                    }
+                },
+                error: function () {
+                    alert('Wystąpił błąd podczas przesyłania obrazu.');
+                }
+            });
+        });
+    });
+</script>

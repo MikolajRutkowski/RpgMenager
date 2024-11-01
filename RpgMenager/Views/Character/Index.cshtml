@@ -4,6 +4,9 @@
     ViewData["Title"] = "Characters";
     bool PcActive = ViewBag.PcActive ?? true;
     bool NpcActive = ViewBag.NpcActive ?? true;
+    string imagePath = Url.Content("~/images/1704811628_new_scale_1200.png");
+    string imagePath2 = Url.Content(@"C:\Users\mikol\source\repos\RpgMenager\RpgMenager\wwwroot\images\438108199_6981518608615401_5176453103410536636_n.jpg");
+
 }
 
 <h1>Characters</h1>
@@ -25,15 +28,20 @@
     @foreach (var item in Model)
     {
         <div class="card m-3" style="width: 18rem;">
+            <!-- Display character image if available -->
+            @if (!string.IsNullOrEmpty(item.PathToImage))
+            {
+                <img src="@imagePath" class="card-img-top" alt="@item.Name" style="height: 200px; object-fit: cover;">
+            }
+
+            
             <div class="card-body">
                 <h5 class="card-title">@item.Name</h5>
                 <h6 class="card-subtitle mb-2 text-muted">@item.Lastname</h6>
                 <p class="card-text">@item.Description</p>
                 <p class="card-text">HP: @item.Hp</p>
-                <p class="card-text">Player ID: @item.PlayerId</p>
-                <p class="card-text">Attitude: @item.AttitudeToAnotherCharacter</p>
-                <a class="btn btn-primary" asp-route-encodedName="@item.EncodedName" asp-route-id="@item.Id" asp-controller="Character" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                <a class="btn btn-primary" asp-route-encodedName="@item.EncodedName" asp-route-id="@item.Id" asp-controller="Character" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a class="btn btn-primary" asp-route-encodedName="@item.EncodedName" asp-route-id="@item.Id" asp-controller="Character" asp-action="Details">Details</a>
+                <a class="btn btn-primary" asp-route-encodedName="@item.EncodedName" asp-route-id="@item.Id" asp-controller="Character" asp-action="Edit">Edit</a>
                 <form asp-action="Delete" asp-controller="Character" method="post" style="display:inline;">
                     <input type="hidden" name="id" value="@item.Id" />
                     <input type="hidden" name="type" value="@item.TypeOfCharacter" />
@@ -42,4 +50,6 @@
             </div>
         </div>
     }
+    <img src="@imagePath2" class="card-img-top" alt="NIE DZIALA" style="height: 200px; object-fit: cover;">
 </div>
+

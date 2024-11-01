@@ -133,17 +133,6 @@ namespace RpgMenager.Mvc.Controllers
                     _dbcontext.PCs.Remove(pc);
                     await _dbcontext.SaveChangesAsync();
                 }
-                var listOfStatistik = await _dbcontext.IndexsOfStatistic.FirstOrDefaultAsync(s => s.OwnerId() ==id);
-                if (listOfStatistik != null) {
-                    foreach (var statistic in listOfStatistik.MainList)
-                    {
-                        _dbcontext.Statistics.Remove(statistic);
-
-                    }
-                    _dbcontext.IndexsOfStatistic.Remove(listOfStatistik);
-                }
-                
-                await _dbcontext.SaveChangesAsync();
 
                 return RedirectToAction("Index");
             }
@@ -227,7 +216,39 @@ namespace RpgMenager.Mvc.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        
+        [HttpPost]
+        public IActionResult UploadImage(ImageUploadViewModel model)
+        {
+            if (model.ImageFile != null && model.ImageFile.Length > 0)
+            {
+                // Ustaw ścieżkę do katalogu, w którym chcesz przechowywać obrazy
+                string imagesPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+
+                // Upewnij się, że katalog istnieje
+                if (!Directory.Exists(imagesPath))
+                {
+                    Directory.CreateDirectory(imagesPath);
+                }
+
+                // Generuj unikalną nazwę pliku
+                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(model.ImageFile.FileName);
+                string filePath = Path.Combine(imagesPath, fileName);
+
+                // Zapisz plik na serwerze
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.ImageFile.CopyTo(stream);
+                }
+
+                // Zwróć ścieżkę do obrazu w folderze `images`
+                string relativePath = $"/images/{fileName}";
+                return Json(new { success = true, path = relativePath });
+            }
+
+            return Json(new { success = false, message = "No file uploaded" });
+        }
+
+
 
         #endregion
     }
