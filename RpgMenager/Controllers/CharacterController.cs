@@ -202,52 +202,49 @@ namespace RpgMenager.Mvc.Controllers
         [Authorize]
         public ActionResult Create()
         {
+            // Pobranie listy graczy i przypisanie do ViewBag
             ViewBag.Players = _dbcontext.Players.Select(p => new { p.Id, p.Name }).ToList();
             return View();
         }
-        [HttpPost]                              
-        public async Task<IActionResult> Create(CreateCharacterCommand  command)
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Create(CreateCharacterCommand command, IFormFile imageUpload)
         {
+            ViewBag.Players = _dbcontext.Players.Select(p => new { p.Id, p.Name }).ToList();
+
+            // Usuń "imageUpload" z ModelState, aby uniknąć błędów walidacji
+            ModelState.Remove("imageUpload");
+
+            // Obsługa przesłanego obrazu
+            if (imageUpload != null && imageUpload.Length > 0)
+            {
+                var fileName = Path.GetFileName(imageUpload.FileName);
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                var filePath = Path.Combine(uploadsFolder, fileName);
+
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await imageUpload.CopyToAsync(stream);
+                }
+
+                command.PathToImage = $"/images/{fileName}";
+            }
+
+            // Walidacja modelu po usunięciu imageUpload
             if (!ModelState.IsValid)
             {
                 return View(command);
             }
+
             await _mediator.Send(command);
             return RedirectToAction(nameof(Index));
         }
-
-        [HttpPost]
-        public IActionResult UploadImage(ImageUploadViewModel model)
-        {
-            if (model.ImageFile != null && model.ImageFile.Length > 0)
-            {
-                // Ustaw ścieżkę do katalogu, w którym chcesz przechowywać obrazy
-                string imagesPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
-
-                // Upewnij się, że katalog istnieje
-                if (!Directory.Exists(imagesPath))
-                {
-                    Directory.CreateDirectory(imagesPath);
-                }
-
-                // Generuj unikalną nazwę pliku
-                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(model.ImageFile.FileName);
-                string filePath = Path.Combine(imagesPath, fileName);
-
-                // Zapisz plik na serwerze
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    model.ImageFile.CopyTo(stream);
-                }
-
-                // Zwróć ścieżkę do obrazu w folderze `images`
-                string relativePath = $"/images/{fileName}";
-                return Json(new { success = true, path = relativePath });
-            }
-
-            return Json(new { success = false, message = "No file uploaded" });
-        }
-
 
 
         #endregion

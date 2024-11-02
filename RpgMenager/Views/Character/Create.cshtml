@@ -1,4 +1,5 @@
 ﻿@using RpgMenager.Application.DtosAndFactories.Statistic.Commands.Create
+@using RpgMenager.Mvc.Models
 @model RpgMenager.Application.DtosAndFactories.Character.Commands.Create.CreateCharacterCommand
 
 @{
@@ -11,7 +12,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <!-- Ukryte pole, które będzie aktualizowane w zależności od wyboru typu postaci -->
@@ -74,11 +75,11 @@
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
+            <!-- Zdjecie -->
+            @await Html.PartialAsync("_ImageUpload")
+            <input type="hidden" asp-for="PathToImage" />
 
-            <!-- Ścieżka do obrazu -->
-            <div class="form-group">
-                @await Html.PartialAsync("_UploadImage.cshtml")
-            </div>
+            <!-- Statystyki  -->
             <div class="form-group">
                 <label class="control-label">Czy dodać statystyki ?</label>
                 <div>
@@ -103,6 +104,7 @@
 
 <!-- Skrypt do dynamicznego przełączania pól formularza i ustawiania wartości TypeOfCharacter -->
 @section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="~/js/Character/Create.js"></script>
     <script>
         $(document).ready(function () {

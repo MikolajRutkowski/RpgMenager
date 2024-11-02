@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,8 @@ namespace RpgMenager.Application.DtosAndFactories
         public string? Name { get; set; } = default;
         public string? Description { get; set; }
         public string? EncodedName { get; set; } = default;
+
+        //[Required(AllowEmptyStrings = true)]
         public string? PathToImage { get; set; }
         public bool IsEditable { get; set; } = false;
     }

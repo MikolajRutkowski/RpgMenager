@@ -22,18 +22,19 @@ namespace RpgMenager.Application.DtosAndFactories.Player.Commands.Create
         public async Task Handle(CreatePlayerCommand request, CancellationToken cancellationToken)
         {
             var currentUser = _userContext.GetCurrentUser();
-            if (currentUser == null || !currentUser.IsInRole("RpgMaster"))
+            if (currentUser == null || !currentUser.IsInRole("RpgMaster") || !currentUser.IsInRole("Admin"))
             {
 
             }
             else
             {
-                var player = _mapper.Map<Domain.Entities.Player>(request);
-                player.Encode();
-                player.CreatedById = currentUser.Id;
+                
+            }
+            var player = _mapper.Map<Domain.Entities.Player>(request);
+            player.Encode();
+            player.CreatedById = currentUser.Id;
 
-                await _repository.CreatePlayer(player);
-            }       
+            await _repository.CreatePlayer(player);
         }
     }
 }

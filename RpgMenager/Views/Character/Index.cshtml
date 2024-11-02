@@ -31,7 +31,7 @@
             <!-- Display character image if available -->
             @if (!string.IsNullOrEmpty(item.PathToImage))
             {
-                <img src="@imagePath" class="card-img-top" alt="@item.Name" style="height: 200px; object-fit: cover;">
+                <img src="@item.PathToImage" class="card-img-top" alt="@item.Name" style="height: 200px; object-fit: cover;">
             }
 
             
@@ -50,6 +50,6 @@
             </div>
         </div>
     }
-    <img src="@imagePath2" class="card-img-top" alt="NIE DZIALA" style="height: 200px; object-fit: cover;">
+   
 </div>
 
