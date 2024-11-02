@@ -1,0 +1,30 @@
+﻿@model string
+
+<div class="form-group">
+    <label for="imageUpload">Upload Image</label>
+    <input type="file" id="imageUpload" name="imageUpload" class="form-control" />
+    <br />
+    <!-- Element img do podglądu obrazu -->
+    <img id="imagePreview" src="#" alt="Image Preview" style="display:none; max-width: 100%; height: auto;" />
+</div>
+@section Scripts {
+    <script>
+        document.getElementById("imageUpload").addEventListener("change", function (event) {
+            const imagePreview = document.getElementById("imagePreview");
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = "block";
+                };
+
+                reader.readAsDataURL(file); // Wczytaj plik jako URL dla podglądu
+            } else {
+                imagePreview.style.display = "none"; // Ukryj podgląd, jeśli plik nie jest wybrany
+            }
+        });
+    </script>
+}

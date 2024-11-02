@@ -133,17 +133,6 @@ namespace RpgMenager.Mvc.Controllers
                     _dbcontext.PCs.Remove(pc);
                     await _dbcontext.SaveChangesAsync();
                 }
-                var listOfStatistik = await _dbcontext.IndexsOfStatistic.FirstOrDefaultAsync(s => s.OwnerId() ==id);
-                if (listOfStatistik != null) {
-                    foreach (var statistic in listOfStatistik.MainList)
-                    {
-                        _dbcontext.Statistics.Remove(statistic);
-
-                    }
-                    _dbcontext.IndexsOfStatistic.Remove(listOfStatistik);
-                }
-                
-                await _dbcontext.SaveChangesAsync();
 
                 return RedirectToAction("Index");
             }
@@ -213,21 +202,50 @@ namespace RpgMenager.Mvc.Controllers
         [Authorize]
         public ActionResult Create()
         {
+            // Pobranie listy graczy i przypisanie do ViewBag
             ViewBag.Players = _dbcontext.Players.Select(p => new { p.Id, p.Name }).ToList();
             return View();
         }
-        [HttpPost]                              
-        public async Task<IActionResult> Create(CreateCharacterCommand  command)
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Create(CreateCharacterCommand command, IFormFile imageUpload)
         {
+            ViewBag.Players = _dbcontext.Players.Select(p => new { p.Id, p.Name }).ToList();
+
+            // Usuń "imageUpload" z ModelState, aby uniknąć błędów walidacji
+            ModelState.Remove("imageUpload");
+
+            // Obsługa przesłanego obrazu
+            if (imageUpload != null && imageUpload.Length > 0)
+            {
+                var fileName = Path.GetFileName(imageUpload.FileName);
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                var filePath = Path.Combine(uploadsFolder, fileName);
+
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await imageUpload.CopyToAsync(stream);
+                }
+
+                command.PathToImage = $"/images/{fileName}";
+            }
+
+            // Walidacja modelu po usunięciu imageUpload
             if (!ModelState.IsValid)
             {
                 return View(command);
             }
+
             await _mediator.Send(command);
             return RedirectToAction(nameof(Index));
         }
 
-        
 
         #endregion
     }
