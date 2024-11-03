@@ -1,35 +1,21 @@
 ﻿@using RpgMenager.Application.DtosAndFactories.Statistic.Commands.Create
+@using RpgMenager.Mvc.Models
 @model RpgMenager.Application.DtosAndFactories.Character.Commands.Edit.EditCharacterCommand
-
+@{
+    
+}
 <h4>EditCharacterCommand</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
             <div class="form-group">
-                <label asp-for="TypeOfCharacter" class="control-label"></label>
-                <input asp-for="TypeOfCharacter" class="form-control" id="TypeOfCharacter" />
-                <span asp-validation-for="TypeOfCharacter" class="text-danger"></span>
-            </div>
-
-            <div class="form-group" id="playerIdGroup" style="display:none;">
-                <label asp-for="PlayerId" class="control-label"></label>
-                <input asp-for="PlayerId" class="form-control" readonly />
-                <span asp-validation-for="PlayerId" class="text-danger"></span>
-            </div>
-
-            <div class="form-group" id="attitudeToAnotherCharacterGroup" style="display:none;">
-                <label asp-for="AttitudeToAnotherCharacter" class="control-label"></label>
-                <input asp-for="AttitudeToAnotherCharacter" class="form-control" />
-                <span asp-validation-for="AttitudeToAnotherCharacter" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Hp" class="control-label"></label>
-                <input asp-for="Hp" class="form-control" />
-                <span asp-validation-for="Hp" class="text-danger"></span>
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Lastname" class="control-label"></label>
@@ -37,21 +23,27 @@
                 <span asp-validation-for="Lastname" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
+                <label asp-for="Hp" class="control-label"></label>
+                <input asp-for="Hp" class="form-control" />
+                <span asp-validation-for="Hp" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+            <div class="form-group" id="attitudeToAnotherCharacterGroup" style="display:none;">
+                <label asp-for="AttitudeToAnotherCharacter" class="control-label"></label>
+                <input asp-for="AttitudeToAnotherCharacter" class="form-control" />
+                <span asp-validation-for="AttitudeToAnotherCharacter" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
+            @* tego nie bedzie widać *@
+            <input asp-for="Id" type="hidden" value="@Model.Id" />
+            <!-- Zdjecie -->
+            @await Html.PartialAsync("_ImageUpload", Model.PathToImage)
+            <input type="hidden" asp-for="PathToImage" />
 
+            
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -62,7 +54,7 @@
 
 <div>
     <a asp-action="Index">Back to List</a>
-    <partial name="_CreateStatistic" model="new CreateStatisticCommand() {  }" />
+    @* <partial name="_CreateStatistic" model="new CreateStatisticCommand() {  }" /> *@
 </div>
 
 @section Scripts {
@@ -70,32 +62,5 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Initialize the visibility of fields based on the current TypeOfCharacter value
-            function toggleFields() {
-                var typeOfCharacter = document.getElementById('TypeOfCharacter').value;
-                var playerIdGroup = document.getElementById('playerIdGroup');
-                var attitudeToAnotherCharacterGroup = document.getElementById('attitudeToAnotherCharacterGroup');
-
-                if (typeOfCharacter === "PC") {
-                    playerIdGroup.style.display = "block";
-                    attitudeToAnotherCharacterGroup.style.display = "none";
-                } else if (typeOfCharacter === "NPC") {
-                    playerIdGroup.style.display = "none";
-                    attitudeToAnotherCharacterGroup.style.display = "block";
-                } else {
-                    // Hide both if it's not PC or NPC
-                    playerIdGroup.style.display = "none";
-                    attitudeToAnotherCharacterGroup.style.display = "none";
-                }
-            }
-
-            // Attach event listener to TypeOfCharacter field
-            document.getElementById('TypeOfCharacter').addEventListener('input', toggleFields);
-
-            // Call the function on load to set the initial visibility
-            toggleFields();
-        });
-    </script>
+    
 }

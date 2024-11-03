@@ -87,17 +87,51 @@ namespace RpgMenager.Mvc.Controllers
         {
             var dto = await _mediator.Send(new GetCharacterByIdQuery(id));
             EditCharacterCommand model = _mapper.Map<EditCharacterCommand>(dto);
+            model.Id = id;
             return View(model);
         }
+
         [HttpPost]
         [Route("Character/{encodedName}/Edit")]
-        public async Task<IActionResult> Edit(EditCharacterCommand command)
+        public async Task<IActionResult> Edit(EditCharacterCommand command, IFormFile imageUpload)
         {
-            if (!ModelState.IsValid) { return View(command); }
+            if (!ModelState.IsValid)
+            {
+                return View(command);
+            }
+
+            if (imageUpload != null && imageUpload.Length > 0)
+            {
+                // Ścieżka folderu, w którym chcesz zapisać obraz (np. "wwwroot/images")
+                var imageFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+
+                // Upewnij się, że folder istnieje
+                if (!Directory.Exists(imageFolderPath))
+                {
+                    Directory.CreateDirectory(imageFolderPath);
+                }
+
+                // Generowanie unikalnej nazwy pliku
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageUpload.FileName);
+                var filePath = Path.Combine(imageFolderPath, fileName);
+
+                // Zapisanie pliku na serwerze
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await imageUpload.CopyToAsync(stream);
+                }
+
+                // Ustawienie ścieżki w modelu `PathToImage`
+                command.PathToImage = "/images/" + fileName;
+            }
+
+            // Wysłanie komendy do MediatR
             await _mediator.Send(command);
+
             return RedirectToAction(nameof(Index));
         }
-       
+
+
 
         #endregion
         #region Delete
