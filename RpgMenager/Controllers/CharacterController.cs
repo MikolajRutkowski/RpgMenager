@@ -3,8 +3,6 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NuGet.Protocol.Core.Types;
-using RpgMenager.Application.DtosAndFactories;
 using RpgMenager.Application.DtosAndFactories.Character;
 using RpgMenager.Application.DtosAndFactories.Character.Commands.Create;
 using RpgMenager.Application.DtosAndFactories.Character.Commands.Edit;
@@ -12,16 +10,9 @@ using RpgMenager.Application.DtosAndFactories.Character.Queries.GetAllCharacters
 using RpgMenager.Application.DtosAndFactories.Character.Queries.GetCharacterByEncodedName;
 using RpgMenager.Application.DtosAndFactories.Index.Commands;
 using RpgMenager.Application.DtosAndFactories.Index.Queries.GetAllIndexByOwnerIdAndType;
-using RpgMenager.Application.DtosAndFactories.Player;
-using RpgMenager.Application.DtosAndFactories.Player.Commands.Create;
-using RpgMenager.Application.DtosAndFactories.Player.Commands.Edit;
-using RpgMenager.Application.DtosAndFactories.Player.Queries.GetAllPlayers;
-using RpgMenager.Application.DtosAndFactories.Player.Queries.GetPlayersByEncodedName;
-using RpgMenager.Application.DtosAndFactories.Statistic;
 using RpgMenager.Application.DtosAndFactories.Statistic.Commands.Create;
-using RpgMenager.Domain.Entities;
 using RpgMenager.Infrastructure.Persistence;
-using RpgMenager.Mvc.Models;
+
 
 namespace RpgMenager.Mvc.Controllers
 {
@@ -100,31 +91,8 @@ namespace RpgMenager.Mvc.Controllers
                 return View(command);
             }
 
-            if (imageUpload != null && imageUpload.Length > 0)
-            {
-                // Ścieżka folderu, w którym chcesz zapisać obraz (np. "wwwroot/images")
-                var imageFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
-
-                // Upewnij się, że folder istnieje
-                if (!Directory.Exists(imageFolderPath))
-                {
-                    Directory.CreateDirectory(imageFolderPath);
-                }
-
-                // Generowanie unikalnej nazwy pliku
-                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageUpload.FileName);
-                var filePath = Path.Combine(imageFolderPath, fileName);
-
-                // Zapisanie pliku na serwerze
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await imageUpload.CopyToAsync(stream);
-                }
-
-                // Ustawienie ścieżki w modelu `PathToImage`
-                command.PathToImage = "/images/" + fileName;
-            }
-
+            
+            command.PathToImage = await ImageFactory.FixImagePatchAsync(imageUpload);
             // Wysłanie komendy do MediatR
             await _mediator.Send(command);
 
@@ -250,25 +218,8 @@ namespace RpgMenager.Mvc.Controllers
             // Usuń "imageUpload" z ModelState, aby uniknąć błędów walidacji
             ModelState.Remove("imageUpload");
 
-            // Obsługa przesłanego obrazu
-            if (imageUpload != null && imageUpload.Length > 0)
-            {
-                var fileName = Path.GetFileName(imageUpload.FileName);
-                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
-                var filePath = Path.Combine(uploadsFolder, fileName);
+            command.PathToImage = await ImageFactory.FixImagePatchAsync(imageUpload);
 
-                if (!Directory.Exists(uploadsFolder))
-                {
-                    Directory.CreateDirectory(uploadsFolder);
-                }
-
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await imageUpload.CopyToAsync(stream);
-                }
-
-                command.PathToImage = $"/images/{fileName}";
-            }
 
             // Walidacja modelu po usunięciu imageUpload
             if (!ModelState.IsValid)
