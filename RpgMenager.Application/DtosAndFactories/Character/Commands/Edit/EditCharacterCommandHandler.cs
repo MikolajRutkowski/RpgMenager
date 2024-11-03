@@ -34,6 +34,7 @@ namespace RpgMenager.Application.DtosAndFactories.Character.Commands.Edit
             }
 
             character.Hp = (int)request.Hp;
+            character.PathToImage = request.PathToImage;
             character.Name = request.Name;
             character.Description = request.Description;
             character.Encode();
