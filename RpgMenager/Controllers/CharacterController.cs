@@ -233,5 +233,9 @@ namespace RpgMenager.Mvc.Controllers
 
 
         #endregion
+        #region CreateCard
+
+        #endregion
+
     }
 }

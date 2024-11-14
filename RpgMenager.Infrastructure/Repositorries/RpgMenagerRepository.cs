@@ -201,5 +201,11 @@ namespace RpgMenager.Infrastructure.Repositorries
                     throw new InvalidOperationException("Nieobsługiwany typ encji");
             }
         }
+
+        public async Task CreateCard(Card card)
+        {
+             _context.Cards.Add(card);
+            await _context.SaveChangesAsync();
+        }
     }
 }

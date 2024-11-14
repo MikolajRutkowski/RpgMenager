@@ -13,6 +13,7 @@ namespace RpgMenager.Domain.Interfaces
         Task CreatePlayer(Player player);
         Task CreateItem(Item item);
         Task CreateStatistic(Statistic statistic);
+        Task CreateCard(Card card);
         Task CreateCharacter(Character character);
         Task CrateIndex<T>(IndexOfSmt<T> index) where T : Entity;
         Task<IEnumerable<T>> GetAll<T>() where T : Entity;

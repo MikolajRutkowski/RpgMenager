@@ -21,6 +21,8 @@ namespace RpgMenager.Infrastructure.Persistence
         public DbSet<Statistic> Statistics { get; set; }
         public DbSet<IndexOfItem> IndexsOfItems { get; set; }
 
+        public DbSet<Card> Cards { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -39,6 +41,9 @@ namespace RpgMenager.Infrastructure.Persistence
                 .WithOne(l => l.Character)
                 .HasForeignKey(l => l.CharacterId)     // IndexOfStatistic przechowuje ListId jako klucz obcy
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Character>().HasMany(c => c.Cards)
+                .WithOne(a => a.Character).HasForeignKey(a => a.CharacterID).OnDelete(DeleteBehavior.Cascade);
            
 
             modelBuilder.Entity<Character>()
