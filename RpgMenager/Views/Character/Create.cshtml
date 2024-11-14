@@ -29,20 +29,24 @@
                 </div>
             </div>
 
-            <!-- Pole wyboru HP -->
+            <!-- Pole dla imienia postaci -->
             <div class="form-group">
-                <label asp-for="Hp" class="control-label"></label>
-                <input asp-for="Hp" class="form-control" />
-                <span asp-validation-for="Hp" class="text-danger"></span>
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-
             <!-- Pole dla nazwiska -->
             <div class="form-group">
                 <label asp-for="Lastname" class="control-label"></label>
                 <input asp-for="Lastname" class="form-control" />
                 <span asp-validation-for="Lastname" class="text-danger"></span>
             </div>
-
+            <!-- Pole wyboru HP -->
+            <div class="form-group">
+                <label asp-for="Hp" class="control-label"></label>
+                <input asp-for="Hp" class="form-control" />
+                <span asp-validation-for="Hp" class="text-danger"></span>
+            </div>
             <!-- Dynamiczna kontrola - wyświetlanie w zależności od typu postaci -->
             <div id="playerIdSection" class="form-group">
                 <label asp-for="PlayerId" class="control-label">Assign to Player</label>
@@ -60,13 +64,6 @@
                 <label asp-for="AttitudeToAnotherCharacter" class="control-label">Attitude to Other Characters</label>
                 <input asp-for="AttitudeToAnotherCharacter" class="form-control" />
                 <span asp-validation-for="AttitudeToAnotherCharacter" class="text-danger"></span>
-            </div>
-
-            <!-- Pole dla imienia postaci -->
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
 
             <!-- Opis postaci -->

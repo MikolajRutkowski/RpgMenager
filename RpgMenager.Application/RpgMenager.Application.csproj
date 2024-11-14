@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <Folder Include="DtosAndFactories\Character\Queries\GetAllCharactersById\" />
+    <Folder Include="PDFReadWrite\" />
   </ItemGroup>
 
 </Project>

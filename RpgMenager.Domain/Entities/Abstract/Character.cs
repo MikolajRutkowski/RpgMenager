@@ -15,6 +15,8 @@ namespace RpgMenager.Domain.Entities.Abstract
         public List<IndexOfStatistic> IndexOfStatistic { get; set; } = new List<IndexOfStatistic>();
 
         public List<IndexOfItem> IndexOfItem { get; set; } = new List<IndexOfItem>();
+
+        public List<Card> Cards { get; set; } = new List<Card>();
         
 
     }
